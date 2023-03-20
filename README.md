@@ -1,3 +1,9 @@
+# csharpnotes
+
+This is a work in progress, to take David Eck's introductory computer science textbook and convert it from Java to C#. Currently no progress has been made - I'm just getting started. Come back in a few months to see where things are!
+
+Below is the original README file for the Java book.
+
 # javanotes9
 This git repository contains the full source files for the free textbook *Introduction to Programming Using Java,* Version 9.
 The textbook has been available on the web in a series of versions since 1996.
