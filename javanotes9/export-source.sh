@@ -20,7 +20,7 @@ PROJECT='javanotes9'
 # SOURCE_DIR refers the directory that contains the Eclipse project,
 # so $SOURCE_DIR/$PROJECT is the Eclipse project directory.
 
-SOURCE_DIR='/home/eck/git/javanotes9'
+SOURCE_DIR='/home/eck/git/csharpnotes'
 
 # VERSION is only used as part of the name of the EXPORT_DIR.
 # EXPORT_DIR is directory to which the files are exported.
@@ -28,7 +28,7 @@ SOURCE_DIR='/home/eck/git/javanotes9'
 # WARNING:  If the EXPORT_DIR already exists, its current contents
 #           will be deleted!!!
 
-VERSION='javanotes-9.0'
+VERSION='csharpnotes-1.0'
 EXPORT_DIR="/home/eck/Desktop/$VERSION-source"
 
 # The scripts for building the book use xalan-j to process the XSLT
@@ -36,7 +36,7 @@ EXPORT_DIR="/home/eck/Desktop/$VERSION-source"
 # xalan-j .jar files, or you can leave it empty and set the XALAN_DIR
 # directory in BUILD-env.sh.
 
-XALAN_DIR="/home/eck/xalan-j_2_7_2"
+#XALAN_DIR="/home/eck/xalan-j_2_7_2"
 
 #---------------------------------------------------------------
 
