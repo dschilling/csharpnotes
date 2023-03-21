@@ -1,8 +1,8 @@
-                Javanotes Version 9, May 2022
+                CSharpNotes Version 1, May 2022
 
-This is the README file for the javanotes source download...
+This is the README file for the csharpnotes source download...
 
-(Note that there are two editions of Javanotes Version 9, one using
+(Note that there are two editions of CSharpNotes Version 9, one using
 JavaFX for GUI programs and one using Swing.  These are source files 
 used to build the JavaFX edition.  The source files for both editions 
 can be extracted from a Github repository that can be found at
@@ -12,7 +12,7 @@ see the README.md file for that repository.)
 Directory csharpnotes1.0-source contains the source files that are used 
 to produce the web site and PDF versions of "Introduction to Programming 
 using Java", Version 9.0, JavaFX edition.  This free textbook (or a later 
-version) can be found on the web at:  http://math.hws.edu/javanotes
+version) can be found on the web at:  http://math.hws.edu/csharpnotes
 
       Everything in this directory is released under a 
       Creative Commons Attribution-NonCommercial-ShareAlike 4.0 License 
@@ -23,7 +23,7 @@ version) can be found on the web at:  http://math.hws.edu/javanotes
       provided that you include a clear attribution  to the author of 
       the original work and make clear any modifications that you 
       have made.  The attribution should include a reference to the 
-      web site, http://math.hws.edu/javanotes.  
+      web site, http://math.hws.edu/csharpnotes.  
       
       ADDITIONALLY, permission is given to use Java source code from this 
       work in programming projects [but not in commercial educational material]
@@ -31,7 +31,7 @@ version) can be found on the web at:  http://math.hws.edu/javanotes
       non-commercial purposes.  No claim is made about the suitability or 
       reliability of any of the source code.
 
-The source files for "Introduction to Programming using Java" include
+The source files for "Introduction to Programming Using C#" include
 XML files, which contain most of the text; XSLT transformation files,
 which are used to translate the XML files into a web site and LaTeX 
 files; image files for both the web and PDF versions; Java source 
@@ -64,7 +64,7 @@ at https://dlcdn.apache.org/xalan/xalan-j/binaries/
 Two versions are available, xalan-j_2_7_2-bin.zip or
 xalan-j_2_7_2-bin-2jars.zip ; either one will work.
 To make things as easy as possible, you can extract Xalan-J in
-the javanotes-9.0-source directory, and rename the directory from 
+the csharpnotes-9.0-source directory, and rename the directory from 
 something like "xalan-j_2_7_2" to "xalan".  Alternatively, you can edit 
 the script BUILD-env.sh, and define XALAN_DIR to refer to the correct 
 directory name for Xalan. (Or, you could make a symbolic link in the

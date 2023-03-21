@@ -8,22 +8,22 @@
    <redirect:write file="web/index.html">
         <html>
         <head>
-        <title>Javanotes 9, JavaFX Edition -- Title Page</title>
-        <link href="javanotes.css" rel="stylesheet" type="text/css"/>
+        <title>CSharpNotes 9, JavaFX Edition -- Title Page</title>
+        <link href="csharpnotes.css" rel="stylesheet" type="text/css"/>
         </head>
         <body><div class="page">
         <div class="content">
         <hr/>
-        <h2 class="chapter_title">Introduction to Programming Using Java</h2>
+        <h2 class="chapter_title">Introduction to Programming Using C#</h2>
         <h2 class="chapter_title">Version 9.0, JavaFX Edition</h2>
-        <p style="text-align:center">(May, 2022)</p>
+        <p style="text-align:center">(Publication Date TBD)</p>
         <h4 align="center">Author:&#160; <a href="https://math.hws.edu/eck/">David J. Eck</a>&#160;
                  (<a href="mailto:eck@hws.edu">eck@hws.edu</a>)</h4>        
         <hr/>
         <table border="0">
         <tr valign="top"><td><p style="margin-right:20pt"><img height="235" width="180" src="csharpnotes1-cover-180x235.png"/></p></td>
         <td style="margin-left:1cm">
-        <p><big>W</big>ELCOME TO Version 9.0 of <i>Introduction to Programming Using Java</i>,
+        <p><big>W</big>ELCOME TO Version 9.0 of <i>Introduction to Programming Using C#</i>,
          a free, on-line textbook for introductory
          programming that uses Java as the language of instruction.  This book is directed
          mainly towards beginning programmers, although it might also be useful for experienced
@@ -51,16 +51,16 @@
         <h3>Short Table of Contents:</h3>
         <ul class="contents">
         <li><b><a href="contents-with-subsections.html">Full Table of Contents</a></b></li>
-        <xsl:if test="/javanotes/preface">
+        <xsl:if test="/csharpnotes/preface">
            <li><a href="preface.html">Preface</a></li>
         </xsl:if>
-        <xsl:for-each select="/javanotes/chapter">
+        <xsl:for-each select="/csharpnotes/chapter">
             <li>Chapter <xsl:value-of select="position()"/>: <b><a><xsl:attribute name="href"><xsl:value-of select="concat('c',position(),'/index.html')"/></xsl:attribute><xsl:value-of select="@title"/></a></b></li>
         </xsl:for-each>
-        <xsl:if test="/javanotes/source">
+        <xsl:if test="/csharpnotes/source">
            <li><a href="source/index.html">Source Code for All Examples in this Book</a></li>
         </xsl:if>
-        <xsl:if test="/javanotes/glossary">
+        <xsl:if test="/csharpnotes/glossary">
            <li><a href="glossary.html">Glossary</a></li>
         </xsl:if>
         <li><a href="news.html">News and Errata</a></li>
@@ -77,7 +77,7 @@
             <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">license</a> for full
             details.)<br/><br/>
             This book is available for downloading and for on-line use at the Web address:
-            <a href="https://math.hws.edu/javanotes/">https://math.hws.edu/javanotes/</a></small></i>
+            <a href="https://math.hws.edu/csharpnotes/">https://math.hws.edu/csharpnotes/</a></small></i>
           </blockquote>
 
         <hr/>
@@ -148,7 +148,7 @@
           like to have a bound printout in a nice form.
           (Please <b>do not</b> feel obliged to buy the printed version; I do not make any money from it!)
           The entire book is available in a thick and somewhat unwieldy 772-page printed version:
-          <a style="whitespace:pre" href="https://www.lulu.com/en/us/shop/david-eck/introduction-to-programming-using-java-javafx-edition/paperback/product-1nwwq5r.html">Introduction to Programming Using Java</a>.
+          <a style="whitespace:pre" href="https://www.lulu.com/en/us/shop/david-eck/introduction-to-programming-using-java-javafx-edition/paperback/product-1nwwq5r.html">Introduction to Programming Using C#</a>.
           It is also available in two parts: 
           <a style="whitespace:pre" href="https://www.lulu.com/en/us/shop/david-eck/introduction-to-programming-using-java-javafx-edition-part-i/paperback/product-1k8pjg9.html">Chapters 1 through 7</a>,
           and <a style="whitespace:pre" href="https://www.lulu.com/en/us/shop/david-eck/introduction-to-programming-using-java-javafx-edition-part-2/paperback/product-1yjjdq2.html">Chapters 8 through 13</a>.
@@ -180,10 +180,10 @@
    <xsl:call-template name="table-of-contents">
       <xsl:with-param name="subsections" select="false()"/>
    </xsl:call-template>
-   <xsl:apply-templates select="/javanotes/preface"/>
-   <xsl:apply-templates select="/javanotes/chapter"/>
-   <xsl:apply-templates select="/javanotes/source"/>
-   <xsl:apply-templates select="/javanotes/glossary"/>
+   <xsl:apply-templates select="/csharpnotes/preface"/>
+   <xsl:apply-templates select="/csharpnotes/chapter"/>
+   <xsl:apply-templates select="/csharpnotes/source"/>
+   <xsl:apply-templates select="/csharpnotes/glossary"/>
 </xsl:template>
    
 <xsl:template name="table-of-contents">
@@ -192,16 +192,16 @@
    <redirect:write select="$file">
      <html>
      <head>
-     <title>Javanotes 9 Table of Contents</title>
-     <link href="javanotes.css" rel="stylesheet" type="text/css"/>
+     <title>CSharpNotes 9 Table of Contents</title>
+     <link href="csharpnotes.css" rel="stylesheet" type="text/css"/>
      </head>
      <body><div class="page">
      <div class="content">
-        <h3 align="center">Introduction to Programming Using Java, Version 9, JavaFX Edition</h3>
+        <h3 align="center">Introduction to Programming Using C#, Version 1, JavaFX Edition</h3>
         <h2 align="center">Table of Contents</h2>
         <hr/>
         <p align="center"><span class="start"><big>T</big>his is the Table of Contents</span> for the free on-line
-           textbook <a href="index.html"><i>Introduction to Programming Using Java</i></a>.</p>
+           textbook <a href="index.html"><i>Introduction to Programming Using C#</i></a>.</p>
         <xsl:choose>
            <xsl:when test="$subsections">
               <p align="center"><b><a href="contents.html">(Click here to hide subsections.)</a></b></p>
@@ -213,7 +213,7 @@
         <hr/>
         <div style="margin-left: 30pt">
         <p><a href="preface.html"><b>Preface</b></a></p>
-        <xsl:for-each select="/javanotes/chapter">
+        <xsl:for-each select="/csharpnotes/chapter">
            <xsl:variable name="chapter"><xsl:value-of select="position()"/></xsl:variable>
            <p><b>Chapter <xsl:value-of select="$chapter"/>:&#160;
               <a><xsl:attribute name="href"><xsl:value-of 
@@ -246,7 +246,7 @@
            </ul>
         </xsl:for-each>
         <p><b>Appendix:</b>&#160; <a href="source/index.html">Source Code for the Examples in this Book</a></p>
-        <xsl:if test="/javanotes/glossary">
+        <xsl:if test="/csharpnotes/glossary">
            <p><b>Appendix:</b>&#160; <a href="glossary.html">Glossary</a></p>
         </xsl:if>
      </div>
@@ -262,8 +262,8 @@
    <redirect:write select="concat('web/c',position(),'/index.html')">
         <html>
         <head>
-        <title>Javanotes 9, Chapter <xsl:value-of select="position()"/> -- <xsl:value-of select="@title"/></title>
-        <link href="../javanotes.css" rel="stylesheet" type="text/css"/>
+        <title>CSharpNotes 9, Chapter <xsl:value-of select="position()"/> -- <xsl:value-of select="@title"/></title>
+        <link href="../csharpnotes.css" rel="stylesheet" type="text/css"/>
         </head>
         <body><div class="page">
         <div align="right"><xsl:call-template name="chapter-navbar"/></div>
@@ -323,12 +323,12 @@
    <redirect:write select="'web/preface.html'">
      <html>
      <head>
-     <title>Javanotes 9, JavaFX Edition, Preface</title>
-     <link href="javanotes.css" rel="stylesheet" type="text/css"/>
+     <title>CSharpNotes 9, JavaFX Edition, Preface</title>
+     <link href="csharpnotes.css" rel="stylesheet" type="text/css"/>
      </head>
      <body><div class="page">
      <div class="content">
-        <h3 align="center">Introduction to Programming Using Java<br/>
+        <h3 align="center">Introduction to Programming Using C#<br/>
            Version 9, JavaFX Edition, 2022<br/></h3>
         <h2 align="center">Preface</h2>
         <hr class="break"/>
@@ -345,12 +345,12 @@
    <redirect:write select="'web/source/index.html'">
      <html>
      <head>
-     <title>Javanotes Source Code</title>
-     <link href="../javanotes.css" rel="stylesheet" type="text/css"/>
+     <title>CSharpNotes Source Code</title>
+     <link href="../csharpnotes.css" rel="stylesheet" type="text/css"/>
      </head>
      <body><div class="page">
      <div class="content">
-        <h3 align="center">Introduction to Programming Using Java, Version 9, JavaFX Edition</h3>
+        <h3 align="center">Introduction to Programming Using C#, Version 1, JavaFX Edition</h3>
         <h2 align="center">Source Code</h2>
         <hr class="break"/>
         <xsl:apply-templates/>
@@ -366,12 +366,12 @@
     <redirect:write select="'web/glossary.html'">
      <html>
      <head>
-     <title>Javanotes Glossary</title>
-     <link href="javanotes.css" rel="stylesheet" type="text/css"/>
+     <title>CSharpNotes Glossary</title>
+     <link href="csharpnotes.css" rel="stylesheet" type="text/css"/>
      </head>
      <body><div class="page">
      <div class="content">
-        <h3 align="center">Introduction to Programming Using Java, Version 9</h3>
+        <h3 align="center">Introduction to Programming Using C#, Version 1</h3>
         <h2 align="center">Glossary</h2>
         <hr class="break"/>
         <xsl:apply-templates/>
@@ -394,8 +394,8 @@
     <redirect:write select="concat('web/c',$chapternum,'/s',position(),'.html')">
         <html>
         <head>
-        <title>Javanotes 9, Section <xsl:value-of select="$chapternum"/>.<xsl:value-of select="position()"/> -- <xsl:value-of select="@title"/></title>
-        <link href="../javanotes.css" rel="stylesheet" type="text/css"/>
+        <title>CSharpNotes 9, Section <xsl:value-of select="$chapternum"/>.<xsl:value-of select="position()"/> -- <xsl:value-of select="@title"/></title>
+        <link href="../csharpnotes.css" rel="stylesheet" type="text/css"/>
         </head>
         <body><div class="page">
         <div align="right"><xsl:call-template name="section-navbar"/></div>
@@ -449,8 +449,8 @@
     <redirect:write select="concat('web/c',$chapternum,'/exercises.html')">
         <html>
         <head>
-        <title>Javanotes 9, Exercises for Chapter <xsl:value-of select="$chapternum"/></title>
-        <link href="../javanotes.css" rel="stylesheet" type="text/css"/>
+        <title>CSharpNotes 9, Exercises for Chapter <xsl:value-of select="$chapternum"/></title>
+        <link href="../csharpnotes.css" rel="stylesheet" type="text/css"/>
         </head>
         <body><div class="page">
         <div align="right"><xsl:call-template name="exercises-navbar"></xsl:call-template></div>
@@ -459,7 +459,7 @@
         <h2>Programming Exercises for Chapter <xsl:value-of select="$chapternum"/></h2>
         <hr class="break"/>
         <p><span class="start"><big>T</big>his page contains</span> several exercises for Chapter <xsl:value-of select="$chapternum"/>
-        in <a href="../index.html">Introduction to Programming Using Java</a>.  For each exercise, a link to
+        in <a href="../index.html">Introduction to Programming Using C#</a>.  For each exercise, a link to
         a possible solution is provided.   Each solution includes a discussion of how a programmer might approach the
         problem and interesting points raised by the problem or its solution, as well as complete source
         code of the solution.</p>
@@ -491,8 +491,8 @@
        <redirect:write select="concat('web/c',$chapternum,'/ex',position(),'-ans.html')">
            <html>
            <head>
-           <title>Javanotes 9, Solution to Exercise <xsl:value-of select="position()"/>, Chapter <xsl:value-of select="$chapternum"/></title>
-           <link href="../javanotes.css" rel="stylesheet" type="text/css"/>
+           <title>CSharpNotes 9, Solution to Exercise <xsl:value-of select="position()"/>, Chapter <xsl:value-of select="$chapternum"/></title>
+           <link href="../csharpnotes.css" rel="stylesheet" type="text/css"/>
            </head>
            <body><div class="page">
            <div align="right"><xsl:call-template name="exercise-answer-navbar"></xsl:call-template></div>
@@ -501,7 +501,7 @@
            <h2>Solution for Programming Exercise <xsl:value-of select="$chapternum"/>.<xsl:value-of select="position()"/></h2>
            <hr class="break"/>
            <p><span class="start"><big>T</big>his page contains</span> a sample solution to
-           one of the exercises from <a href="../index.html">Introduction to Programming Using Java</a>.</p>
+           one of the exercises from <a href="../index.html">Introduction to Programming Using C#</a>.</p>
            <hr/>
               <h3 class="exercise">Exercise <xsl:value-of select="$chapternum"/>.<xsl:value-of select="position()"></xsl:value-of>:</h3>
               <xsl:apply-templates select="exercise-question"/>
@@ -543,8 +543,8 @@
     <redirect:write select="concat('web/c',$chapternum,'/',$filename,'.html')">
         <html>
         <head>
-        <title>Javanotes 9, <xsl:if test="$answers">Answers for </xsl:if>Quiz on Chapter <xsl:value-of select="$chapternum"/></title>
-        <link href="../javanotes.css" rel="stylesheet" type="text/css"/>
+        <title>CSharpNotes 9, <xsl:if test="$answers">Answers for </xsl:if>Quiz on Chapter <xsl:value-of select="$chapternum"/></title>
+        <link href="../csharpnotes.css" rel="stylesheet" type="text/css"/>
         </head>
         <body><div class="page">
         <div align="right"><xsl:call-template name="quiz-navbar"><xsl:with-param name="answers" select="$answers"/></xsl:call-template></div>
@@ -554,12 +554,12 @@
            <xsl:choose>
            <xsl:when test="$answers">
            <p><span class="start"><big>T</big>his page contains</span> sample answers to the quiz on Chapter <xsl:value-of select="$chapternum"/> of
-           <a href="../index.html"><i>Introduction to Programming Using Java</i></a>.
+           <a href="../index.html"><i>Introduction to Programming Using C#</i></a>.
            Note that generally, there are lots of correct answers to a given question.</p>
            </xsl:when>
            <xsl:otherwise>
            <p><span class="start"><big>T</big>his page contains</span> questions on Chapter <xsl:value-of select="$chapternum"/> of
-           <a href="../index.html"><i>Introduction to Programming Using Java</i></a>.
+           <a href="../index.html"><i>Introduction to Programming Using C#</i></a>.
            You should be able to answer these questions after studying that chapter.
            Sample answers to these questions can be found <a href="quiz_answers.html">here</a>.</p>
            </xsl:otherwise>

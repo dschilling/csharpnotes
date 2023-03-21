@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# THIS SCRIPT BUILDS THE JAVANOTES WEB SITE.
+# THIS SCRIPT BUILDS THE CSHARPNOTES WEB SITE.
 
 # VARIABLES USED IN THIS SCRIPT CAN BE SET IN BUILT-env.sh; see that file
 # for more information.
@@ -30,7 +30,7 @@ function copyfiles() {
    done
 }
 
-cd $JAVANOTES_SOURCE_DIR
+cd $CSHARPNOTES_SOURCE_DIR
 
 rm -rf web
 mkdir web
@@ -44,7 +44,7 @@ if  $XALAN_COMMAND -xsl convert-web.xsl -in csharpnotes1.xml ; then
 
    echo Copying other web site files...
 
-   cp javanotes.css web
+   cp csharpnotes.css web
    cp -r TextIO_Javadoc web
    cp csharpnotes1-cover-180x235.png web
    cp news.html web
@@ -91,7 +91,7 @@ if  $XALAN_COMMAND -xsl convert-web.xsl -in csharpnotes1.xml ; then
 
    echo
    echo "BUILD-web-site.sh completed."
-   echo "Created Javanotes web site in $BUILD_OUTPUT_DIR/web-site."
+   echo "Created CSharpNotes web site in $BUILD_OUTPUT_DIR/web-site."
    echo
    exit 0
    

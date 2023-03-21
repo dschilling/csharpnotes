@@ -1,7 +1,7 @@
 
 This README explains how to use the solutions to the programming exercises
-for "Introduction to Programming Using Java, Version 9, JavaFX edition", 
-which is freely available on the web at http://math.hws.edu/javanotes
+for "Introduction to Programming Using C#, Version 1, JavaFX edition", 
+which is freely available on the web at http://math.hws.edu/csharpnotes
 
 Although some exercise solutions will work with earlier versions,
 Java 17 is required for many of them.  All GUI programs use JavaFX,

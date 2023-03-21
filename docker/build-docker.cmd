@@ -1,1 +1,1 @@
-docker build -t javanotes %~dp0
+docker build -t csharpnotes %~dp0

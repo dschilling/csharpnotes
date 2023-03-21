@@ -2,9 +2,9 @@
 <!DOCTYPE preface SYSTEM "csharpnotes1.dtd">
 
 <preface>
-<p><start><big>I</big>ntroduction to Programming Using Java</start> is a free
-introductory computer programming textbook that uses Java as the language of
-instruction.  This version of the book covers Java&nbsp;17.
+<p><start><big>I</big>ntroduction to Programming Using C#</start> is a free
+introductory computer programming textbook that uses C# as the language of
+instruction.  This version of the book covers C#&nbsp;10, as available in .NET&nbsp;6.
 It is suitable for use in an introductory programming course
 and for people who are trying to learn programming on their own. There are
 no prerequisites beyond a general familiarity with the ideas of computers and
@@ -14,7 +14,7 @@ college-level course or in a year-long high school course.  The remaining
 chapters can be covered in a second course.</p>
 
 <p>The textbook home page, 
-<fx><a href="https://math.hws.edu/javanotes/">https://math.hws.edu/javanotes/</a>,</fx><swing><a href="https://math.hws.edu/javanotes-swing/">https://math.hws.edu/javanotes-swing/</a>,</swing> 
+<a href="https://codewren.ch/csharpnotes/">https://codewren.ch/csharpnotes/</a>,
 has links for downloading both web site and PDF versions of the book.  Example programs and
 solutions to end-of-chapter exercises are part of the web site download and can also be downloaded
 separately.  Readers are encouraged
@@ -28,17 +28,17 @@ concentrates on explaining concepts rather than giving step-by-step
 how-to-do-it guides.
 I have tried to use a conversational writing style that
 might be closer to classroom lecture than to a typical textbook. This is
-certainly not a Java reference book, and it is not a
-comprehensive survey of all the features of Java. It is not written as
-a quick introduction to Java for people who already know another programming
+certainly not a .NET reference book, and it is not a
+comprehensive survey of all the features of C#. It is not written as
+a quick introduction to C# for people who already know another programming
 language. Instead, it is directed mainly towards people who are learning
 programming for the first time, and it is as much about general programming
-concepts as it is about Java in particular. I believe that <i>Introduction to
-Programming using Java</i> is fully competitive with the conventionally
+concepts as it is about C# in particular. I believe that <i>Introduction to
+Programming Using C#</i> is fully competitive with the conventionally
 published, printed programming textbooks that are available on the market.
 (Well, all right, I'll confess that I think it's better.)</p>
 
-<p>There are several approaches to teaching Java. One approach uses
+<p>There are several approaches to teaching programming. One approach uses
 graphical user interface programming from the very beginning. And some people
 believe that object oriented programming should be emphasized from the
 very beginning. These are <b>not</b> the approach that I take. The approach that I favor
@@ -51,80 +51,41 @@ graphical user interfaces. Arrays are introduced in Chapter&nbsp;3 with a full t
 Chapter&nbsp;8 is a short chapter that marks a turning point in the book, moving beyond the
 fundamental ideas of programming to cover more advanced topics.
 Chapter&nbsp;8 is about writing robust, correct, and efficient programs.
-Chapters&nbsp;9 and 10 cover recursion and data structures, including generic programming and the Java Collection
-Framework.  Chapter&nbsp;11 is about files and networking.  Chapter&nbsp;12
+Chapters&nbsp;9 and 10 cover recursion and data structures, including generic programming and the various collection types available in the .NET runtime
+libraries.  Chapter&nbsp;11 is about files and networking and introduces asynchronous programming.  Chapter&nbsp;12
 covers threads and parallel processing.  Finally,
 Chapter&nbsp;13 returns to the topic of graphical user interface programming
 to cover some more advanced features.</p>
 
 <break/>
 
-<p>Java currently has two major approaches to Graphical User Interface programming:
-JavaFX and Swing.  This edition of the textbook uses <fx>JavaFX</fx><swing>Swing</swing>,
-but there is an alternative edition that uses <fx>Swing</fx><swing>JavaFX</swing>.
-The main differences are in Chapters&nbsp;6 and&nbsp;13, which are devoted to GUI programming,
-but GUI programs and GUI-related material
-in other chapters also use <fx>JavaFX</fx><swing>Swing</swing> exclusively.
-For the Swing edition, much of the GUI material is taken from Version&nbsp;7 of this textbook,
-with some updating and modification.</p>
-
-<p>Swing is a standard part of Java.  JavaFX was introduced as a more modern approach to
-GUI programming, but it must be downloaded and installed separately from Java itself,
-which makes it more complicated to use.  Swing and JavaFX can both be used to write
-complex, fully functional GUI programs, and either one is a reasonable choice.  Version&nbsp;8 of
-this textbook used JavaFX.  The alternative edition that uses Swing has been added
-for Version&nbsp;9.</p>
-
 <p>GUI programming was never included in the textbook as an end in itself, and it would
 take another textbook to cover the topic in its entirety.  I cover GUI because it is a
 great example of object-oriented programming, it lets me introduce event-driven programs,
-and it lets students literally see the effect of the code that they write.  JavaFX and
-Swing both offer good support for all of those purposes.</p>
+and it lets students literally see the effect of the code that they write.</p>
 
 <break/>
 
-<p>Version 8 of this textbook originally covered Java&nbsp;8, but minor updates of that
-version added notes about new features in Java&nbsp;9 through Java&nbsp;16.  Version&nbsp;9 of
-the book covers Java&nbsp;17.  The main change from Version&nbsp;8 is the addition of the
-Swing edition.  A&nbsp;section on records has
-been added to Chapter&nbsp;7. Many examples have been modified to use text blocks and
-the new <code>switch</code> statement syntax.  Some&nbsp;references to the general idea of
-"abstraction" have been added, such as a short subsection on control abstraction in
-Section&nbsp;3.1. A&nbsp;short subsection on final classes and methods has been added
-to Section&nbsp;5.5.  There are also small corrections and modifications throughout.</p>
-
-<p>The majority of this textbook is valid for Java&nbsp;8, and the book does not
-cover features added after Java&nbsp;8 in as much detail.  
-Note that only Java 8, 11, and&nbsp;17 are "long-term support"
-releases.  When I introduce a feature
-that requires Java&nbsp;11 or Java&nbsp;17, I will make note of that fact.
-However, I will never refer to any of the non-long-term-support releases.</p>
-
-<break/>
-   
-
-<p>The first version of the book was written in 1996, and there have
-been several versions since then.  Version&nbsp;9 will be the last version.
-All editions are archived (at least until my retirement in December 2022
-and hopefully beyond) at the following Web addresses:</p>
+<p>The first version of the Java edition of this book was written by David Eck in 1996, with a total of 9 versions through 2022.
+All editions of the Java book are archived at the following Web addresses:</p>   
    
 <ul>
 <li>First edition: <a href=
-"https://math.hws.edu/eck/cs124/javanotes1/">https://math.hws.edu/eck/cs124/javanotes1/</a> (Covers Java 1.0.)</li>
+"https://math.hws.edu/eck/cs124/csharpnotes1/">https://math.hws.edu/eck/cs124/csharpnotes1/</a> (Covers Java 1.0.)</li>
 <li>Second edition: <a href=
-"https://math.hws.edu/eck/cs124/javanotes2/">https://math.hws.edu/eck/cs124/javanotes2/</a> (Covers Java 1.1.)</li>
+"https://math.hws.edu/eck/cs124/csharpnotes2/">https://math.hws.edu/eck/cs124/csharpnotes2/</a> (Covers Java 1.1.)</li>
 <li>Third edition: <a href=
-"https://math.hws.edu/eck/cs124/javanotes3/">https://math.hws.edu/eck/cs124/javanotes3/</a> (Covers Java 1.1.)</li>
+"https://math.hws.edu/eck/cs124/csharpnotes3/">https://math.hws.edu/eck/cs124/csharpnotes3/</a> (Covers Java 1.1.)</li>
 <li>Fourth edition: <a href=
-"https://math.hws.edu/eck/cs124/javanotes4/">https://math.hws.edu/eck/cs124/javanotes4/</a> (Covers Java 1.4.)</li>
+"https://math.hws.edu/eck/cs124/csharpnotes4/">https://math.hws.edu/eck/cs124/csharpnotes4/</a> (Covers Java 1.4.)</li>
 <li>Fifth edition: <a href=
-"https://math.hws.edu/eck/cs124/javanotes5/">https://math.hws.edu/eck/cs124/javanotes5/</a> (Covers Java 5.0.)</li>
+"https://math.hws.edu/eck/cs124/csharpnotes5/">https://math.hws.edu/eck/cs124/csharpnotes5/</a> (Covers Java 5.0.)</li>
 <li>Sixth edition: <a href=
-"https://math.hws.edu/eck/cs124/javanotes6/">https://math.hws.edu/eck/cs124/javanotes6/</a> (Covers Java 5.0, with a bit of 6.0.)</li>
+"https://math.hws.edu/eck/cs124/csharpnotes6/">https://math.hws.edu/eck/cs124/csharpnotes6/</a> (Covers Java 5.0, with a bit of 6.0.)</li>
 <li>Seventh edition: <a href=
-"https://math.hws.edu/eck/cs124/javanotes7/">https://math.hws.edu/eck/cs124/javanotes7/</a> (Covers Java 7.)</li>
+"https://math.hws.edu/eck/cs124/csharpnotes7/">https://math.hws.edu/eck/cs124/csharpnotes7/</a> (Covers Java 7.)</li>
 <li>Eighth edition: <a href=
-"https://math.hws.edu/eck/cs124/javanotes8/">https://math.hws.edu/eck/cs124/javanotes8/</a> (Covers Java 8, plus a bit of 11 and 17.)</li>
+"https://math.hws.edu/eck/cs124/csharpnotes8/">https://math.hws.edu/eck/cs124/csharpnotes8/</a> (Covers Java 8, plus a bit of 11 and 17.)</li>
 <li>Ninth edition with JavaFX: <a href=
 "https://math.hws.edu/eck/cs124/csharpnotes1/">https://math.hws.edu/eck/cs124/csharpnotes1/</a> (Covers Java 17.)</li>
 <li>Ninth edition with Swing: <a href=
@@ -133,7 +94,7 @@ and hopefully beyond) at the following Web addresses:</p>
    
 
 <p>This textbook is <b>free</b>, but it is not in the
-public domain. Version&nbsp;9 is published under the terms of the
+public domain. <i>Introduction to Programming Using C#,</i> Version&nbsp;1 is published under the terms of the
 Creative Commons Attribution-NonCommercial-ShareAlike 4.0 License. 
 To view a copy of this license, visit 
 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">http://creativecommons.org/licenses/by-nc-sa/4.0/</a>.
@@ -172,30 +133,16 @@ PDF version, the XML is processed into a form that can be used by the TeX
 typesetting program.  In addition to
 XML files, the source includes DTDs, XSLT transformations, Java source code files,
 image files, a TeX macro file, and a couple of scripts that are used in processing.
-The scripts work on Linux and on MacOS. I have made the complete source files available 
-for download here:</p>
+The scripts work on Linux and on MacOS, and on Windows via Docker. The source files are available 
+on Github here:</p>
 
-<fxdiv>
-<p align="center"><a href="https://math.hws.edu/eck/cs124/downloads/csharpnotes1-full-source.zip">https://math.hws.edu/eck/cs124/downloads/csharpnotes1-full-source.zip</a></p>
-</fxdiv>
-<swingdiv>
-<p align="center"><a href="https://math.hws.edu/eck/cs124/downloads/csharpnotes1-swing-full-source.zip">https://math.hws.edu/eck/cs124/downloads/csharpnotes1-swing-full-source.zip</a></p>
-</swingdiv>
+<p align="center"><a href="https://github.com/dschilling/csharpnotes">https://github.com/dschilling/csharpnotes</a></p>
 
 <p>These files were not originally meant for publication, and therefore are not very
 cleanly written.  Furthermore, it requires a fair amount of expertise to use them.
 However, I have had several requests for the sources and have made
 them available on an "as-is" basis.  For more information about the sources and
-how they are used see the <tex>README file</tex><web><a href="README-full-source.txt">README&nbsp;file</a></web> from
-the source download.</p>
-
-<p>The source files for the JavaFX edition and for the Swing edition are actually
-generated from a common set of source files that would be even harder to use.
-If you are interested in exploring them, those ultimate source files can be
-found on Github.  You can browse the files online, or you can clone
-the git repository, using the following URL: </p>
-
-<p align="center"><a href="https://github.com/davidjeck/csharpnotes1">https://github.com/davidjeck/csharpnotes1</a></p>
+how they are used see the <tex>README file</tex><web><a href="README-full-source.txt">README&nbsp;file</a></web> on Github.</p>
    
 <break/> 
 
@@ -206,6 +153,10 @@ Email: <a href="mailto:eck@hws.edu">eck@hws.edu</a><br />
 WWW: <a href="https://math.hws.edu/eck/">https://math.hws.edu/eck/</a><br /><br />
 </np>
 
+<np>Daniel Schilling<br />
+Email: <a href="mailto:rawdatadaniel@gmail.com">rawdatadaniel@gmail.com</a><br />
+WWW: <a href="https://codewren.ch/">https://codewren.ch/</a><br /><br />
+</np>
 
 
   

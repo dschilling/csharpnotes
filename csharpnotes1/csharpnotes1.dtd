@@ -17,7 +17,7 @@
 <!ENTITY % simpletext "(#PCDATA|%textitem;)*">
 <!ENTITY % text "(p|np|pre|break|img|ul|ol|narrower|centered|imageclear|webdiv|texdiv|fxdiv|swingdiv)*">
 
-<!ELEMENT javanotes (preface?,chapter*,fudgeref*,glossary?,source?)>
+<!ELEMENT csharpnotes (preface?,chapter*,fudgeref*,glossary?,source?)>
 <!ELEMENT preface (%text;)>
 <!ELEMENT intro (%text;)>
 

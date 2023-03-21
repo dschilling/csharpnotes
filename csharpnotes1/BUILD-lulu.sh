@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# THIS SCRIPT BUILDS THE JAVANOTES PDF FILES FOR lulu.com.
+# THIS SCRIPT BUILDS THE CSHARPNOTES PDF FILES FOR lulu.com.
 
 # VARIABLES USED IN THIS SCRIPT CAN BE SET IN BUILT-env.sh; see that file
 # for more information.
@@ -18,7 +18,7 @@ fi
 
 XALAN_COMMAND="$JAVA_COMMAND -cp $XALAN_DIR/xalan.jar:$XALAN_DIR/serializer.jar:$XALAN_DIR/xercesImpl.jar:$XALAN_DIR/xml-apis.jar org.apache.xalan.xslt.Process"
 
-cd $JAVANOTES_SOURCE_DIR
+cd $CSHARPNOTES_SOURCE_DIR
 
 rm -rf tex
 mkdir tex

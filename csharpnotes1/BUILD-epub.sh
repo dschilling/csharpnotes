@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# THIS SCRIPT BUILDS JAVANOTES AS AN EPUB EBOOK.
+# THIS SCRIPT BUILDS CSHARPNOTES AS AN EPUB EBOOK.
 # IT SHOULD BE CONSIDERED (PERMANENTLY) EXPERIMENTAL.
 
 # The script can convert the .epub file to a .mobi file
@@ -43,14 +43,14 @@ function copyfiles() {
 echo
 echo Building epub...
 
-cd $JAVANOTES_SOURCE_DIR
+cd $CSHARPNOTES_SOURCE_DIR
 
 echo in directory `pwd`
 
 rm -rf epub
 
 echo
-echo Creating directory epub in $JAVANOTES_SOURCE_DIR...
+echo Creating directory epub in $CSHARPNOTES_SOURCE_DIR...
 
 if ! cp -r epub-files epub ; then
    echo "Error: could not create epub!"
@@ -74,7 +74,7 @@ if  $XALAN_COMMAND -xsl convert-epub.xsl -in csharpnotes1-epub.xml ; then
    echo
    echo Copying other files...
 
-   cp javanotes-epub.css epub/OEBPS
+   cp csharpnotes-epub.css epub/OEBPS
    cp csharpnotes1-cover-518x675.jpg epub/OEBPS
    copyfiles c1-overview epub/OEBPS/c1
    copyfiles c2-basics epub/OEBPS/c2

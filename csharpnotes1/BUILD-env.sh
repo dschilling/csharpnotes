@@ -12,11 +12,11 @@
 TOP_DIR=`pwd`
 
 
-# JAVANOTES_SOURCE_DIR is the directory that contains all the source
+# CSHARPNOTES_SOURCE_DIR is the directory that contains all the source
 # files from which the web site and PDF files will be built.
 
-if [ -z "$JAVANOTES_SOURCE_DIR" ] ; then
-   JAVANOTES_SOURCE_DIR="$TOP_DIR/csharpnotes1"
+if [ -z "$CSHARPNOTES_SOURCE_DIR" ] ; then
+   CSHARPNOTES_SOURCE_DIR="$TOP_DIR/csharpnotes1"
 fi
 
 
@@ -77,7 +77,7 @@ fi
 
 export TOP_DIR
 export BUILD_OUTPUT_DIR
-export JAVANOTES_SOURCE_DIR 
+export CSHARPNOTES_SOURCE_DIR 
 export XALAN_DIR
 export JAVA_COMMAND
 export LATEX_COMMAND

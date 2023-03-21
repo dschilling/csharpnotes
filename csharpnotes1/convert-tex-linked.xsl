@@ -54,18 +54,18 @@
 \tolerance=8000
 \input texmacros
 \renewcommand{\weblink}[2]{\href{#1}{#2}}
-\title{Introduction to Programming Using Java}
+\title{Introduction to Programming Using C\#}
 \author{David J. Eck}
 \begin{document}
 \frontmatter
 \pageonelinked
 \tableofcontents
-<xsl:apply-templates select="/javanotes/preface"/>
+<xsl:apply-templates select="/csharpnotes/preface"/>
 \mainmatter
-<xsl:apply-templates select="/javanotes/chapter"/>
+<xsl:apply-templates select="/csharpnotes/chapter"/>
 \appendix
-<xsl:apply-templates select="/javanotes/source"/>
-<xsl:apply-templates select="/javanotes/glossary"/>
+<xsl:apply-templates select="/csharpnotes/source"/>
+<xsl:apply-templates select="/csharpnotes/glossary"/>
 \end{document}
 </xsl:template>
 

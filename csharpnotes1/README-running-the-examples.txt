@@ -1,7 +1,7 @@
 
 This README file explains how to use the example programs for
-"Introduction to Programming Using Java, Version 9.0, JavaFX edition", 
-which is freely available on the web at http://math.hws.edu/javanotes
+"Introduction to Programming Using C#, Version 1.0, JavaFX edition", 
+which is freely available on the web at http://math.hws.edu/csharpnotes
 
 Although some example programs will work with earlier versions,
 Java 17 is required for many of them.  All GUI programs use JavaFX,
@@ -14,7 +14,7 @@ you can find the files in a folder named "sources."  The example
 programs are also available as a separate download.  The files are
 arranged by chapter, with a folder inside "sources" for each chapter.
 There are also links to individual files in the index.html file inside
-"sources," or on the web at http://math.hws.edu/javanotes/sources/index.html
+"sources," or on the web at http://math.hws.edu/csharpnotes/sources/index.html
 
 You have several options for running the examples...
 

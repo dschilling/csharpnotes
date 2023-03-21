@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # This script will export the source files for the JavaFX edition of 
-# Introduction to Programming using Java.  The exported directory
+# Introduction to Programming Using C#.  The exported directory
 # will contain the files that are needed to build the book in 
 # various formats, plus a README.txt file with mor information.
 # The source for the exports is the Eclipse project directory

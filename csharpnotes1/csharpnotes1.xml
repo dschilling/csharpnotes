@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE javanotes SYSTEM "csharpnotes1.dtd">
-<javanotes>
+<!DOCTYPE csharpnotes SYSTEM "csharpnotes1.dtd">
+<csharpnotes>
    &includes;
-</javanotes>
+</csharpnotes>

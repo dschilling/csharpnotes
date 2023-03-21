@@ -5,4 +5,4 @@ if "%~1"=="" (
     exit /b 1
 )
 @echo on
-docker run -it --rm --env XALAN_DIR=/usr/share/java -v %~dp0..:/home/eck/git/csharpnotes -w /home/eck/git/csharpnotes javanotes docker/entry-point.sh %1
+docker run -it --rm --env XALAN_DIR=/usr/share/java -v %~dp0..:/home/eck/git/csharpnotes -w /home/eck/git/csharpnotes csharpnotes docker/entry-point.sh %1

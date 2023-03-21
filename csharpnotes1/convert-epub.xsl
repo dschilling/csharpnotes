@@ -10,7 +10,7 @@
     
 <xsl:template match="/">
    <redirect:write file="epub/OEBPS/csharpnotes1.opf">
-		<package version="2.0" xmlns="http://www.idpf.org/2007/opf" unique-identifier="javanotesID">
+		<package version="2.0" xmlns="http://www.idpf.org/2007/opf" unique-identifier="csharpnotesID">
 		    <metadata xmlns:dc="http://purl.org/dc/elements/1.1/"
 		          xmlns:opf="http://www.idpf.org/2007/opf">
 		   		<dc:title>Introduction to Programming Using C#, Version 1</dc:title>
@@ -18,20 +18,20 @@
 		   		<dc:description>A free introductory programming textbook using C# as the programming language.</dc:description>
 		   		<dc:date>2022-5</dc:date>
 		   		<dc:language>en-US</dc:language>
-		   		<dc:rights>Copyright 1996-2022 by David J. Eck and Copyright 2023 Daniel Schilling.  Released under the
+		   		<dc:rights>Copyright 1996-2022 by David J. Eck. Copyright 2023 by Daniel Schilling.  Released under the
 		   		    Creative Commons Attribution-Noncommercial-ShareAlike 4.0 License.</dc:rights>
-		   		<dc:identifier id="javanotesID">https://codewren.ch/csharpnotes1</dc:identifier>
+		   		<dc:identifier id="csharpnotesID">https://codewren.ch/csharpnotes1</dc:identifier>
 		    </metadata>
 		    <manifest>
 		        <item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml"/>
-		        <item id="css" href="javanotes-epub.css" media-type="text/css"/>
+		        <item id="css" href="csharpnotes-epub.css" media-type="text/css"/>
 		        <item id="cover-image" href="csharpnotes1-cover-518x675.jpg" media-type="image/jpeg"/>
 		    	<item id="titlepage" href="titlepage.html" media-type="application/xhtml+xml"/>
 		    	<item id="cover" href="cover.html" media-type="application/xhtml+xml"/>
 		    	<item id="quiz-answers-intro" href="quiz-answers-intro.html" media-type="application/xhtml+xml"/>
 		    	<item id="exercise-answers-intro" href="exercise-answers-intro.html" media-type="application/xhtml+xml"/>
-				<xsl:if test="/javanotes/preface"><item id="preface" href="preface.html" media-type="application/xhtml+xml"/></xsl:if>
-		        <xsl:for-each select="/javanotes/chapter">
+				<xsl:if test="/csharpnotes/preface"><item id="preface" href="preface.html" media-type="application/xhtml+xml"/></xsl:if>
+		        <xsl:for-each select="/csharpnotes/chapter">
 		           <xsl:variable name="chapter"><xsl:value-of select="position()"/></xsl:variable>
 		           <item media-type="application/xhtml+xml"><xsl:attribute name="href"><xsl:value-of select="concat('c',$chapter,'/index.html')"/></xsl:attribute>
 		           		<xsl:attribute name="id"><xsl:value-of select="concat('c',$chapter,'-intro')"/></xsl:attribute></item>
@@ -75,7 +75,7 @@
 		        <itemref idref="cover"/>
 		    	<itemref idref="titlepage"/>
 		    	<itemref idref="preface"/>
-		        <xsl:for-each select="/javanotes/chapter">
+		        <xsl:for-each select="/csharpnotes/chapter">
 		           <xsl:variable name="chapter"><xsl:value-of select="position()"/></xsl:variable>
 		           <itemref><xsl:attribute name="idref"><xsl:value-of select="concat('c',$chapter,'-intro')"/></xsl:attribute></itemref>
 		           <xsl:for-each select="section">
@@ -91,14 +91,14 @@
 		        </xsl:for-each>		    	
 		    	<itemref idref="glossary"/>
 		    	<itemref linear="no" idref="quiz-answers-intro"/>
-		    	<xsl:for-each select="/javanotes/chapter">
+		    	<xsl:for-each select="/csharpnotes/chapter">
 		    	   <xsl:if test="quiz">
 		              <xsl:variable name="chapter"><xsl:value-of select="position()"/></xsl:variable>
 		    	      <itemref linear="no"><xsl:attribute name="idref"><xsl:value-of select="concat('c',$chapter,'-quiz-answers')"/></xsl:attribute></itemref>
 		    	   </xsl:if>
 		    	</xsl:for-each>
 		    	<itemref linear="no" idref="exercise-answers-intro"/>
-		    	<xsl:for-each select="/javanotes/chapter">
+		    	<xsl:for-each select="/csharpnotes/chapter">
 		    	   <xsl:if test="exercises">
 		              <xsl:variable name="chapter"><xsl:value-of select="position()"/></xsl:variable>
 		    	      <xsl:for-each select="exercises/exercise">
@@ -123,7 +123,7 @@
 	        <meta content="https://codewren.ch/csharpnotes1" name="dtb:uid"/>
 	    </head>
 	    <docTitle>
-	        <text>Introduction to Programming Using Java, Version 9.0</text>
+	        <text>Introduction to Programming Using C#, Version 1.0</text>
 	    </docTitle>
 	    <docAuthor>
 	        <text>David J. Eck</text>
@@ -141,7 +141,7 @@
 	            </navLabel>
 	            <content src="preface.html"/>
 	        </navPoint>
-	        <xsl:for-each select="/javanotes/chapter">
+	        <xsl:for-each select="/csharpnotes/chapter">
 	           <xsl:variable name="chapter"><xsl:value-of select="position()"/></xsl:variable>
 	           <navPoint><xsl:attribute name="id"><xsl:value-of select="concat('c',$chapter,'-intro')"/></xsl:attribute>
 	              <navLabel>
@@ -195,7 +195,7 @@
 	              <text>Answers To End-of-Chapter Quizzes</text>
 	           </navLabel>
 	           <content src="quiz-answers-intro.html"/>
-	           <xsl:for-each select="/javanotes/chapter">
+	           <xsl:for-each select="/csharpnotes/chapter">
 	              <xsl:variable name="chapter"><xsl:value-of select="position()"/></xsl:variable>
 	              <xsl:if test="quiz">
 		               <navPoint><xsl:attribute name="id"><xsl:value-of select="concat('c',$chapter,'-quiz-answers')"/></xsl:attribute>
@@ -212,7 +212,7 @@
 	              <text>Answers to End-of-Chapter Exercises</text>
 	           </navLabel>
 	           <content src="exercise-answers-intro.html"/>
-	           <xsl:for-each select="/javanotes/chapter">
+	           <xsl:for-each select="/csharpnotes/chapter">
 	              <xsl:variable name="chapter"><xsl:value-of select="position()"/></xsl:variable>
 	              <xsl:if test="exercises">
 					  <xsl:for-each select="exercises/exercise">
@@ -236,13 +236,13 @@
 </xsl:text>
         <html xmlns="http://www.w3.org/1999/xhtml">
         <head>
-        <title>Javanotes 9, JavaFX Edition -- Title Page</title>
-        <link href="javanotes-epub.css" rel="stylesheet" type="text/css"/>
+        <title>CSharpNotes 9, JavaFX Edition -- Title Page</title>
+        <link href="csharpnotes-epub.css" rel="stylesheet" type="text/css"/>
         </head>
         <body>
         <div class="content">
         <hr/>
-        <h2 class="chapter_title">Introduction to Programming Using Java</h2>
+        <h2 class="chapter_title">Introduction to Programming Using C#</h2>
         <h2 class="chapter_title">Version 9.0, JavaFX Edition</h2>
         <h2 class="chapter_title">May 2022</h2>
         <h4 class="centeralign">Author:&#160; <a href="https://math.hws.edu/eck/">David J. Eck</a>&#160;
@@ -252,7 +252,7 @@
         <p>This is an <b>experimental</b> ebook version of a free Java Programming textbook.  Please excuse any
         irregularities in formatting.  In particular, your reader might have problems with overly wide code segments.
         Note that PDF and web versions
-        are available on-line at <a href="https://math.hws.edu/javanotes/">https://math.hws.edu/javanotes/</a>.  
+        are available on-line at <a href="https://math.hws.edu/csharpnotes/">https://math.hws.edu/csharpnotes/</a>.  
         Source code for examples is <b>not</b> included in
         this ebook, but the ebook does contain links to online copies of the examples.
         You can email comments to the author.</p>
@@ -267,7 +267,7 @@
             details.)
             The most recent version of this book is always available, at no
             charge, for downloading and for on-line use at the Web address:
-            <a href="https://math.hws.edu/javanotes/">https://math.hws.edu/javanotes/</a></p>
+            <a href="https://math.hws.edu/csharpnotes/">https://math.hws.edu/csharpnotes/</a></p>
             <hr/>
         </div>
         </div>
@@ -275,10 +275,10 @@
         </html>
    </redirect:write>
 
-   <xsl:apply-templates select="/javanotes/preface"/>
-   <xsl:apply-templates select="/javanotes/chapter"/>
- <!--   <xsl:apply-templates select="/javanotes/source"/> -->
-   <xsl:apply-templates select="/javanotes/glossary"/>
+   <xsl:apply-templates select="/csharpnotes/preface"/>
+   <xsl:apply-templates select="/csharpnotes/chapter"/>
+ <!--   <xsl:apply-templates select="/csharpnotes/source"/> -->
+   <xsl:apply-templates select="/csharpnotes/glossary"/>
 </xsl:template>
    
 
@@ -290,16 +290,16 @@
 </xsl:text>
      <html xmlns="http://www.w3.org/1999/xhtml">
      <head>
-     <title>Javanotes 7.0 Table of Contents</title>
-     <link href="javanotes-epub.css" rel="stylesheet" type="text/css"/>
+     <title>CSharpNotes 7.0 Table of Contents</title>
+     <link href="csharpnotes-epub.css" rel="stylesheet" type="text/css"/>
      </head>
      <body>
      <div class="content">
-        <h3 class="centeralign">Introduction to Programming Using Java, Sixth Edition</h3>
+        <h3 class="centeralign">Introduction to Programming Using C#, Sixth Edition</h3>
         <h2 class="centeralign">Table of Contents</h2>
         <div style="margin-left: 30pt">
         <p><a href="preface.html"><b>Preface</b></a></p>
-        <xsl:for-each select="/javanotes/chapter">
+        <xsl:for-each select="/csharpnotes/chapter">
            <xsl:variable name="chapter"><xsl:value-of select="position()"/></xsl:variable>
            <p><b>Chapter <xsl:value-of select="$chapter"/>:&#160;
               <a><xsl:attribute name="href"><xsl:value-of 
@@ -331,7 +331,7 @@
            </xsl:if>
            </ul>
         </xsl:for-each>
-        <xsl:if test="/javanotes/glossary">
+        <xsl:if test="/csharpnotes/glossary">
            <p><b>Appendix:</b>&#160; <a href="glossary.html">Glossary</a></p>
         </xsl:if>
      	</div>
@@ -349,8 +349,8 @@
 </xsl:text>
         <html xmlns="http://www.w3.org/1999/xhtml">
         <head>
-        <title>Javanotes 9.0, Chapter <xsl:value-of select="position()"/> -- <xsl:value-of select="@title"/></title>
-        <link href="../javanotes-epub.css" rel="stylesheet" type="text/css"/>
+        <title>CSharpNotes 9.0, Chapter <xsl:value-of select="position()"/> -- <xsl:value-of select="@title"/></title>
+        <link href="../csharpnotes-epub.css" rel="stylesheet" type="text/css"/>
         </head>
         <body>
         <div class="content">
@@ -396,12 +396,12 @@
 &lt;!DOCTYPE html PUBLIC  "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"&gt;
 </xsl:text>
      <html xmlns="http://www.w3.org/1999/xhtml">     <head>
-     <title>Javanotes 9 Preface</title>
-     <link href="javanotes-epub.css" rel="stylesheet" type="text/css"/>
+     <title>CSharpNotes 9 Preface</title>
+     <link href="csharpnotes-epub.css" rel="stylesheet" type="text/css"/>
      </head>
      <body>
      <div class="content">
-        <h3 class="centeralign">Introduction to Programming Using Java<br/>
+        <h3 class="centeralign">Introduction to Programming Using C#<br/>
            Version 9.0, JavaFX Edition, May 2022<br/></h3>
         <h2 class="centeralign">Preface</h2>
         <hr class="break"/>
@@ -422,12 +422,12 @@
 </xsl:text>
      <html xmlns="http://www.w3.org/1999/xhtml">
      <head>
-     <title>Javanotes Source Code</title>
-     <link href="../javanotes-epub.css" rel="stylesheet" type="text/css"/>
+     <title>CSharpNotes Source Code</title>
+     <link href="../csharpnotes-epub.css" rel="stylesheet" type="text/css"/>
      </head>
      <body>
      <div class="content">
-        <h3 class="centeralign">Introduction to Programming Using Java, Sixth Edition</h3>
+        <h3 class="centeralign">Introduction to Programming Using C#, Sixth Edition</h3>
         <h2 class="centeralign">Source Code</h2>
         <hr class="break"/>
         <xsl:apply-templates/>
@@ -447,8 +447,8 @@
 </xsl:text>
      <html xmlns="http://www.w3.org/1999/xhtml">
      <head>
-     <title>Javanotes Glossary</title>
-     <link href="javanotes-epub.css" rel="stylesheet" type="text/css"/>
+     <title>CSharpNotes Glossary</title>
+     <link href="csharpnotes-epub.css" rel="stylesheet" type="text/css"/>
      </head>
      <body>
      <div class="content">
@@ -474,8 +474,8 @@
 </xsl:text>
         <html xmlns="http://www.w3.org/1999/xhtml">
         <head>
-        <title>Javanotes 9.0, Section <xsl:value-of select="$chapternum"/>.<xsl:value-of select="position()"/> -- <xsl:value-of select="@title"/></title>
-        <link href="../javanotes-epub.css" rel="stylesheet" type="text/css"/>
+        <title>CSharpNotes 9.0, Section <xsl:value-of select="$chapternum"/>.<xsl:value-of select="position()"/> -- <xsl:value-of select="@title"/></title>
+        <link href="../csharpnotes-epub.css" rel="stylesheet" type="text/css"/>
         </head>
         <body>
         <div class="content">
@@ -505,8 +505,8 @@
 </xsl:text>
         <html xmlns="http://www.w3.org/1999/xhtml">
         <head>
-        <title>Javanotes 9.0, Exercises for Chapter <xsl:value-of select="$chapternum"/></title>
-        <link href="../javanotes-epub.css" rel="stylesheet" type="text/css"/>
+        <title>CSharpNotes 9.0, Exercises for Chapter <xsl:value-of select="$chapternum"/></title>
+        <link href="../csharpnotes-epub.css" rel="stylesheet" type="text/css"/>
         </head>
         <body>
         <div class="content">
@@ -534,8 +534,8 @@
 </xsl:text>
            <html xmlns="http://www.w3.org/1999/xhtml">
            <head>
-           <title>Javanotes 9.0, Solution to Exercise <xsl:value-of select="position()"/>, Chapter <xsl:value-of select="$chapternum"/></title>
-           <link href="../javanotes-epub.css" rel="stylesheet" type="text/css"/>
+           <title>CSharpNotes 9.0, Solution to Exercise <xsl:value-of select="position()"/>, Chapter <xsl:value-of select="$chapternum"/></title>
+           <link href="../csharpnotes-epub.css" rel="stylesheet" type="text/css"/>
            </head>
            <body>
            <div class="content">
@@ -576,8 +576,8 @@
 </xsl:text>
         <html xmlns="http://www.w3.org/1999/xhtml">
         <head>
-        <title>Javanotes 9.0, <xsl:if test="$answers">Answers for </xsl:if>Quiz on Chapter <xsl:value-of select="$chapternum"/></title>
-        <link href="../javanotes-epub.css" rel="stylesheet" type="text/css"/>
+        <title>CSharpNotes 9.0, <xsl:if test="$answers">Answers for </xsl:if>Quiz on Chapter <xsl:value-of select="$chapternum"/></title>
+        <link href="../csharpnotes-epub.css" rel="stylesheet" type="text/css"/>
         </head>
         <body>
         <div class="content">

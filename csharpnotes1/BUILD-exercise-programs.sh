@@ -19,7 +19,7 @@ fi
 XALAN_COMMAND="$JAVA_COMMAND -cp $XALAN_DIR/xalan.jar:$XALAN_DIR/serializer.jar:$XALAN_DIR/xercesImpl.jar:$XALAN_DIR/xml-apis.jar org.apache.xalan.xslt.Process"
 
 
-cd $JAVANOTES_SOURCE_DIR
+cd $CSHARPNOTES_SOURCE_DIR
 
 rm -rf exercise-programs
 mkdir exercise-programs
