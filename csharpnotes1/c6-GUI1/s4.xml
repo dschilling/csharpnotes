@@ -1,0 +1,587 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section SYSTEM "../csharpnotes1.dtd" >
+
+<section id="GUI1.4" title="Basic Controls">
+   
+   
+<p><start><big>I</big>n preceding sections</start>, you've seen how to use a
+graphics context to draw on the screen and how to handle mouse events and
+keyboard events. In one sense, that's all there is to GUI programming. If
+you're willing to program all the drawing and handle all the mouse and keyboard
+events, you have nothing more to learn. However, you would either be doing a
+lot more work than you need to do, or you would be limiting yourself to very
+simple user interfaces. A typical user interface uses standard GUI components
+such as buttons, scroll bars, text-input boxes, and menus. These components
+have already been written for you, so you don't have to duplicate the work
+involved in developing them. They know how to draw themselves, and they can
+handle the details of processing the mouse and keyboard events that concern
+them.</p>
+
+<p>Consider one of the simplest user interface components, a push button. The
+button has a border, and it displays some text. This text can be changed.
+Sometimes the button is disabled, so that clicking on it doesn't have any
+effect. When it is disabled, its appearance changes. When the user clicks on
+the  button, it changes appearance when the mouse button is
+pressed and changes back when the mouse button is released. In fact, it's more
+complicated than that. If the user moves the mouse outside the push button
+before releasing the mouse button, the button changes to its regular
+appearance, and releasing the mouse at that time will not trigger the button. 
+To implement this, it is necessary to respond to mouse exit or
+mouse drag events. Furthermore, on many platforms, a button can receive the
+input focus. The button changes appearance when it has the focus. If the button
+has the focus and the user presses the space bar, the button is triggered. This
+means that the button must respond to keyboard and focus events as well.</p>
+
+<p>Fortunately, you don't have to program <b>any</b> of this, provided you
+use an object belonging to the standard class <code>javafx.scene.control.Button</code>. A
+<classname>Button</classname> object draws itself and processes mouse, keyboard, and focus
+events on its own. You only hear from the <classname>Button</classname> when the user
+triggers it by clicking on it or pressing the space bar while the button has
+the input focus. When this happens, the <classname>Button</classname> object creates an
+event object belonging to the class <code>javafx.event.ActionEvent</code>. The
+event object is sent to any registered listener to tell it that the button
+has been pushed. Your program gets only the information it needs&mdash;the fact
+that a button was pushed.</p>
+   
+<break/>
+   
+<p>Many standard components that are defined as part of the JavaFX graphical user interface
+API are defined by subclasses of the class <classname>Control</classname>, from
+package <code>javafx.scene.control</code>.  Controls (with just a couple of exceptions)
+can be manipulated by the user to generate input and events for the program.
+A number of useful methods are defined for controls. I begin by mentioning
+three methods that can be used with any <classname>Control</classname>
+<code>control</code>:</p>
+
+<ul>
+<li><codedef>control.setDisable(true)</codedef> can be called to
+disable the control.  The control can be re-enabled with <codedef>control.setDisable(false)</codedef>.
+When a control is disabled, its appearance
+might change, and it cannot be the target of mouse or key events.
+This function can actually be called with any scene graph node, not just controls;
+when you disable a node, any nodes contained inside that node are also disabled.
+There is a boolean-valued function, <codedef>control.isDisabled()</codedef> 
+that you can call to discover whether the control is disabled, either because
+it was explicitly disabled or because it is inside a container node
+that was explicitly disabled.</li>
+<li><codedef>control.setTooltip(new Tooltip(string))</codedef> sets the
+specified string as a "tool tip" for the control. The tool tip is displayed
+if the mouse cursor is inside the control and the mouse is not moved for a few
+seconds. The tool tip should give some information about the meaning of the
+control or how to use it.</li>
+<li><codedef>control.setStyle(cssString)</codedef> sets the CSS style
+of the control.  CSS was discussed in <localref href="GUI1.2.5"/>.</li>
+</ul>
+
+   
+<p>Note that using a control, or any scene graph node,
+is a multi-step process. The component object must be created
+with a constructor. It must be added to a container. In many cases, a listener
+must be registered to respond to events from the component. And in some cases,
+a reference to the component must be saved in an instance variable so that the
+component can be manipulated by the program after it has been created.
+In this section, we will look at a few of the basic standard control components that are
+available in JavaFX.  They are all defined by classes in the package
+<classname>javafx.scene.control</classname>.  In the <localref href="GUI1.4">next section</localref>
+we will consider the problem of laying out components in containers.</p>
+
+
+
+<subsection id="GUI1.4.1" title="ImageView">
+
+<p>But before we turn to controls, I want to mention one other node type:
+<classname>ImageView</classname> from package <code>javafx.scene.image</code>.
+Recall from <localref href="GUI1.2.3"/> that an <classname>Image</classname>
+object represents a picture, and that images can be loaded from resource files.
+An <classname>Image</classname> can be drawn on a <classname>Canvas</classname>,
+but an <classname>Image</classname> is not a <classname>Node</classname>.
+That is, it can't be part of a scene graph.</p>
+
+<p>An <classname>ImageView</classname> is a scene graph node that is a 
+simple wrapper for an image.  Its purpose is simply to display the
+image.  It makes it possible to add the image to a scene graph without
+having to draw the image on a canvas.  The image can be specified as a parameter to the
+<classname>ImageView</classname> constructor.  For example, suppose
+that "icons/tux.png" is the path to an image resource file.  
+Then an <classname>ImageView</classname> can be created to display
+the image like this:</p>
+
+<pre>Image tux = new Image("icons/tux.png");
+ImageView tuxIcon = new ImageView( tux );</pre>
+
+<np>In this case, I am thinking of the image as an "icon," that is, a small
+image that is typically used on a button, label, or menu item to
+add a graphical element to the usual plain text.  In fact, we'll see that
+you can do exactly that in JavaFX.</np>
+
+</subsection>
+
+  
+<subsection id="GUI1.4.2" title="Label and Button">
+
+<p>The first four controls that we will look at have something in common:
+They all display a string of text to the user, which the user can view 
+but not edit.  Furthermore they can all display a graphical element in 
+addition to or instead of the text.  The graphic can be any <classname>Node</classname>
+but is usually a small icon, implemented as an object of type <classname>ImageView</classname>.
+In fact, all four types of controls inherit their behavior from a common
+superclass named <classname>Labeled</classname>.  In <localref href="GUI1.6.2"/>,
+we look at menu items, which also inherit from <classname>Labeled</classname>.
+That class defines a number of instance methods that can be used with
+labels, buttons, and other labeled controls. Those methods include:</p>
+
+<ul>
+<li><codedef>setText(string)</codedef> for
+setting the text that is displayed on the control.  The text
+can be multi-line.  The new line character, "\n", in the <code>string</code>
+represents a line break.</li>
+<li><codedef>setGraphic(node)</codedef> for setting the control's graphical element.
+</li>
+<li><codedef>setFont(font)</codedef> for setting the font that is used for the text.
+</li>
+<li><codedef>setTextFill(color)</codedef> for setting the paint that is used for drawing the text. 
+</li>
+<li><codedef>setGraphicTextGap(size)</codedef> for setting the amount of space that is put
+between the text and the graphic.  The parameter is of type <ptype>double</ptype>.
+</li>
+<li><codedef>setContentDisplay(displayCode)</codedef> for setting where the graphic
+should be placed with respect to the text.  The parameter is a constant
+from an enum, <classname>ContentDisplay</classname>, such as 
+<code>ContentDisplay.LEFT</code>, <code>ContentDisplay.RIGHT</code>, <code>ContentDisplay.TOP</code>
+or <code>ContentDisplay.BOTTOM</code>.
+</li>
+</ul>
+
+<np>All of these setter methods have corresponding getters, such as <code>getText()</code>
+and <code>getFont()</code>.  I have not listed a setter method for the background
+color.  It is possible to set a background color, but it's cumbersome.  (Setting
+the background color of a control, <code>c</code>, to white looks like this:</np>
+
+<pre>c.setBackground(new Background(new BackgroundFill(Color.WHITE,null,null)));</pre>
+
+<np>where <classname>Background</classname> and <classname>BackgroundFill</classname>
+are in package <code>javafx.scene.layout</code>.)  It is more easily done by
+setting the CSS style of the control with the <code>setStyle()</code> method.
+CSS is also useful for setting the border and for setting padding (the amount of
+empty space left around the content).</np>
+
+<break/>
+
+<p>A <classname>Label</classname> is certainly the simplest type of control. 
+It adds almost nothing to the <classname>Labeled</classname> class.  Its
+purpose is simply to display some unedited text and/or a graphic to the user.
+The label class has two constructors.  The first has one parameter of type
+<classname>String</classname> specifying the text for the label.  The
+second adds a parameter of type <classname>Node</classname> specifying
+a graphic for the label.  For example, assuming that <code>tuxIcon</code>
+is the <classname>ImageView</classname> object from the previous subsection,</p>
+
+<pre>Label message = new Label("Hello World");
+Label linuxAd = new Label("Choose Linux First!", tuxIcon);</pre>
+
+<p>The default background of a label is completely transparent, and the label
+has no border or padding by default.  Often I would like to add at least
+some padding.  Here is an example of setting all three properties using CSS:</p>
+
+<pre>message.setStyle("-fx-border-color: blue; -fx-border-width: 2px; " +
+                           "-fx-background-color: white; -fx-padding: 6px");</pre>
+
+
+<break/>
+
+<p> You've already seen buttons used in <localref href="GUI1.1"/>.
+A <classname>Button</classname>, like a <classname>Label</classname>, displays
+some text and/or a graphic to the user, and the <classname>Button</classname>
+class, like the <classname>Label</classname> class, has two constructors:</p>
+
+<pre>Button stopButton = new Button("Stop");
+Button linuxButton = new Button("Get Linux", tuxIcon);</pre>
+
+<p>When the user clicks a button, an event of type <classname>ActionEvent</classname>
+is generated.  You can register an event handler for the action with the button's
+<code>setOnAction</code> method.  For example,</p>
+
+<pre>stopButton.setOnAction( e -&gt; animator.stop() );</pre>
+
+<p>In addition to the methods inherited from <classname>Labeled</classname>, a button
+has the instance methods <code>setDisable(boolean)</code> and <code>setToolTip(string)</code>
+that were mentioned at the beginning of this section.  
+The <code>setDisable()</code> and <code>setText()</code> methods are
+particularly useful for giving the user information about what is going on in
+the program. A disabled button is better than a button that gives an obnoxious
+error message such as "Sorry, you can't click on me now!"  For example, suppose
+that we want to use two buttons to start and stop an <classname>AnimationTimer</classname>,
+<code>animator</code>.  When the animation is running, the start button should be 
+disabled, and when the animation is paused, the stop button should be disabled.
+The code for this might look like:</p>
+
+<pre>Button startButton = new Button("Run Animation");
+Button stopButton = new Button("Stop Animation");
+stopButton.setDisable(true); // Stop button is initially disabled.
+startButton.setOnAction( e -&gt; {
+    animator.start();
+    startButton.setDisable(true);
+    stopButton.setDisable(false);
+} );
+stopButton.setOnAction( e -&gt; {
+    animator.stop();
+    startButton.setDisable(false);
+    stopButton.setDisable(true);
+} );</pre>
+
+<np>This ensures that the user can't try to start the animation when it is already
+started or stop it when it is already stopped.</np>   
+
+<p>Often, there is a button that triggers some default action in a program.
+For example, the user might enter data into some text input boxes and then click
+a "Compute" button to process the data.  It would be nice if the user could just
+press Return when done typing, instead of having to click the button.
+In JavaFX, you can make a <classname>Button</classname>, <code>button</code>,
+into the default button for the window that contains it by calling</p>
+
+<pre>button.setDefaultButton(true);</pre>
+
+<np>When a window has a default button, then pressing the Return (or Enter) key on the
+keyboard is equivalent to clicking the default button, unless the key event
+generated by the Return key is consumed by another component.  This
+can be very convenient for the user.</np>
+
+</subsection>
+   
+   
+   
+<subsection id="GUI1.4.3" title="CheckBox and RadioButton">
+   
+<p>A <classname>CheckBox</classname> is a component that has two states: selected or
+unselected. (Being "selected" means that the checkbox is checked.)
+The user can change the state of a check box by clicking on it. The
+state of a checkbox is represented by a <ptype>boolean</ptype> value that is
+<code>true</code> if the box is selected and is <code>false</code> if the box is
+unselected. A checkbox has a label, which is specified when the box is
+constructed:</p>
+
+<pre>CheckBox showTime = new CheckBox("Show Current Time");</pre>
+
+<np><classname>CheckBox</classname> is a subclass of <classname>Labeled</classname>,
+so a checkbox can also have a graphic, and all the instance methods from
+the <classname>Labeled</classname> class can also be used with checkboxes.
+(There is no constructor that specifies a graphic for the checkbox; any
+graphic has to be set by calling <code>setGraphic</code>(node).)</np>
+
+<p>Usually, it's the user who sets the state of a <classname>CheckBox</classname> by
+clicking on it, but you can also set the state programmatically. The current state of a checkbox is set
+using its <code>setSelected(boolean)</code> method. For example, if you want the
+checkbox <code>showTime</code> to be checked, you would say
+"<code>showTime.setSelected(true)"</code>. To uncheck the box, say
+"<code>showTime.setSelected(false)"</code>. You can determine the current state of
+a checkbox by calling its <code>isSelected()</code> method, which returns a <ptype>boolean</ptype>
+value.</p>
+
+<p>In many cases, you don't need to worry about events from checkboxes. Your
+program can just check the state whenever it needs to know it by calling the
+<code>isSelected()</code> method. However, a checkbox does generate an event when
+its state is changed by the user, and you can detect this event and respond to it if you want
+something to happen at the moment the state changes. When the state of a
+checkbox is changed by the user, it generates an event of type
+<classname>ActionEvent</classname>. If you want something to happen when the user changes the
+state, you must register a handler with the
+checkbox by calling its <code>setOnAction()</code> method. (Note that if you change the state by calling the
+<code>setSelected()</code> method, no <classname>ActionEvent</classname> is generated. However,
+there is another method in the <classname>CheckBox</classname> class, <code>fire()</code>,
+which simulates a user click on the checkbox and does generate an
+<classname>ActionEvent</classname>.)</p>
+
+<p>It is actually possible for a checkbox to be in a third state, called
+"indeterminate," although that possibility is turned off by default.
+See the API documentation for details.</p>
+
+<break/>
+
+<p>Closely related to checkboxes are <newword>radio buttons</newword>.
+Like a checkbox, a radio button can be either selected or not.  However,
+radio buttons are expected to occur in groups, where at most one radio button in a given
+group can be selected at any given time.  Radio button groups let the user
+select one choice among several alternatives.  In JavaFX, a radio button is represented
+by an object of type <classname>RadioButton</classname>. When used in isolation, a
+<classname>RadioButton</classname> acts just like a <classname>CheckBox</classname>, 
+and it has the same constructor, methods, and events, including methods inherited from <classname>Labeled</classname>.
+Ordinarily, however, a <classname>RadioButton</classname> is used in a
+group. A group of radio buttons is represented by an object belonging to the
+class <classname>ToggleGroup</classname>. A <classname>ToggleGroup</classname> is <b>not</b> a component
+and does not itself have a visible representation on the screen. A
+<classname>ToggleGroup</classname> works behind the scenes to organize a group of radio
+buttons, to ensure that at most one button in the group can be selected at any given
+time.</p>
+
+<p>To use a group of radio buttons, you must create a <classname>RadioButton</classname>
+object for each button in the group, and you must create one object of type
+<classname>ToggleGroup</classname> to organize the individual buttons into a group. Each
+<classname>RadioButton</classname> must be added individually to the scene graph, so that it
+will appear on the screen. (A <classname>ToggleGroup</classname> plays no role in the
+placement of the buttons on the screen.) Each <classname>RadioButton</classname> must also
+be added to the <classname>ToggleGroup</classname>.  You do that by calling
+the radio button's <code>setToggleGroup(group)</code> instance method.
+If you want one of the buttons to be selected initially, you
+can call <code>setSelected(true)</code> for that button. If you don't do this, then
+none of the buttons will be selected until the user clicks on one of them.</p>
+
+<p>As an example, here is how you could set up a group of radio buttons that can
+be used to select a color:</p>
+
+<pre>RadioButton redRadio, blueRadio, greenRadio, yellowRadio;
+         // Variables to represent the radio buttons.
+         // These might be instance variables, so that
+         // they can be used throughout the program.
+ 
+ToggleGroup colorGroup = new ToggleGroup();
+
+redRadio = new RadioButton("Red");   // Create a button.
+redRadio.setToggleGroup(colorGroup); // Add it to the ToggleGroup.
+   
+blueRadio = new RadioButton("Blue");
+blueRadio.setToggleGroup(colorGroup);
+ 
+greenRadio = new RadioButton("Green");
+greenRadio.setToggleGroup(colorGroup);
+ 
+yellowRadio = new RadioButton("Yellow");
+yellowRadio.setToggleGroup(colorGroup);
+ 
+redRadio.setSelected(true);  // Make an initial selection.</pre>
+
+<np>As an alternative to calling <code>redRadio.setSelected(true)</code>, 
+you can use the <code>selectToggle()</code> instance method 
+in the <classname>ToggleGroup</classname> class to select the radio
+button:</np>
+
+<pre>colorGroup.selectToggle( redRadio );</pre>
+
+<np>Just as for checkboxes, it is not always necessary to register listeners for radio buttons.
+You can test the state of an individual <classname>RadioButton</classname>
+by calling its <code>isSelected()</code> method, or you can call the toggle group's
+<code>getSelectedToggle()</code> method.  The return type of this method is
+<classname>Toggle</classname>, which is an interface implemented by <classname>RadioButton</classname>.
+For example:</np>
+
+<pre>Toggle selection = colorGroup.getSelectedToggle();
+if (selection == redRadio) {
+    color = Color.RED;
+}
+else if (selection == greenRadio){
+   .
+   .
+   .</pre>
+
+<np>Here's what these radio buttons look like, lined up vertically
+in a container:</np>
+
+<img src="colorRadioButtons.png" width="90" height="126" tex="colorRadioButtons.eps" texscale="0.6" alt="radio buttons"/>
+
+</subsection>
+   
+<subsection id="GUI1.4.4" title="TextField and TextArea">
+   
+<p>The <classname>TextField</classname> and <classname>TextArea</classname> classes 
+represent components that contain text that can be edited by the user.  
+A <classname>TextField</classname> holds a single line of text, while a
+<classname>TextArea</classname> can hold multiple lines.   It is also possible to set a
+<classname>TextField</classname> or <classname>TextArea</classname> 
+to be read-only so that the user can read the text that it contains but
+cannot edit the text. Both classes are subclasses of an abstract class, 
+<classname>TextInputControl</classname>, which defines their common properties.</p>
+   
+<p><classname>TextField</classname> and <classname>TextArea</classname> have many
+methods in common.  The instance method <code>setText(text)</code>, which takes a parameter
+of type <classname>String</classname>, can be used to change the text that is
+displayed in an input component.  The contents of the component can be retrieved by calling its
+<code>getText()</code> instance method, which returns a value of type <classname>String</classname>.
+You can add a <classname>String</classname> of text onto the end of the text that is already
+in the component by calling the instance method <code>appendText(text)</code>.  The text
+in the <code>setText()</code> and <code>appendText()</code> methods
+can include "\n" characters to represent line breaks; in a 
+<classname>TextField</classname> they will be ignored.  The instance method
+<code>setFont(font)</code> can be used to change the font that is used in the text component.</p>
+
+<p>If you want to stop the user from modifying the text, you can
+call <code>setEditable(false)</code>.  Call the same method with parameter
+<code>true</code> to make the input component user-editable again.</p>
+   
+<p>The user can only type into a text component when it has
+the input focus.  The user can give the input focus to a text component by clicking
+it with the mouse, but sometimes it is useful to give the input focus to a
+text field programmatically.  You can do this by calling its
+<code>requestFocus()</code> method.</p>
+
+<p>A substring of the text in a text component can be "selected."  The selected text is
+highlighted and can be cut or copied from the text component.  (The user can right-click in
+the component to bring up a pop-up menu of editing commands.)
+<classname>TextInputComponent</classname> has several instance methods for working 
+with the text selection, but I only mention one of them:  <code>selectAll()</code>,
+which selects the entire string of text in the text component.
+</p>   
+
+<p>For example, when I discover an error
+in the user's input in a <classname>TextField</classname>, <code>input</code>, I&nbsp;usually call both
+<code>input.requestFocus()</code> and <code>input.selectAll()</code>.  This helps the user see where the error occurred
+and lets the user start typing the correction immediately.  If the user starts typing, the old text in the input
+box, which is highlighted, will automatically be deleted.</p>
+      
+<break/>
+
+<p>Both the <classname>TextField</classname> class and the <classname>TextArea</classname> class
+have two constructors.  One of the constructors has no parameter and makes an
+initially empty text input box.  The second constructor takes a parameter of type <classname>String</classname>,
+specifying the initial content of the box.</p>
+
+<p>A <classname>TextField</classname> has a preferred number of columns, which by default is 12.
+This determines the preferred width of the text field, that is, the size that is used if the
+size is not reset by the program or when the text field is laid out by a container.  The preferred
+number of columns for a <classname>TextField</classname>, <code>input</code>, can be changed by calling
+<code>input.setPrefColumnCount(n)</code>, where <code>n</code> is a positive integer.</p>
+
+<p>Similarly, a <classname>TextArea</classname> has both a preferred number of columns and a 
+preferred number of rows, which by default are 40 and 10.  The value can be changed using
+the <classname>TextArea</classname> instance methods <code>setPrefColumnCount(n)</code>
+and <code>setPrefRowCount(n)</code>.</p>
+
+
+<p>The <classname>TextArea</classname> class adds a few useful methods to those inherited
+from <classname>TextInputControl</classname>, including some methods for getting and
+setting the amount by which the text has been scrolled.  Most important is
+<code>setWrapText(wrap)</code>, where <code>wrap</code> is of type <ptype>boolean</ptype>.
+This method says what should happen when a line of text is too long to be displayed in the
+text area.  If <code>wrap</code> is true, then any line that is too long will be
+"wrapped" onto the next line, with the line break occurring between words if possible; 
+if <code>wrap</code> is false, the line will simply extend outside the text area, and 
+the user will have to scroll the text area
+horizontally to see the entire line.  The default value of <code>wrap</code> is false.</p>
+   
+<p>Since it might be necessary to scroll a text area to see all the text that it
+contains, a <classname>TextArea</classname> comes with scroll bars.  The scroll
+bars are visible only when they are needed because the text cannot fit in the
+available space.</p>
+
+<p>See the sample program
+<sourceref href="TextInputDemo.java"/> for a short example of using a text field
+and a text area.  Here is the window from that program, after
+the text has been edited and scrolled down a few lines:</p>
+
+<img src="TextInputDemo.png" width="550" height="263" tex="TextInputDemo.eps"
+    texscale="0.5" alt="The window from sample program TextInputDemo.png"/>
+   
+<np>(I pasted the source code of the program into the text area!)</np>
+
+</subsection>
+ 
+   
+<subsection id="GUI1.4.6" title="Slider">
+
+<p>A <classname>Slider</classname> provides a way for the user to select an integer value
+from a range of possible values. The user does this by dragging a "knob" along
+a bar, or by clicking at some point along the bar.
+A slider can, optionally, be decorated with tick marks and with labels.
+This picture, from the sample program <sourceref href="SliderDemo.java"/>, shows 
+three sliders with different decorations and with different ranges of values:</p>
+
+<img src="slider-demo.png" width="377" height="191" alt="three sliders with and without labels and tick marks"
+       tex="slider-demo.eps" texscale="0.5"/>
+
+
+<np>Here, the second slider is decorated with tick marks, and the third one
+is decorated with labels. It's possible for a single slider to have both types
+of decorations.</np>
+
+<p>The most commonly used constructor for <classname>Sliders</classname> specifies the start
+and end of the range of values for the slider and its initial value when it
+first appears on the screen:</p>
+
+<pre>public Slider(double minimum, double maximum, double value)</pre>
+
+<np>If the parameters are omitted, the values 0, 100, and 0 are used. By
+default, a slider is horizontal, but you can make it vertical by calling its
+method <code>setOrientation(Orientation.VERTICAL)</code>. <classname>Orientation</classname>
+is an enum from package <code>javafx.geometry</code>.</np>
+
+<p>The current value of a
+<classname>Slider</classname> can be read at any time with its <code>getValue()</code> method,
+which returns a value of type <ptype>double</ptype>. If you want to change the
+value programmatically, you can do so with the method <code>setValue(val)</code>, which takes a
+parameter of type <ptype>double</ptype>.  If the specified value is not between
+the minimum and maximum slider values, it is adjusted to lie in that range.</p>
+
+<p>If you want to respond immediately when the user changes the value of a
+slider, you can register a listener with the slider. <classname>Sliders</classname>, unlike
+other components we have seen, do not generate <code>ActionEvents</code>. Instead,
+they have an observable property of type <code>Double</code>
+that represents the value.  (See <localref href="GUI1.3.7"/>.)
+You can access the value property of a <classname>Slider</classname>, <code>slider</code>,
+by calling <code>slider.valueProperty()</code>, and you can add a listener to the
+property that will be called whenever the value changes.  For example, in the
+sample program, I add listeners to the sliders with commands such as</p>
+
+<pre>slider1.valueProperty().addListener( e -> sliderValueChanged(slider1) );</pre>
+
+<np>The listener will be called whenever the value changes, either because the
+user is dragging the knob on the slider or because the program calls <code>setValue()</code>.
+If you want to know whether the user generated the event by dragging the slider's knob,
+call the slider's boolean-valued <code>isValueChanging()</code>
+method, which returns <code>true</code> if the user is dragging the knob.</np>
+
+<p>Using tick marks on a slider is a two-step process: Specify the interval
+between the tick marks, and tell the slider that the tick marks should be
+displayed. There are actually two types of tick marks, "major" tick marks and
+"minor" tick marks. You can have one or the other or both. Major tick marks are
+a bit longer than minor tick marks. The method <code>setMajorTickSpacing(x)</code>
+indicates that there should be a major tick mark every <code>x</code> units along
+the slider. The parameter is of type <ptype>double</ptype>. (The spacing is in terms of values on
+the slider, not pixels.) To control the minor tick marks, you can call
+<code>setMinorTickCount(n)</code>.  The parameter is an <ptype>int</ptype>
+that specifies how many minor tick marks are placed between consecutive major
+tick marks.  The default value is 4.  If you don't want minor tick marks, set
+the count to zero.  Calling these methods is not enough to make
+the tick marks appear. You also have to call <code>setShowTickMarks(true)</code>. For
+example, the second slider in the sample program was created and configured using
+the commands:</p>
+
+<pre>slider2 = new Slider();  // Use default values (0,100,0)
+slider2.setMajorTickUnit(25); // space between big tick marks
+slider2.setMinorTickCount(5); // 5 small tick marks between big tick marks.
+slider2.setShowTickMarks(true);
+</pre>
+
+<p>Labels on a slider are handled similarly.  A label will be placed at
+every major tick mark, but some labels will be omitted if they would
+overlap.  To see the labels, you need to call
+<code>setShowTickLabels(true)</code>.  For
+example, the third slider in the above illustration was created and configured 
+to show labels with the commands:</p>
+
+<pre>slider3 = new Slider(2000,2100,2022);
+slider3.setMajorTickUnit(50); // tick marks are not shown!
+slider3.setShowTickLabels(true)</pre>
+
+<p>The value of a slider is of type <ptype>double</ptype>.  You might want
+to restrict the value to be an integer, or to be some multiple of a given
+value.  What you can do is call <code>slider.setSnapToTicks(true)</code>.
+After the user finishes dragging the slider's knob, the value will be
+moved to the value at the nearest major or minor tick mark, even if the
+tick marks are not visible.  The value will <b>not</b> be restricted
+while the user is dragging the knob; the value is just adjusted at
+the end of the drag.  The value set by calling <code>setValue(x)</code> 
+is also <b>not</b> restricted, but there is another method, <code>adjustValue(x)</code>,
+that will set the value to the value at the tick mark nearest to&nbsp;<code>x</code>.
+For example, if you want a slider to snap to integral values in the range
+0 to 10, you could say:</p>
+
+<pre>Slider sldr = new Slider(0,10,0);
+sldr.setMajorTickUnit(1);  // major ticks 1 unit apart
+sldr.setMinorTickCount(0); // no minor tick marks
+sldr.setSnapToTicks(true);</pre>
+
+<np>In the sample program, the third slider has been configured to snap to
+an integer value at the end of a drag operation.</np>
+
+</subsection>
+   
+   
+</section>

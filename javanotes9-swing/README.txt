@@ -6,10 +6,10 @@ This is the README file for the javanotes-swing source download...
 JavaFX for GUI programs and one using Swing.  These are source files 
 used to build the Swing edition.  The source files for both editions 
 can be extracted from a Github repository that can be found at
-https://github.com/davidjeck/javanotes9.  For more information,
+https://github.com/davidjeck/csharpnotes1.  For more information,
 see the README.md file for that repository.)
                                                     
-Directory javanotes9.0-swing-source contains the source files that are used 
+Directory csharpnotes1.0-swing-source contains the source files that are used 
 to produce the web site and PDF versions of "Introduction to Programming 
 using Java", Version 9.0, Swing edition.  This free textbook (or a later 
 version) can be found on the web at:  http://math.hws.edu/javanotes-swing
@@ -121,7 +121,7 @@ code files for the examples in the textbook are in the directory
 named src-c1, src-c2, src-3, and so on.
 
 The syntax of the XML files is defined by the DTD file,
-javanotes9.dtd.  This is a fairly simple, home-brewed DTD.
+csharpnotes1.dtd.  This is a fairly simple, home-brewed DTD.
 Note that the elements <web>...</web>  and <webdiv>...</webdiv>
 defines content that is sent only to the web site version of 
 the book, while <tex>...</tex> and <texdiv>...</texdiv> 
@@ -129,7 +129,7 @@ define content that goes only to the LaTeX (that is, PDF)
 versions.   Also note that entity names are defined to refer 
 to the XML files that define the individual sections of the book.
 
-Javanotes9 is available in two "editions", one using JavaFX
+csharpnotes1 is available in two "editions", one using JavaFX
 and one using Swing.  The XML files are used for both editions,
 except for Chapters 6 and 13.  This was new in Version 9 and
 adds even more clumsiness to the files.  Elements <fx>..</fx> and
@@ -138,11 +138,11 @@ adds even more clumsiness to the files.  Elements <fx>..</fx> and
 Swing edition only.  A few elements have "scope" attributes that
 can limit the output to one edition.
 
-The file javanotes9.xml is the main xml file that is processed
+The file csharpnotes1.xml is the main xml file that is processed
 to create the web site version of the book.  It simply reads in
-javanotes9-xml-includes.txt, which in turn reads in all the
+csharpnotes1-xml-includes.txt, which in turn reads in all the
 individual xml files for the individual sections.  For the
-LaTeX/PDF versions, the main xml file is javanotes9-tex.xml.
+LaTeX/PDF versions, the main xml file is csharpnotes1-tex.xml.
 
 Xalan is used with the XSLT files convert-web.xsl, convert-tex.xsl,
 and convert-tex-linked.xsl to process the XML files.  Note that

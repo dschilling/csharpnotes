@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE javanotes SYSTEM "javanotes9.dtd" [
-   <!ENTITY newcodestyle "red italic">
-]>
-
-<javanotes>
-   &includes;
-</javanotes>

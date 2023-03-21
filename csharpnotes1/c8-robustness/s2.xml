@@ -1,0 +1,704 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section SYSTEM "../csharpnotes1.dtd" >
+
+<section id="robustness.2" title="Writing Correct Programs">
+
+<p><start><big>C</big>orrect programs don't</start> just happen. It takes
+planning and attention to detail to avoid errors in programs. There are some
+techniques that programmers can use to increase the likelihood that their
+programs are correct.</p>
+
+<subsection id="robustness.2.1" title="Provably Correct Programs">
+   
+<p>In some cases, it is possible to <b>prove</b> that a program is
+correct. That is, it is possible to demonstrate mathematically that the
+sequence of computations represented by the program will always produce the
+correct result. Rigorous proof is difficult enough that in practice it can only
+be applied to fairly small programs. Furthermore, it depends on the fact that
+the "correct result" has been specified correctly and completely. As I've
+already pointed out, a program that correctly meets its specification is not
+useful if its specification was wrong. Nevertheless, even in everyday
+programming, we can apply some of the ideas and techniques that are used in
+proving that programs are correct.</p>
+
+<p>The fundamental ideas are <newword>process</newword> and
+<newword>state</newword>. A state consists of all the information
+relevant to the execution of a program at a given moment during its execution.
+The state includes, for example, the values of all the
+variables in the program, the output that has been produced, any input that is
+waiting to be read, and a record of the position in the program where the
+computer is working. A process is the sequence of states that the computer goes
+through as it executes the program. From this point of view, the meaning of a
+statement in a program can be expressed in terms of the effect that the
+execution of that statement has on the computer's state. As a simple example,
+the meaning of the assignment statement "<code>x&nbsp;=&nbsp;7;</code>" is that
+after this statement is executed, the value of the variable <code>x</code> will be
+7. We can be absolutely sure of this fact, so it is something upon which we can
+build part of a mathematical proof.</p>
+
+<p>In fact, it is often possible to look at a program and deduce that some fact
+must be true at a given point during the execution of a program. For example,
+consider the <code>do</code> loop:</p>
+
+<pre>do {
+   System.out.print("Enter a positive integer: ");
+   N = TextIO.getlnInt();
+} while (N &lt;= 0);</pre>
+
+<np>After this loop ends, we can be absolutely sure that the value of the
+variable <code>N</code> is greater than zero. The loop cannot end until this
+condition is satisfied. This fact is part of the meaning of the <code>while</code>
+loop. More generally, if a <code>while</code> loop uses the test "<code>while
+(<bnf>condition</bnf>)</code>", and if there are no <code>break</code>
+statements in the loop, then after the loop ends, we can be
+sure that the <code><bnf>condition</bnf></code> is false. We can then
+use this fact to draw further deductions about what happens as the execution of
+the program continues. (With a loop, by the way, we also have to worry about
+the question of whether the loop will ever end. This is something that has to
+be verified separately.)</np>
+
+
+</subsection>
+
+<subsection title="Preconditions and Postconditions" id="robustness.2.2">
+
+<p>A fact that can be proven to be true after a given program segment has been
+executed is called a <newword>postcondition</newword> of that program
+segment. Postconditions are known facts upon which we can build further
+deductions about the behavior of the program. A postcondition of a program as a
+whole is simply a fact that can be proven to be true after the program has
+finished executing. A program can be proven to be correct by showing that the
+postconditions of the program meet the program's specification.</p>
+
+<p>Consider the following program segment, where all the variables are of type
+<ptype>double</ptype>:</p>
+
+<pre>disc = B*B - 4*A*C;
+x = (-B + Math.sqrt(disc)) / (2*A);</pre>
+
+<np>The quadratic formula (from high-school mathematics) assures us that the
+value assigned to <code>x</code> is a solution of the equation <code>A*x<sup>2</sup> +
+B*x + C = 0</code>, provided that the value of <code>disc</code> is greater than or equal
+to zero and the value of <code>A</code> is not zero. <b>If</b> we can
+guarantee that <code>B*B-4*A*C&nbsp;&gt;=&nbsp;0</code> and that <code>A&nbsp;!=&nbsp;0</code>, then the
+fact that <code>x</code> is a solution of the equation becomes a postcondition of
+the program segment. We say that the condition, <code>B*B-4*A*C&nbsp;&gt;=&nbsp;0</code> is a
+<newword>precondition</newword> of the program segment. The condition
+that <code>A&nbsp;!=&nbsp;0</code> is another precondition. A precondition is defined to be a
+condition that must be true at a given point in the execution of a program in
+order for the program to continue correctly. A precondition is something that
+you want to be true. It's something that you have to check or force to be true,
+if you want your program to be correct.</np>
+
+<p>We've encountered preconditions and postconditions once before, in <localref href="subroutines.6.1"/>.
+That section introduced preconditions and
+postconditions as a way of specifying the contract of a subroutine. As the
+terms are being used here, a precondition of a subroutine is just a
+precondition of the code that makes up the definition of the subroutine, and
+the postcondition of a subroutine is a postcondition of the same code. In this
+section, we have generalized these terms to make them more useful in talking
+about program correctness in general.</p>
+
+<p>Let's see how this works by considering a longer program segment:</p>
+
+<pre>do {
+   System.out.println("Enter A, B, and C.");
+   System.out.println("A must be non-zero and B*B-4*A*C must be &gt;= 0.");
+   System.out.print("A = ");
+   A = TextIO.getlnDouble();
+   System.out.print("B = ");
+   B = TextIO.getlnDouble();
+   System.out.print("C = ");
+   C = TextIO.getlnDouble();
+   if (A == 0 || B*B - 4*A*C &lt; 0)
+      System.out.println("Your input is illegal.  Try again.");
+} while (A == 0 || B*B - 4*A*C &lt; 0);
+
+disc = B*B - 4*A*C;
+x = (-B + Math.sqrt(disc)) / (2*A);</pre>
+
+<np>After the loop ends, we can be sure that <code>B*B-4*A*C&nbsp;&gt;=&nbsp;0</code> and that
+<code>A&nbsp;!=&nbsp;0</code>. The preconditions for the last two lines are fulfilled, so the
+postcondition that <code>x</code> is a solution of the equation <code>A*x<sup>2</sup> +
+B*x + C = 0</code> is also valid. This program segment correctly and provably computes
+a solution to the equation. (Actually, because of problems with representing real
+numbers on computers, this is not 100% true. The <b>algorithm</b> is correct,
+but the <b>program</b> is not a perfect implementation of the algorithm. See
+the discussion in <localref href="robustness.1.3"/>.)</np>
+
+<p>Here is another variation, in which the precondition is checked by an
+<code>if</code> statement. In the first part of the <code>if</code> statement, where a
+solution is computed and printed, we know that the preconditions are fulfilled.
+In the other parts, we know that one of the preconditions fails to hold. In any
+case, the program is correct.</p>
+
+<pre>System.out.println("Enter your values for A, B, and C.");
+System.out.print("A = ");
+A = TextIO.getlnDouble();
+System.out.print("B = ");
+B = TextIO.getlnDouble();
+System.out.print("C = ");
+C = TextIO.getlnDouble();
+
+if (A != 0 &amp;&amp; B*B - 4*A*C &gt;= 0) {
+   disc = B*B - 4*A*C;
+   x = (-B + Math.sqrt(disc)) / (2*A);
+   System.out.println("A solution of A*X*X + B*X + C = 0 is " + x);
+}
+else if (A == 0) {
+   System.out.println("The value of A cannot be zero.");
+}
+else {
+   System.out.println("Since B*B - 4*A*C is less than zero, the");
+   System.out.println("equation A*X*X + B*X + C = 0 has no solution.");
+}</pre>
+
+<p>Whenever you write a program, it's a good idea to watch out for
+preconditions and think about how your program handles them. Often, a
+precondition can offer a clue about how to write the program.</p>
+
+<p>For example, every array reference, such as <code>A[i]</code>, has a
+precondition: The index must be within the range of legal indices for the
+array. For <code>A[i]</code>, the precondition is that <code>0&nbsp;&lt;=&nbsp;i 
+&lt;&nbsp;A.length</code>. The computer will check this condition when it evaluates
+<code>A[i]</code>, and if the condition is not satisfied, the program will be
+terminated. In order to avoid this, you need to make sure that the index has a
+legal value. (There is actually another precondition, namely that <code>A</code> is
+not <code>null</code>, but let's leave that aside for the moment.) Consider the
+following code, which searches for the number <code>x</code> in the array
+<code>A</code> and sets the value of <code>i</code> to be the index of
+the array element that contains <code>x</code>:</p>
+
+<pre>i = 0;
+while (A[i] != x) {
+   i++;
+}</pre>
+
+<np>As this program segment stands, it has a precondition, namely that
+<code>x</code> is actually in the array. If this precondition is satisfied, then
+the loop will end when <code>A[i]&nbsp;==&nbsp;x</code>. That is, the value of <code>i</code>
+when the loop ends will be the position of <code>x</code> in the array. However, if
+<code>x</code> is not in the array, then the value of <code>i</code> will just keep
+increasing until it is equal to <code>A.length</code>. At that time, the reference
+to <code>A[i]</code> is illegal and the program will be terminated. To avoid this,
+we can add a test to make sure that the precondition for referring to
+<code>A[i]</code> is satisfied:</np>
+
+<pre>i = 0;
+while (<newcode>i &lt; A.length</newcode> &amp;&amp; A[i] != x) {
+   i++;
+}</pre>
+
+<np>Now, the loop will definitely end. After it ends, <code>i</code> will satisfy
+<b>either</b> <code>i&nbsp;==&nbsp;A.length</code> or <code>A[i]&nbsp;==&nbsp;x</code>. 
+An <code>if</code> statement
+can be used after the loop to test which of these conditions caused the loop to
+end:</np>
+
+<pre>i = 0;
+while (i &lt; A.length &amp;&amp; A[i] != x) {
+   i++;
+}
+
+if (i == A.length)
+   System.out.println("x is not in the array");
+else
+   System.out.println("x is in position " + i);</pre>
+
+</subsection>
+
+
+<subsection id="robustness.2.3" title="Invariants">
+
+<p>Let's look at how loops work in more detail.  Consider a
+subroutine for finding the sum of the elements in an array of <ptype>int</ptype>:</p>
+
+<pre>static int arraySum( int[] A ) {
+    int total = 0;
+    int i = 0;
+    while ( i &lt; A.length ) {
+        total = total + A[i];
+        i = i + 1;
+    }
+    return total;
+}</pre>
+
+<np>(Note, by the way, that the requirements that <code>A</code> is not 
+<code>null</code> is a precondition of the subroutine.  If it is violated, the code in 
+the subroutine will throw a <code>NullPointerException</code>.)</np>
+
+<p>How can we be sure that this subroutine works?  We need to prove
+that when the <code>return</code> statement is executed, the value
+of <code>total</code> is the sum of all the elements in&nbsp;<code>A</code>.  One way
+to think about this problem is in terms of <newword>loop invariants</newword>.</p>
+
+<p>A loop invariant is, roughly, a statement that remains true as the
+loop is executed.  More precisely, we can show that a statement is an 
+invariant for a loop if the following holds: As long as the statement
+is true <b>before</b> the code inside the loop is executed, then it will
+also be true <b>after</b> the code inside the loop has been executed.  That is,
+a loop invariant is both a precondition and a postcondition of
+the body of the loop.</p>
+
+<p>A loop invariant for the loop in the above subroutine is,
+"<code>total</code> is equal to the sum of the first <code>i</code>
+elements of&nbsp;<code>A</code>."  Suppose this is
+true at the beginning of the <code>while</code> loop.  That is, before the statement
+"<code>total = total + A[i]</code>" is executed, <code>total</code>
+is the sum of the first <code>i</code> elements of the
+array (namely <code>A[0]</code> through <code>A[i-1]</code>).
+After <code>A[i]</code> is added to <code>total</code>,
+<code>total</code> is now the sum of the first <code>i+1</code>
+elements of the array.  At this point, the loop invariant
+is <b>not</b> true.  However, as soon as the next statement,
+"<code>i = i + 1</code>" is executed, replacing
+<code>i</code> with <code>i+1</code>, the loop
+invariant becomes true again.  We have checked that if the
+loop invariant is true at the start of the body of the loop, then is
+also true at the end.</p>
+
+<p>Note that a loop invariant is not necessarily true at <b>every</b>
+point during the execution of a loop.  Executing one of the statements
+in the loop can make it false temporarily, as long as later statements
+in the loop make it true again.</p>
+
+<p>So, have we proved that the subroutine <code>arraySum()</code> is
+correct?  Not quite.  There are still a few things to check.  First of
+all, we need to make sure that the loop invariant is true before the
+very first time the loop is executed. At that point, <code>i</code>
+is zero, and <code>total</code> is also equal to zero,  which is the
+correct sum of zero elements.  So the loop invariant is true
+before the loop. Once we know that, we know that it remains true after each
+execution of the loop (because it's an invariant), and in particular,
+we know that it will still be true after the loop ends.</p>
+
+<p>But for that to do us any good, we need to check that the
+loop actually does end!  In each execution of the loop,
+the value of <code>i</code> goes up by one.  That means that
+eventually it has to reach <code>A.length</code>.  At that
+point, the condition in the <code>while</code> loop
+is false, and the loop ends.</p>
+
+<p>After the loop ends, we know that <code>i</code> equals
+<code>A.length</code>, and we know that the loop invariant
+is true.  At that point, since <code>i</code> is <code>A.length</code>, the loop invariant says,
+"<code>total</code> is the sum of the first <code>A.length</code>"
+elements of&nbsp;A."  But that includes <b>all</b> of the
+elements of <code>A</code>.  So, the loop invariant gives us
+exactly what we wanted to show:  When <code>total</code> is
+returned by the subroutine, it is equal to the sum of all the 
+elements of the array!</p>
+
+<p>This might seem to you to be a lot of work to prove something
+that's obvious.  But if you try to explain <i>why</i> it's
+obvious that <code>arraySum()</code> works, you'll probably
+find yourself using the logic behind loop invariants, even if
+you don't use the term.</p>
+
+<p>Let's look more quickly at a similar example.  Consider a
+subroutine that finds the maximum value in an array of <ptype>int</ptype>,
+where we assume that the array has length at least one:</p>
+
+<pre>static int maxInArray( int[] A ) {
+    int max = A[0];
+    int i = 1;
+    while ( i &lt; A.length ) {
+        if ( A[i] > max )
+            max = A[i];
+        i = i + 1;
+    }
+    return max;
+}</pre>
+
+<np>In this case, we have a loop invariant that says,
+"<code>max</code> is the largest value among the first
+<code>i</code> elements of&nbsp;<code>A</code>."
+This statement is true before the loop starts, when
+<code>i</code> is&nbsp;1 and <code>max</code> is&nbsp;<code>A[0]</code>.
+Suppose it is true at the start of the loop,
+before the <code>if</code> statement.
+After the <code>if</code> statement, <code>max</code>
+is greater than or equal to <code>A[i]</code>, because
+that is a postcondition of the <code>if</code> statement,
+and it is greater than or equal to <code>A[0]</code>
+through <code>A[i-1]</code>, because of the truth
+of the loop invariant.  Put those two facts together,
+and you get that <code>max</code> is the largest value
+among the first <code>i+1</code> elements of <code>A</code>.
+When <code>i</code> is replaced by <code>i+1</code> in the
+next statement, the loop invariant becomes true again.
+After the loop ends, <code>i</code> is <code>A.length</code>,
+and the loop invariant tells us exactly
+what we need to know:  <code>max</code> is the largest
+value in the whole array.</np>
+
+<p>Loop invariants are not just useful for proving that
+programs are correct.  Thinking in terms of loop invariants
+can be useful when you are trying to develop an algorithm.
+As an example, let's look at the insertion sort algorithm
+that was discussed in <localref href="arrays.4.3"/>.
+Suppose that we want to sort an array <code>A</code>.
+That is, at the end of the algorithm, we want it to be
+true that</p>
+
+<pre>A[0] &lt;= A[1] &lt;= ... &lt;= A[A.length-1]</pre>
+
+<np>The question is, what step-by-step procedure can we use to make this statement true?
+Well, can we come up with a loop invariant that, at the end, will become
+the statement that we want to be true?  If we want all of the elements
+to be sorted at the end, how about a loop invariant that says that
+some of the elements are sorted&mdash;say, that the first <code>i</code>
+elements are sorted.  This leads to an outline for the algorithm:</np>
+
+<pre>i = 0;
+while (i &lt; A.length ) {
+   // Loop invariant:  A[0] &lt;= A[1] &lt;= ... &lt;= A[i-1]
+      .
+      .  // Code that adds A[i] to the sorted portion of the array
+      .
+   i = i + 1;
+}
+// At this point, i = A.length, and A[0] &lt;= A[1] &lt;= ... &lt;= A[A.length-1]</pre>
+
+<np>The loop invariant is true before the <code>while</code> loop,
+and when the loop ends, the loop invariant becomes precisely the statement
+that we want to be true at the end of the algorithm.
+We know what we have to do to complete the
+algorithm:  Develop code for the inside of the loop that will preserve
+the truth of the loop invariant.  If we can do that, the loop invariant
+will assure us that the algorithm that we have developed is correct.
+The algorithm for adding <code>A[i]</code> to the sorted portion of
+the array will require its own loop, with its own loop invariant. I'll
+leave you to think about that.</np>
+
+<break/>
+
+<p>There is another kind of invariant that is useful for thinking
+about programs: <newword>class invariants</newword>.
+A class invariant is, roughly, a statement that is always true
+about the state of a class, or about objects created from that class.
+For example, suppose we have a <classname>PairOfDice</classname> class
+in which the values shown on the dice are stored in instance
+variables <code>die1</code> and <code>die2</code>.
+(See <localref href="OOP.2"/> for a variety of such classes.)
+We might like to have a class invariant that says, "the values of
+<code>die1</code> and <code>die2</code> are in the range 1 through&nbsp;6."
+(This would be a statement about any object created from the
+<classname>PairOfDice</classname> class, not about the class as such.)
+After all, this is a statement that should always be true about
+any pair of dice.
+</p>
+
+<p>But in order to be a class invariant, the statement has to be
+guaranteed true at all times.  If <code>die1</code> and <code>die2</code>
+are <code>public</code> instance variables, then no such guarantee is
+possible, since there is no way to control what values a program that uses
+the class might assign to them.
+So, we are led to make <code>die1</code> and <code>die2</code>
+<code>private</code>.  Then we just have to make sure that all of the
+code in the class definition respects the class invariant.
+That is, first of all, when a <classname>PairOfDice</classname> object
+is constructed, the variables <code>die1</code> and <code>die2</code>
+must be initialized to be in the range 1 to&nbsp;6.  Furthermore, every
+method in the class must preserve the truth of the class invariant.
+In this case, that means that any method that assigns a value to
+<code>die1</code> or <code>die2</code> must ensure that the
+value is in the range 1 to&nbsp;6.  For example, a setter method
+would have to check that a legal value is being assigned.</p>
+
+<p>In general, we can say that a class invariant is a postcondition
+of every constructor and is both a precondition and a postcondition
+of every method in the class.  When you are writing a class, a
+class invariant is something that you <i>want to be true</i> at
+all times.  When you write a method, you need to make sure that
+the code in that method respects the invariant:  Assuming that
+the class invariant is true when the method in called, you need to
+ensure that it will still be true after the code in the method is
+executed.  This kind of thinking can be a very useful tool
+for class design.</p>
+
+<p>As another example, consider a dynamic array class, 
+like the one in <localref href="arrays.2.4"/>.  That class uses
+an ordinary array to store values and a counter to keep track
+of how many items have been added to the dyanmic array:</p>
+
+<pre>private int[] items = new int[8];
+private int itemCount = 0;</pre>
+
+<np>Class invariants include the facts that "<code>itemCount</code> is the number of items,"
+that "<code>0&nbsp;&lt;=&nbsp;itemCount&nbsp;&lt;&nbsp;items.length</code>," and that "the items are in
+the array elements <code>items[0]</code> through <code>items[itemCount-1]</code>."
+Keeping these invariants in mind can be helpful when writing the class.  When writing a method
+for adding an item, the first invariant reminds you to increment <code>itemCount</code>
+in order to ensure that the invariant remains true.  The second invariant tells you
+where the new item has to be stored.  And the third invariant tells you that if
+incrementing <code>itemCount</code> makes it equal to <code>items.length</code>,
+then you will need to do something to avoid violating the invariant.  (Since <code>itemCount</code>
+has to be incremented, the invariant means that you will have to make the array bigger.)</np>
+
+<p>In future chapters, I will occasionally point out how it can be useful to
+think in terms of preconditions, postconditions, and invariants.</p>
+
+<p>I should note that reasoning about invariants becomes much more complicated in parallel
+programs, when several threads that are running at the same time and are accessing the
+same data.  This will be an issue when we encounter threads in <localref href="threads"/>.</p>
+
+</subsection>
+
+   
+<subsection id="robustness.2.4" title="Robust Handling of Input">
+
+<p>One place where correctness and robustness are important&mdash;and especially
+difficult&mdash;is in the processing of input data, whether that data is typed in
+by the user, read from a file, or received over a network. Files and networking
+will be covered in <localref href="IO"/>, which will
+make essential use of material that will be covered in the <localref href="robustness.3">next section</localref> 
+of this chapter. For now, let's look at an example of processing user input.</p>
+
+<p>Examples in this textbook use my <classname>TextIO</classname> class for reading input
+from the user. This class has built-in error handling. For example, the
+function <code>TextIO.getDouble()</code> is guaranteed to return a legal value of
+type <ptype>double</ptype>. If the user types an illegal value, then
+<classname>TextIO</classname> will ask the user to re-enter their response; your
+program never sees the illegal value.  However, this approach can be
+clumsy and unsatisfactory, especially when the user is entering complex data.
+In the following example, I'll do my own error-checking.</p>
+
+<p>Sometimes, it's useful to be able to look ahead at what's coming up in the
+input without actually reading it. For example, a program might need to know
+whether the next item in the input is a number or a word. For this purpose, the
+<classname>TextIO</classname> class includes the function <code>TextIO.peek()</code>. This
+function returns a <ptype>char</ptype> which is the next character in the user's
+input, but it does not actually read that character. If the next thing in the
+input is an end-of-line, then <code>TextIO.peek()</code> returns the new-line
+character, <code>'\n'</code>.</p>
+
+<p>Often, what we really need to know is the next <b>non-blank</b>
+character in the user's input. Before we can test this, we need to skip past
+any spaces (and tabs). Here is a function that does this. It uses
+<code>TextIO.peek()</code> to look ahead, and it reads characters until the next
+character in the input is either an end-of-line or some non-blank character.
+(The function <code>TextIO.getAnyChar()</code> reads and returns the next character
+in the user's input, even if that character is a space. By contrast, the more
+common <code>TextIO.getChar()</code> would skip any blanks and then read and return
+the next non-blank character. We can't use <code>TextIO.getChar()</code> here since
+the object is to skip the blanks <b>without</b> reading the next
+non-blank character.)</p>
+
+<pre>/**
+ * Reads past any blanks and tabs in the input.
+ * Postcondition:  The next character in the input is an
+ *                 end-of-line or a non-blank character.
+ */
+static void skipBlanks() {
+   char ch;
+   ch = TextIO.peek();
+   while (ch == ' ' || ch == '\t') {
+         // Next character is a space or tab; read it
+         // and look at the character that follows it.
+      ch = TextIO.getAnyChar();
+      ch = TextIO.peek();
+   }
+} // end skipBlanks()</pre>
+   
+<np>(In fact, this operation is so common that it is built into 
+<code>TextIO</code>.  The method <code>TextIO.skipBlanks()</code>
+does essentially the same thing as the <code>skipBlanks()</code> method
+presented here.)</np>
+
+<p>An example in <localref href="control.5.3"/> allowed the user to
+enter length measurements such as "3 miles" or "1ft". It would then convert
+the measurement into inches, feet, yards, and miles. But people commonly use
+combined measurements such as "3 feet 7 inches". Let's improve the program so
+that it allows inputs of this form.</p>
+
+<p>More specifically, the user will input lines containing one or more
+measurements such as "1 foot" or "3 miles 20 yards 2 feet". The legal units of
+measure are inch, foot, yard, and mile. The program will also recognize plurals
+(inches, feet, yards, miles) and abbreviations (in, ft, yd, mi). Let's write a
+subroutine that will read one line of input of this form and compute the
+equivalent number of inches. The main program uses the number of inches to
+compute the equivalent number of feet, yards, and miles. If there is any error
+in the input, the subroutine will print an error message and return the value
+<code>-1</code>. The subroutine assumes that the input line is not empty. The main program
+tests for this before calling the subroutine and uses an empty line as a signal
+for ending the program.</p>
+
+<p>Ignoring the possibility of illegal inputs, a pseudocode algorithm for the
+subroutine is</p>
+
+<pre>inches = 0    // This will be the total number of inches
+while there is more input on the line:
+    read the numerical measurement
+    read the units of measure
+    add the measurement to inches
+return inches</pre>
+
+<np>We can test whether there is more input on the line by checking whether the
+next non-blank character is the end-of-line character. But this test has a
+precondition: We have to make sure that the next character in the input is
+in fact either an end-of-line or is a non-blank.  To ensure that, we
+need to skip over any blank characters. So, the algorithm becomes</np>
+
+<pre>inches = 0
+skipBlanks()
+while TextIO.peek() is not '\n':
+    read the numerical measurement
+    read the unit of measure
+    add the measurement to inches
+    skipBlanks()
+return inches</pre>
+
+<np>Note the call to <code>skipBlanks()</code> at the end of the <code>while</code>
+loop. The call to <code>skipBlanks()</code> ensures that the precondition 
+for the test is again true.  More generally, if the test in a <code>while</code>
+loop has a precondition, then you have to make sure that this precondition
+holds at the <b>end</b> of the while loop, before the computer jumps
+back to re-evaluate the test, as well as before the start of the loop.</np>
+
+<p>What about error checking? Before reading the numerical measurement, we have
+to make sure that there is really a number there to read. Before reading the
+unit of measure, we have to test that there is something there to read. (The
+number might have been the last thing on the line. An input such as "3",
+without a unit of measure, is not acceptable.) Also, we have to check that the unit of
+measure is one of the valid units: inches, feet, yards, or miles. Here is an
+algorithm that includes error-checking:</p>
+
+<pre>inches = 0
+skipBlanks()
+
+while TextIO.peek() is not '\n':
+
+    if the next character is not a digit:
+       report an error and return -1
+       
+    Let measurement = TextIO.getDouble();
+
+    skipBlanks()    // Precondition for the next test!!
+    if the next character is end-of-line:
+       report an error and return -1                   
+    Let units = TextIO.getWord()
+    
+    if the units are inches:
+        add measurement to inches
+    else if the units are feet:
+        add 12*measurement to inches
+    else if the units are yards:
+        add 36*measurement to inches
+    else if the units are miles:
+        add 12*5280*measurement to inches
+    else
+        report an error and return -1
+ 
+    skipBlanks()
+
+return inches</pre>
+
+<p>As you can see, error-testing adds significantly to the complexity of the
+algorithm. Yet this is still a fairly simple example, and it doesn't even
+handle all the possible errors. For example, if the user enters a numerical
+measurement such as <code>1e400</code> that is outside the legal range of values of type
+<ptype>double</ptype>, then the program will fall back on the default error-handling
+in <classname>TextIO</classname>. 
+Something even more interesting happens if the measurement is "1e308 miles".
+The number <code>1e308</code> is legal, but the corresponding number of inches is outside
+the legal range of values for type <ptype>double</ptype>. As mentioned in the 
+<localref href="robustness.1.3">previous section</localref>, 
+the computer will get the value <code>Double.POSITIVE_INFINITY</code>
+when it does the computation. You might want to run the program and try this out.</p>
+
+<p>Here is the subroutine written out in Java:</p>
+
+<pre>/**
+ * Reads the user's input measurement from one line of input.
+ * Precondition:   The input line is not empty.
+ * Postcondition:  If the user's input is legal, the measurement
+ *                 is converted to inches and returned.  If the
+ *                 input is not legal, the value -1 is returned.
+ *                 The end-of-line is NOT read by this routine.
+ */
+static double readMeasurement() {
+
+   double inches;  // Total number of inches in user's measurement.
+   
+   double measurement;  // One measurement, 
+                        //   such as the 12 in "12 miles"
+   String units;        // The units specified for the measurement,
+                        //   such as "miles"
+   
+   char ch;  // Used to peek at next character in the user's input.
+
+   inches = 0;  // No inches have yet been read.
+
+   skipBlanks();
+   ch = TextIO.peek();
+   
+   /* As long as there is more input on the line, read a measurement and
+      add the equivalent number of inches to the variable, inches.  If an
+      error is detected during the loop, end the subroutine immediately
+      by returning -1. */
+
+   while (ch != '\n') {
+   
+       /* Get the next measurement and the units.  Before reading
+          anything, make sure that a legal value is there to read. */
+   
+       if ( ! Character.isDigit(ch) ) {
+           System.out.println(
+                 "Error:  Expected to find a number, but found " + ch);
+           return -1;
+       }
+       measurement = TextIO.getDouble();
+       
+       skipBlanks();
+       if (TextIO.peek() == '\n') {
+           System.out.println(
+                 "Error:  Missing unit of measure at end of line.");
+           return -1;
+       }
+       units = TextIO.getWord();
+       units = units.toLowerCase();
+       
+       /* Convert the measurement to inches and add it to the total. */
+       
+       if (units.equals("inch") 
+               || units.equals("inches") || units.equals("in")) {
+           inches += measurement;
+       }
+       else if (units.equals("foot") 
+                  || units.equals("feet") || units.equals("ft")) {
+           inches += measurement * 12;
+       }
+       else if (units.equals("yard") 
+                  || units.equals("yards") || units.equals("yd")) {
+           inches += measurement * 36;
+       }
+       else if (units.equals("mile") 
+                  || units.equals("miles") || units.equals("mi")) {
+           inches += measurement * 12 * 5280;
+       }
+       else {
+           System.out.println("Error: \"" + units 
+                             + "\" is not a legal unit of measure.");
+           return -1;
+       }
+     
+       /* Look ahead to see whether the next thing on the line is 
+          the end-of-line. */
+      
+       skipBlanks();
+       ch = TextIO.peek();
+       
+   }  // end while
+   
+   return inches;
+   
+} // end readMeasurement()
+</pre>
+
+<np>The source code for the complete program can be found in the file 
+<sourceref href="LengthConverter2.java"/>.</np>
+   
+</subsection>
+
+</section>

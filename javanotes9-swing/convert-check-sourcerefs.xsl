@@ -37,9 +37,9 @@
 
 <!--
    To use this file, export the web site, copy the "sources" folder into
-   the javanotes9/source directory, cd to javanotes9, and run xalan on
-   javanotes9.xml with this xsl transform file:
+   the csharpnotes1/source directory, cd to csharpnotes1, and run xalan on
+   csharpnotes1.xml with this xsl transform file:
    
    XALAN_DIR='...'
-   java -cp $XALAN_DIR/xalan.jar:$XALAN_DIR/serializer.jar:$XALAN_DIR/xercesImpl.jar:$XALAN_DIR/xml-apis.jar org.apache.xalan.xslt.Process -xsl convert-check-sourcerefs.xsl -in javanotes9.xml
+   java -cp $XALAN_DIR/xalan.jar:$XALAN_DIR/serializer.jar:$XALAN_DIR/xercesImpl.jar:$XALAN_DIR/xml-apis.jar org.apache.xalan.xslt.Process -xsl convert-check-sourcerefs.xsl -in csharpnotes1.xml
 -->

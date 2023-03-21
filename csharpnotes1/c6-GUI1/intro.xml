@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE intro SYSTEM "../csharpnotes1.dtd" >
+
+<intro>
+<p><start><big>C</big>omputer users today expect</start> to interact
+with their computers using a graphical user interface (GUI), and
+Java can be used to write sophisticated GUI programs.</p>
+   
+<p>GUI programs
+differ from traditional "straight-through" programs that you have 
+encountered in the first few chapters of this book.  One big difference is
+that GUI programs are <newword>event-driven</newword>. That is, user actions such as
+clicking on a button or pressing a key on the keyboard generate events, and the
+program must respond to these events as they occur.</p>
+
+<p>Event-driven programming builds on all the skills you have learned in the
+first five chapters of this text. You need to be able to write the methods
+that respond to events. Inside those methods, you are doing the kind of
+programming-in-the-small that was covered in <localref href="basics"/>
+and <localref href="control"/>.
+And of course, objects are everywhere in GUI programming.  
+Events are objects. Colors and fonts are objects.  GUI components such as buttons and
+menus are objects.  Events are handled by instance methods contained in objects. 
+In Java, GUI programming is object-oriented programming.  The purpose of this chapter is, as
+much as anything, to give you some experience with a large-scale object-oriented API.</p>
+
+<p>This chapter is just an introduction to JavaFX, but it covers the
+essential features of GUI programming in enough detail to write some
+interesting programs.  The discussion of JavaFX will continue in <localref href="GUI2"/> 
+with more details and with more advanced techniques, but complete coverage
+of JavaFX would require an entire book of its own.</p>
+
+<p>Note that JavaFX is not distributed as part of the Java
+Development Kit.  For information about how to obtain JavaFX and how to
+compile and run programs that use it, see <localref href="basics.6"/>.</p>
+
+<p>This edition of this textbook covers GUI programming using the JavaFX GUI toolkit.
+An alternative edition covers the Swing GUI toolkit instead of JavaFX.  
+Swing is included as a standard part of Java, so does not require any extra
+downloads or configuration.  The Swing edition can be found
+at <a href="https://codewren.ch/csharpnotes1-swing">https://codewren.ch/csharpnotes1-swing</a>.
+The only really significant differences between the two editions are in this
+chapter and in <localref href="GUI2"/>.</p>
+
+
+</intro>

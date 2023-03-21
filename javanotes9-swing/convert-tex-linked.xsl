@@ -105,14 +105,14 @@
 <xsl:template match="exercises">
 \begin{exercises}
 <xsl:for-each select="exercise">
-\exercise \marginpar{\small{\textit{\href{https://math.hws.edu/eck/cs124/javanotes9-swing/c<xsl:number count="chapter"/>/ex<xsl:number count="exercise"/>-ans.html}{\ \ \ (solution)}}}}\ignorespaces <xsl:apply-templates select="exercise-question"/>
+\exercise \marginpar{\small{\textit{\href{https://math.hws.edu/eck/cs124/csharpnotes1-swing/c<xsl:number count="chapter"/>/ex<xsl:number count="exercise"/>-ans.html}{\ \ \ (solution)}}}}\ignorespaces <xsl:apply-templates select="exercise-question"/>
 </xsl:for-each> 
 
 \end{exercises}
 </xsl:template>
 
 <xsl:template match="quiz">
-\begin{quiz}\marginpar{\small{\textit{\href{https://math.hws.edu/eck/cs124/javanotes9-swing/c<xsl:number count="chapter"/>/quiz_answers.html}{\ \ (answers)}}}}
+\begin{quiz}\marginpar{\small{\textit{\href{https://math.hws.edu/eck/cs124/csharpnotes1-swing/c<xsl:number count="chapter"/>/quiz_answers.html}{\ \ (answers)}}}}
 <xsl:for-each select="question">
 \quizquestion <xsl:apply-templates select="ques"/>
 </xsl:for-each>
@@ -191,7 +191,7 @@
 <xsl:template match="code|ptype|newword|codedef|bnf|newcode|classname|atype|start">\<xsl:value-of select="name()"/>{<xsl:apply-templates/>}</xsl:template>
 
 <!-- 
-<xsl:template match="start">\<xsl:value-of select="name()"/>{<xsl:apply-templates/>}<xsl:if test="ancestor::section">\marginpar{\small{\textit{\href{https://math.hws.edu/eck/cs124/javanotes9-swing/c<xsl:number count="chapter"/>/s<xsl:number count="section"/>.html }{\ \ \ (online)}}}}</xsl:if></xsl:template>
+<xsl:template match="start">\<xsl:value-of select="name()"/>{<xsl:apply-templates/>}<xsl:if test="ancestor::section">\marginpar{\small{\textit{\href{https://math.hws.edu/eck/cs124/csharpnotes1-swing/c<xsl:number count="chapter"/>/s<xsl:number count="section"/>.html }{\ \ \ (online)}}}}</xsl:if></xsl:template>
 -->
 
 <xsl:template match="a"><xsl:choose>
@@ -208,8 +208,8 @@
    </xsl:variable>
    <xsl:variable name="ref">
       <xsl:choose>
-         <xsl:when test="ancestor::source"><xsl:text>https://math.hws.edu/eck/cs124/javanotes9-swing/source/</xsl:text><xsl:value-of select="@href"/></xsl:when>
-         <xsl:otherwise><xsl:text>https://math.hws.edu/eck/cs124/javanotes9-swing/source/chapter</xsl:text><xsl:value-of select="$chapternum"/><xsl:text>/</xsl:text><xsl:value-of select="@href"/></xsl:otherwise>
+         <xsl:when test="ancestor::source"><xsl:text>https://math.hws.edu/eck/cs124/csharpnotes1-swing/source/</xsl:text><xsl:value-of select="@href"/></xsl:when>
+         <xsl:otherwise><xsl:text>https://math.hws.edu/eck/cs124/csharpnotes1-swing/source/chapter</xsl:text><xsl:value-of select="$chapternum"/><xsl:text>/</xsl:text><xsl:value-of select="@href"/></xsl:otherwise>
       </xsl:choose>
    </xsl:variable>
    <xsl:choose>
@@ -219,8 +219,8 @@
 </xsl:template>
    
 <xsl:template match="jarref"><xsl:variable name="a" select="str:new(@href)"/><xsl:variable name="b" select="str:replaceAll($a,'_','\\_')"/><xsl:choose>
-   <xsl:when test="text()">\href{https://math.hws.edu/eck/cs124/javanotes9-swing/jars/c<xsl:number count="chapter"/>/<xsl:value-of select="$b"/>}{<xsl:apply-templates/>}</xsl:when>
-   <xsl:otherwise>\href{https://math.hws.edu/eck/cs124/javanotes9-swing/jars/chapter<xsl:number count="chapter"/>/<xsl:value-of select="$b"/>}{<xsl:value-of select="$b"/>}</xsl:otherwise>
+   <xsl:when test="text()">\href{https://math.hws.edu/eck/cs124/csharpnotes1-swing/jars/c<xsl:number count="chapter"/>/<xsl:value-of select="$b"/>}{<xsl:apply-templates/>}</xsl:when>
+   <xsl:otherwise>\href{https://math.hws.edu/eck/cs124/csharpnotes1-swing/jars/chapter<xsl:number count="chapter"/>/<xsl:value-of select="$b"/>}{<xsl:value-of select="$b"/>}</xsl:otherwise>
 </xsl:choose></xsl:template>
    
 <xsl:template match="localref">

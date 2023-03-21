@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE intro SYSTEM "../javanotes9.dtd" >
+<!DOCTYPE intro SYSTEM "../csharpnotes1.dtd" >
 
 <intro>
 <p><start><big>C</big>omputer users today expect</start> to interact
@@ -31,7 +31,7 @@ techniques.</p>
 <p>This edition of this textbook covers GUI programming using the Swing GUI toolkit,
 which is a standard part of Java and has been included in the JDK since Java&nbsp;2.
 An alternative edition covers JavaFX instead of Swing.  That edition can be found
-at <a href="https://math.hws.edu/javanotes9">https://math.hws.edu/javanotes9</a>.
+at <a href="https://codewren.ch/csharpnotes1">https://codewren.ch/csharpnotes1</a>.
 The only really significant differences between the two editions are in this
 chapter and in <localref href="GUI2"/>.</p>
 

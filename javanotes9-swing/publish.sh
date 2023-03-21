@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION='javanotes9-swing'
+VERSION='csharpnotes1-swing'
 
 if [ ! -d build_output ] ; then
    echo Cannot find build_output directory
@@ -10,7 +10,7 @@ fi
 echo Changing to build_output
 cd build_output
 
-if [ -e javanotes9.pdf -o -e javanotes9-linked.pdf -o -e web-site -o -e javanotes9.epub -o -e exercise-programs ] ; then
+if [ -e csharpnotes1.pdf -o -e csharpnotes1-linked.pdf -o -e web-site -o -e csharpnotes1.epub -o -e exercise-programs ] ; then
    echo Creating downloads directory
    mkdir downloads
 else
@@ -18,24 +18,24 @@ else
    exit
 fi
 
-if [ -e "javanotes9.pdf" ] ; then
-   echo Move javanotes9.pdf to downloads directory
-   mv javanotes9.pdf downloads/$VERSION.pdf
+if [ -e "csharpnotes1.pdf" ] ; then
+   echo Move csharpnotes1.pdf to downloads directory
+   mv csharpnotes1.pdf downloads/$VERSION.pdf
 fi
 
-if [ -e "javanotes9-linked.pdf" ] ; then
-   echo Move javanotes9-linked.pdf to downloads directory
-   mv javanotes9-linked.pdf downloads/$VERSION-linked.pdf
+if [ -e "csharpnotes1-linked.pdf" ] ; then
+   echo Move csharpnotes1-linked.pdf to downloads directory
+   mv csharpnotes1-linked.pdf downloads/$VERSION-linked.pdf
 fi
 
-if [ -e "javanotes9.epub" ] ; then
-   echo Move javanotes9.epub to downloads directory
-   mv javanotes9.epub downloads/$VERSION.epub
+if [ -e "csharpnotes1.epub" ] ; then
+   echo Move csharpnotes1.epub to downloads directory
+   mv csharpnotes1.epub downloads/$VERSION.epub
 fi
 
-if [ -e "javanotes9.mobi" ] ; then
-   echo Move javanotes9.mobi to downloads directory
-   mv javanotes9.mobi downloads/$VERSION.mobi
+if [ -e "csharpnotes1.mobi" ] ; then
+   echo Move csharpnotes1.mobi to downloads directory
+   mv csharpnotes1.mobi downloads/$VERSION.mobi
 fi
 
 if [ -e "web-site" ] ; then

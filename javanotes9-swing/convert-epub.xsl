@@ -9,7 +9,7 @@
    encoding="UTF-8"/>
     
 <xsl:template match="/">
-   <redirect:write file="epub/OEBPS/javanotes9.opf">
+   <redirect:write file="epub/OEBPS/csharpnotes1.opf">
 		<package version="2.0" xmlns="http://www.idpf.org/2007/opf" unique-identifier="javanotesID">
 		    <metadata xmlns:dc="http://purl.org/dc/elements/1.1/"
 		          xmlns:opf="http://www.idpf.org/2007/opf">
@@ -20,12 +20,12 @@
 		   		<dc:language>en-US</dc:language>
 		   		<dc:rights>Copyright 1996-2022 by David J. Eck.  Released under the
 		   		    Creative Commons Attribution-Noncommercial-ShareAlike 4.0 License.</dc:rights>
-		   		<dc:identifier id="javanotesID">https://math.hws.edu/javanotes9-swing</dc:identifier>
+		   		<dc:identifier id="javanotesID">https://codewren.ch/csharpnotes1-swing</dc:identifier>
 		    </metadata>
 		    <manifest>
 		        <item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml"/>
 		        <item id="css" href="javanotes-epub.css" media-type="text/css"/>
-		        <item id="cover-image" href="javanotes9-cover-518x675.jpg" media-type="image/jpeg"/>
+		        <item id="cover-image" href="csharpnotes1-cover-518x675.jpg" media-type="image/jpeg"/>
 		    	<item id="titlepage" href="titlepage.html" media-type="application/xhtml+xml"/>
 		    	<item id="cover" href="cover.html" media-type="application/xhtml+xml"/>
 		    	<item id="quiz-answers-intro" href="quiz-answers-intro.html" media-type="application/xhtml+xml"/>
@@ -120,7 +120,7 @@
    <redirect:write file="epub/OEBPS/toc.ncx">
 	<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1" xml:lang="en-US">
 	    <head>
-	        <meta content="https://math.hws.edu/javanotes9-swing" name="dtb:uid"/>
+	        <meta content="https://codewren.ch/csharpnotes1-swing" name="dtb:uid"/>
 	    </head>
 	    <docTitle>
 	        <text>Introduction to Programming Using Java, Version 9.0</text>
@@ -653,7 +653,7 @@
    <xsl:variable name="ref">
       <xsl:choose>
          <xsl:when test="ancestor::source"><xsl:value-of select="@href"/></xsl:when>
-         <xsl:otherwise><xsl:text>https://math.hws.edu/eck/cs124/javanotes9/source/chapter</xsl:text><xsl:value-of select="$chapternum"/><xsl:text>/</xsl:text><xsl:value-of select="@href"/></xsl:otherwise>
+         <xsl:otherwise><xsl:text>https://math.hws.edu/eck/cs124/csharpnotes1/source/chapter</xsl:text><xsl:value-of select="$chapternum"/><xsl:text>/</xsl:text><xsl:value-of select="@href"/></xsl:otherwise>
       </xsl:choose>
    </xsl:variable>
    <a><xsl:attribute name="href"><xsl:value-of select="$ref"/></xsl:attribute>

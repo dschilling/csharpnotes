@@ -1,0 +1,675 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE section SYSTEM "../csharpnotes1.dtd" >
+
+<section id="GUI1.6" title="Complete Programs">
+
+<p><start><big>I</big>n this chapter, we have</start> covered many of the
+basic aspects of GUI programming.  There is still a lot more to learn,
+and we will return to the topic in <localref href="GUI2"/>.  But you
+already know enough to write some interesting programs.  In this
+section, we look at two complete programs that use what you have
+learned about GUI programming in this chapter, as well as what you
+learned about programming in general in earlier chapters.  Along
+the way, we will also encounter a few new ideas.</p>
+
+
+<subsection id="GUI1.6.1" title="A Little Card Game">
+   
+
+<p>The first program that we will consider is a GUI version 
+of the command-line card game <sourceref chapter="5" href="HighLow.java"/>
+from <localref href="OOP.4.3"/>.  In the new version,
+<sourceref href="HighLowGUI.java"/>, you look at a playing card and try to
+predict whether the next card will be higher or lower in value. (Aces have the
+lowest value in this game.)  In this GUI version of the program, 
+you click on a button to make your
+prediction. If you predict wrong, you lose. If you make three correct
+predictions, you win.  After completing a game, you can click "New Game"
+to start another game. Here is
+what the program looks like in the middle of a game:</p>
+
+<img src="high-low-gui.png" width="334" height="205" alt="GUI version of the HighLow card game"
+      tex="high-low-gui.eps" texscale="0.6"/>
+
+
+<np>The complete source code for the program can be found in the file
+<sourceref href="HighLowGUI.java"/>.  I encourage you to compile and run it.
+Note that the program also requires <sourceref href="Card.java"/>, <sourceref href="Deck.java"/>, 
+and <sourceref href="Hand.java"/>, from <localref href="OOP.4"/>,
+since they define classes that are used in the program. And it requires
+the file of card images, <sourceref href="cards.png"/>, that was used
+in <sourceref href="RandomCards.java"/> from <localref href="GUI1.2.4"/>.</np>
+   
+<p>The layout of the program should be easy to guess:
+<code>HighLowGUI</code> uses a <classname>BorderPane</classname> as the root
+of the scene graph.  The center position is occupied by a <classname>Canvas</classname>
+on which the cards and a message are drawn.  The bottom position contains an
+<classname>HBox</classname> that in turn contains three <classname>Buttons</classname>.
+In order to make the buttons fill the <classname>HBox</classname>, I set them
+all to have the same width, as discussed in <localref href="GUI1.5.3"/>.
+You can see all this in the <code>start()</code> method from the program:</p>
+   
+<pre>public void start(Stage stage) {
+
+    cardImages = new Image("cards.png");     // Load card images.
+    board = new Canvas(4*99 + 20, 123 + 80); // Space for 4 cards.
+    
+    Button higher = new Button("Higher");    // Create the buttons, and
+    higher.setOnAction( e -> doHigher() );   //    install event handlers.
+    Button lower = new Button("Lower");
+    lower.setOnAction( e -> doLower() );
+    Button newGame = new Button("New Game");
+    newGame.setOnAction( e -> doNewGame() );
+
+    HBox buttonBar = new HBox( higher, lower, newGame );
+            
+    higher.setPrefWidth(board.getWidth()/3.0);  // Make each button fill
+    lower.setPrefWidth(board.getWidth()/3.0);   //     1/3 of the width.
+    newGame.setPrefWidth(board.getWidth()/3.0);
+            
+    BorderPane root = new BorderPane();  // Create the scene graph root node.
+    root.setCenter(board);
+    root.setBottom(buttonBar);
+
+    doNewGame();  // set up for the first game
+
+    Scene scene = new Scene(root);  // Finish setting up the scene and stage.
+    stage.setScene(scene);
+    stage.setTitle("High/Low Game");
+    stage.setResizable(false);
+    stage.show();
+    
+}  // end start()</pre>
+   
+   
+<p>Note that the event handlers call methods such as
+<code>doNewGame()</code> that are defined elsewhere in the program.
+The programming of those methods
+is a nice example of thinking in terms of a state machine.  (See <localref href="GUI1.3.6"/>.)
+It is important to think in terms of the states that the game can be in, how the
+state can change, and how the response to events can depend on the state. The
+approach that produced the original, text-oriented game in 
+<localref href="OOP.4.3"/> is not appropriate here. Trying to think about
+the game in terms of a process that goes step-by-step from beginning to end is
+more likely to confuse you than to help you.</p>
+
+<p>The state of the game includes the cards and the message. The cards are
+stored in an object of type <classname>Hand</classname>. 
+The message is a <classname>String</classname>.
+These values are stored in instance variables. There is also another, less
+obvious aspect of the state: Sometimes a game is in progress, and the user is
+supposed to make a prediction about the next card. Sometimes we are between
+games, and the user is supposed to click the "New Game" button. It's a good
+idea to keep track of this basic difference in state. The program uses a
+boolean instance variable named <code>gameInProgress</code> for this purpose.</p>
+
+<p>The state of the game can change whenever the user clicks on a button. The
+program has three methods to respond to button clicks:
+<code>doHigher()</code>, <code>doLower()</code>, and <code>newGame()</code>. 
+It's in these three event-handling methods that the action of the game takes place.</p>
+
+<p>We don't want to let the user start a new game if a game is currently in
+progress. That would be cheating. So, the response in the <code>newGame()</code>
+method is different depending on whether the state variable
+<code>gameInProgress</code> is true or false. If a game is in progress, the
+<code>message</code> instance variable should be set to be an error message. If a
+game is not in progress, then all the state variables should be set to
+appropriate values for the beginning of a new game. In any case, the board must
+be redrawn so that the user can see that the state has changed. The complete
+<code>newGame()</code> method is as follows:</p>
+
+<pre>/**
+ * Called by the start() method, and called by an event handler if
+ * the user clicks the "New Game" button.  Start a new game.
+ */
+private void doNewGame() {
+    if (gameInProgress) {
+            // If the current game is not over, it is an error to try
+            // to start a new game.
+        message = "You still have to finish this game!";
+        drawBoard();
+        return;
+    }
+    deck = new Deck();   // Create the deck and hand to use for this game.
+    hand = new Hand();
+    deck.shuffle();
+    hand.addCard( deck.dealCard() );  // Deal the first card into the hand.
+    message = "Is the next card higher or lower?";
+    gameInProgress = true;
+    drawBoard();
+} // end doNewGame()</pre>
+
+<p>The <code>doHigher()</code> and <code>doLower()</code> methods are almost identical
+to each other (and could probably have been combined into one method with a
+parameter, if I were more clever). Let's look at the <code>doHigher()</code>
+routine. This is called when the user clicks the "Higher" button. This only
+makes sense if a game is in progress, so the first thing <code>doHigher()</code>
+should do is check the value of the state variable <code>gameInProgress</code>. If
+the value is <code>false</code>, then <code>doHigher()</code> should just set up an
+error message. If a game is in progress, a new card should be added to the hand
+and the user's prediction should be tested. The user might win or lose at this
+time. If so, the value of the state variable <code>gameInProgress</code> must be
+set to <code>false</code> because the game is over. In any case, the board is
+redrawn to show the new state. Here is the <code>doHigher()</code> method:</p>
+
+<pre>/**
+ * Called by an event handler when user clicks "Higher" button.
+ * Check the user's prediction.  Game ends if user guessed
+ * wrong or if the user has made three correct predictions.
+ */
+private void doHigher() {
+    if (gameInProgress == false) {
+            // If the game has ended, it was an error to click "Higher",
+            // So set up an error message and abort processing.
+        message = "Click \"New Game\" to start a new game!";
+        drawBoard();
+        return;
+    }
+    hand.addCard( deck.dealCard() );     // Deal a card to the hand.
+    int cardCt = hand.getCardCount();
+    Card thisCard = hand.getCard( cardCt - 1 );  // Card just dealt.
+    Card prevCard = hand.getCard( cardCt - 2 );  // The previous card.
+    if ( thisCard.getValue() &lt; prevCard.getValue() ) {
+        gameInProgress = false;
+        message = "Too bad! You lose.";
+    }
+    else if ( thisCard.getValue() == prevCard.getValue() ) {
+        gameInProgress = false;
+        message = "Too bad!  You lose on ties.";
+    }
+    else if ( cardCt == 4) {
+        gameInProgress = false;
+        message = "You win!  You made three correct guesses.";
+    }
+    else {
+        message = "Got it right!  Try for " + cardCt + ".";
+    }
+    drawBoard();
+} // end doHigher()</pre>
+
+<p>The <code>drawBoard()</code> method, which is responsible for drawing the content
+of the canvas, uses the values in the state variables to decide what to show. It displays the
+string stored in the <code>message</code> variable. It draws each of the cards in
+the <code>hand</code>. There is one little tricky bit: If a game is in progress, it
+draws an extra face-down card, which is not in the hand, to represent the next
+card in the deck.  The technique for drawing the individual cards was
+explained in <localref href="GUI1.2"/>.  See the <sourceref href="HighLowGUI.java">source code</sourceref>
+for the method definition.</p>
+
+</subsection>
+
+   
+<subsection title="Menus and Menubars" id="GUI1.6.2">
+
+<p>Our second example program, "MosaicDraw," is a kind of drawing program.  
+The source code for the program is in the file <sourceref href="MosaicDraw.java"/>.
+The program also requires <sourceref href="MosaicCanvas.java"/>.  Here is a half-size
+screenshot showing a sample drawing made with the program:</p>
+   
+<img src="mosaic-draw.png" width="300" height="328" alt="a face drawn with MosaicDraw"
+      tex="mosaic-draw.eps" texscale="0.6"/>
+
+<p>As the user clicks-and-drags the
+mouse in the large drawing area of this program, it leaves a trail of little colored
+squares. There is some random variation in the color of the squares.  (This is meant
+to make the picture look a little more like a real mosaic, which is a picture made out of 
+small colored stones in which there would be some natural color variation.)  The program has
+one feature that we have not encountered before:
+There is a menu bar above the drawing area.  The "Control" menu contains
+commands for filling and clearing the drawing area, along with a few options that affect
+the appearance of the picture.  The "Color" menu lets the user select the color that will
+be used when the user draws.  The "Tools" menu affects the behavior of the mouse.
+Using the default "Draw" tool, the mouse leaves a trail of single squares.  Using the
+"Draw&nbsp;3x3" tool, the mouse leaves a swatch of colored squares that is three squares wide.
+There are also "Erase" tools, which let the user set squares back to their default
+black color.</p>
+   
+<p>The drawing area of the program is a panel that belongs to the <classname>MosaicCanvas</classname>
+class, a subclass of <classname>Canvas</classname> that is defined in <sourceref href="MosaicCanvas.java"/>.
+<classname>MosaicCanvas</classname> is a highly reusable class for representing mosaics of colored
+rectangles.  It was also used behind the scenes in the sample program in <localref href="subroutines.6.3"/>.
+The <classname>MosaicCanvas</classname> class
+does not directly support drawing on the mosaic, but it does support setting
+the color of each individual square.  The MosaicDraw program installs mouse handlers on
+the canvas.  The handlers respond to <code>MousePressed</code> and <code>MouseDragged</code> events on the
+canvas by applying the currently selected tool to the canvas at the square
+that contains the mouse position.  This is a nice example of
+applying event listeners to an object to do something that was not programmed into the object
+itself.</p>
+   
+<p>I urge you to study <sourceref href="MosaicDraw.java"/>.  I will not be discussing all aspects
+of the code here, but you should be able to understand it all after reading this section. As for
+<sourceref href="MosaicCanvas.java"/>, it uses some techniques that you would not understand at this
+point, but I encourage you to at least read the comments in that file to learn about the API
+for <classname>MosaicCanvas</classname>.</p>
+
+<break/>
+  
+<p>MosaicDraw is the first example that we have seen that uses a menu bar.  Fortunately,
+menus are very easy to use in JavaFX.  The items in a menu are represented by objects belonging
+to class <classname>MenuItem</classname> or to one of its subclasses.
+(<classname>MenuItem</classname> and other menu-related classes are in package <code>javafx.scene.control</code>.)
+Menu items are used in almost exactly the
+same way as buttons.  In particular, a <classname>MenuItem</classname> can be created using
+a constructor that specifies the text of the menu item, such as:</p>
+   
+<pre>MenuItem fillCommand = new MenuItem("Fill");</pre>
+
+<np>Menu items, like buttons, can have a graphic as well as text, and there is a second
+constructor that allows you to specify both text and graphic.
+When the user selects a <classname>MenuItem</classname> from a menu, an <classname>ActionEvent</classname>
+is generated.  Just as for a button, you can add an action event listener to the menu item using its
+<code>setOnAction(handler)</code> method.  A menu item has a <code>setDisable(disabled)</code> method
+that can be used to enable and disable the item.  And it has a <code>setText()</code> method for
+changing the text that is displayed in the item.</np>
+   
+<p>The main difference between a menu item and a button, of course, is that a menu
+item is meant to appear in a menu.  (Actually, a menu item is a <classname>Node</classname>
+that can appear anywhere in a scene graph, but the usual place for it is in a menu.)
+A menu in JavaFX is
+represented by the class <classname>Menu</classname>.  (In fact, <classname>Menu</classname>
+is actually a subclass of <classname>MenuItem</classname>, which means that you can
+add a menu as an item in another menu.  The menu that you add becomes a submenu of the
+menu that you add it to.)  A <classname>Menu</classname> has a name,
+which is specified in the constructor.  It has an instance method <code>getItems()</code>
+that returns a list of menu items contained in the menu.  To add items to the
+menu, you need to add them to that list:</p>
+
+<pre>Menu sampleMenu = new Menu("Sample");
+sampleMenu.getItems().add( menuItem );  // Add one menu item to the menu.
+sampleMenu.getItems().addAll( item1, item2, item3 );  // Add multiple items.</pre>
+  
+<np>Once a menu has been created, it can be added to a menu bar.  A menu bar is represented
+by the class <classname>MenuBar</classname>.  A menu bar is just a container for menus.
+It does not have a name.  The <classname>MenuBar</classname> constructor can be called
+with no parameters, or it can have a parameter list containing <classname>Menus</classname>
+to be added to the menu bar.  The instance method <code>getMenus()</code>
+returns a list of menus, with methods <code>add()</code> and <code>addAll()</code>
+for adding menus to the menu bar.  For example,
+the <code>MosaicDraw</code> program uses three menus, <code>controlMenu</code>, <code>colorMenu</code>,
+and <code>toolMenu</code>.  We could create a menu bar and add the menus to it with
+the statements:</np>
+   
+<pre>MenuBar menuBar = new MenuBar();
+menuBar.getMenus().addAll(controlMenu, colorMenu, toolMenu);</pre>
+
+<np>Or we could list the menus in the menu bar constructor:</np>
+
+<pre>MenuBar menuBar = new MenuBar(controlMenu, colorMenu, toolMenu);</pre>
+
+<p>The final step in using menus is to add the menu bar to the program's
+scene graph.  The menu bar could actually appear anywhere, but typically,
+it should be at the top of the window.  A program that has a menu bar
+will usually use a <classname>BorderPane</classname> as the root of
+its scene graph, and it will add the menu bar as the top component
+in that root pane.  The rest of the GUI for the program can be placed
+in the other four positions of the border pane.</p>
+     
+<p>So using menus generally follows the same pattern:  Create a menu bar.  Create menus
+and add them to the menu bar.  Create menu items and add them to the menus (and set up
+listening to handle action events from the menu items).  Place the menu bar at the
+top of a <classname>BorderPane</classname>, which is the root of the scene graph.</p>
+   
+<break/>
+   
+<p>There are other kinds of menu items, defined by subclasses of <classname>MenuItem</classname>,
+that can be added to menus.  A very simple example is <classname>SeparatorMenuItem</classname>,
+which appears in a menu as a line between other menu items.  You can see an example
+in the "Control" menu of <classname>MosaicDraw</classname>. To add a separator to
+a <classname>Menu</classname>, <code>menu</code>, you just need to say</p>
+
+<pre>menu.getItems().add( new SeparatorMenuItem() );</pre>
+
+<np>Much more interesting are the subclasses <classname>CheckMenuItem</classname>
+and <classname>RadioMenuItem</classname>.</np>
+
+<p>A <classname>CheckMenuItem</classname> represents a menu item that can be in one 
+of two states, selected or not selected. The state is changed when the user
+selects the item from the menu that contains it.
+A <classname>CheckMenuItem</classname> has the same functionality and is used in
+the same way as a <classname>CheckBox</classname> (see <localref href="GUI1.4.3"/>).
+Three <classname>CheckMenuItems</classname> are used in the "Control" menu
+of the MosaicDraw program.  One is used to turn the random color variation of
+the squares on and off.  Another turns a symmetry feature on and off; when symmetry is
+turned on, the user's drawing is reflected horizontally and vertically to produce
+a symmetric pattern.  And the third <classname>CheckMenuItem</classname> shows and hides
+"grouting" in the mosaic (grouting consists of gray lines drawn around each
+of the little squares in the mosaic).  The <classname>CheckMenuItem</classname> that corresponds to the
+"Use Randomness" option in the "Control" menu could be set up with the statements:</p>
+       
+<pre>useRandomness = new CheckMenuItem("Use Randomness");
+useRandomness.setSelected(true);  // Randomness is initially turned on.
+controlMenu.getMenus().add(useRandomness);   // Add menu item to the menu.</pre>
+
+<np>No <classname>ActionEvent</classname> handler is added to <code>useRandomness</code>;
+the program simply checks its state by calling <code>useRandomness.isSelected()</code>
+whenever it is coloring a square, to decide whether to
+add some random variation to the color.  On the other hand, when the user selects the
+"Use&nbsp;Grouting" check box from the menu, the canvas must immediately be redrawn to
+reflect the new state.  A handler is added to the <classname>CheckMenuItem</classname>
+to take care of that by calling an appropriate method:</np>
+
+<pre>useGrouting.setOnAction( e -> doUseGrouting(useGrouting.isSelected()) );</pre>
+
+<break/>
+   
+<p>The "Color" and "Tools" menus contain items of type <classname>RadioMenuItem</classname>,
+which are used in the same way as the <classname>RadioButtons</classname> that were
+discussed in <localref href="GUI1.4.3"/>:  A <classname>RadioMenuItem</classname>,
+like a check box, can be either selected or unselected, but when several 
+<classname>RadioMenuItems</classname> are added to a <classname>ToggleGroup</classname>,
+then at most one of the group members can be selected.  In the program, the user
+selects the tool that they want to use from the "Tools" menu.  Only one
+tool can be selected at a time, so it makes sense to use <classname>RadioMenuItems</classname>
+to represent the available tools, and to put all of those items into the same
+<classname>ToggleGroup</classname>.  The currently selected option in the "Tools" menu will be
+marked as selected; when the user chooses a new tool, the mark is moved.  This gives the
+user some visible feedback about which tool is currently selected for use.
+Furthermore, the <classname>ToggleGroup</classname> has an observable property
+representing the currently selected option (see <localref href="GUI1.3.7"/>).  The program
+adds a listener to that property with an event handler that will be
+called whenever the user selects a new tool.  Here is the code that creates the
+"Tools" menu:</p>
+
+<pre>Menu toolMenu = new Menu("Tools");
+ToggleGroup toolGroup = new ToggleGroup();
+toolGroup.selectedToggleProperty().addListener( 
+                 e -> doToolChoice(toolGroup.getSelectedToggle()) );
+addRadioMenuItem(toolMenu,"Draw",toolGroup, true);
+addRadioMenuItem(toolMenu,"Erase",toolGroup, false);
+addRadioMenuItem(toolMenu,"Draw 3x3",toolGroup, false);
+addRadioMenuItem(toolMenu,"Erase 3x3",toolGroup, false);</pre>
+
+<np>The <code>addRadioMenuItem</code> method that is used in this code
+is a utility method that is defined elsewhere in the program:</np>
+
+<pre>/**
+ * Utility method to create a radio menu item, add it 
+ * to a ToggleGroup, and add it to a menu.
+ */
+private void addRadioMenuItem(Menu menu, String command, 
+                                   ToggleGroup group, boolean selected) {
+    RadioMenuItem menuItem = new RadioMenuItem(command);
+    menuItem.setToggleGroup(group);
+    menu.getItems().add(menuItem);
+    if (selected) {
+        menuItem.setSelected(true);
+    }
+}</pre>
+
+<p>The complete code for creating the menu bar in <code>MosaicDraw</code> can
+be found in a method <code>createMenuBar()</code>.  Again, I encourage you
+to study the <sourceref href="MosaicDraw.java">source code</sourceref>.</p>
+
+</subsection>
+   
+<subsection title="Scene and Stage" id="GUI1.6.3">
+   
+<p>Before ending this brief introduction to GUI programming,
+we look at two fundamental classes in a little more detail:
+<classname>Scene</classname>, from package <code>javafx.scene</code>,
+and <classname>Stage</classname>, from package <code>javafx.stage</code>.</p>
+
+<p>A <classname>Scene</classname> represents the content area of a window
+(that is, not including the window's border and title bar),
+and it serves as a holder for the root of the scene graph.
+The <classname>Scene</classname> class has several constructors, but they
+all require the root of the scene graph as one of the parameters, and the
+root cannot be <code>null</code>.  Perhaps the most common constructor is
+the one that has only the root as parameter: <code>new&nbsp;Scene(root)</code>.</p>
+
+<p>A scene has a width and a height, which can be specified as parameters to the
+constructor: <code>new Scene(root,width,height)</code>.  In the typical case
+where the <code>root</code> is a <classname>Pane</classname>, the size of the
+pane will be set to match the size of the scene, and the pane will lay out
+its contents based on that size.  If the size of the scene is not specified in the constructor,
+then the size of the scene will be set to the preferred size of the pane.
+It is not possible for a program to set the width or
+height of a <classname>Scene</classname> after it has been created, but if the size of the stage that 
+contains a scene is changed, then the size of the scene is automatically changed 
+to match the new size of the stage's content area, and the root node of the
+scene (if it is a <classname>Pane</classname>) will be resized as well.</p>
+
+<p>A <classname>Scene</classname> can have a background fill <classname>color</classname> (actually
+a <classname>Paint</classname>), which can be specified in the constructor.  Generally, the scene's 
+background is not seen, since it is covered by the background of the root node.  The default
+style sets the background of the root to be light gray.  However, you can set the background color
+of the root to be transparent if you want to see the scene background instead.</p>
+
+<break/>
+
+<p>A <classname>Stage</classname>, from package <code>javafx.stage</code>, represents a
+window on the computer's screen.  Any JavaFX <classname>Application</classname> has at
+least one stage, called the primary stage, which is created by the system and passed 
+as a parameter to the application's <code>start()</code> method.  Although we have not seen any
+examples so far in this textbook, many programs
+use more than one window.  It is possible for a program to create new <classname>Stage</classname>
+objects; we will see how to do that in <localref href="GUI2"/>.</p>
+
+<p>A stage contains a scene, which fills its content area.  The scene is installed in the stage by calling the
+instance method <code>stage.setScene(scene)</code>.  It is possible to show a stage
+that does not contain a scene, but its content area will just be a blank rectangle.</p>
+
+<p>In addition to a content area, a stage has a title bar above the content.  The title bar
+contains a title for the window and some "decorations"&mdash;little controls that the
+user can click to do things like close and maximize the window.  The title bar is provided
+by the operating system, not by Java, and its style is set by the operating system.
+The instance method <code>stage.setTitle(string)</code> sets the text that is shown in
+the title bar.  The title can be changed at any time.</p>
+
+<p>By default a stage is resizable.  That is, the size of the window can be changed by the
+user, by dragging its borders or corners.  To prevent the user from changing the
+window size, you can call <code>stage.setResizable(false)</code>.  However, a program
+can change the size of a stage with the instance methods <code>stage.setWidth(w)</code>
+and <code>stage.setHeight(h)</code>, and this can be done even if the stage has
+been made non-resizable.  Usually, the initial size of a stage is determined by the
+size of the scene that it contains, but it is also possible to set the initial size before
+showing the window using <code>setWidth()</code> and <code>setHeight()</code>.</p>
+
+<p>By default, when a stage is resizable, the user can make the window arbitrarily small
+and arbitrarily large.  It is possible to put limits on the resizability of a window
+with the instance methods <code>stage.setMinWidth(w)</code>, <code>stage.setMaxWidth(w)</code>,
+<code>stage.setMinHeight(h)</code>, and <code>stage.setMaxHeight(h)</code>.  The size
+limits apply only to what the user can do by dragging the borders or corners of the window.
+</p>
+
+<p>It is also possible to change the position of a stage on the screen, using the
+instance methods <code>stage.setX(x)</code> and <code>stage.setY(y)</code>.
+The x and y coordinates specify the position of the top left corner of the window,
+in the coordinate system of the screen.  Typically, you would do this before showing
+the stage.</p>
+
+<p>Finally, for now, remember that a stage is not visible on the screen until you
+show it by calling the instance method <code>stage.show()</code>.  Showing the
+primary stage is typically the last thing that you do in a application's
+<code>start()</code> method.</p>
+
+</subsection>
+   
+<subsection title="Creating Jar Files" id="GUI1.6.4">
+   
+<p>Java classes and resource files are often distributed in jar ("java archive") files.
+For a program that consists of multiple files, it can make sense to pack them
+into a single jar file.  As the last topic for this chapter, we look at how to do that.
+The program can be run directly from the jar file, without unpacking it.  However, for
+JavaFX programs, the user will still need access to the JavaFX SDK.
+A jar file can be "executable," meaning that it specifies the class that
+contains the <code>main()</code> routine that will be run when the jar file is
+executed.  If you have an executable jar file that does not require JavaFX or
+other external resources, you can run it on the command line using a command
+of the form:</p>
+
+<pre>java  -jar  JarFileName.jar</pre>
+
+<np>and you might even be able to run the jar file by double-clicking its icon in 
+a file browser window.  If an executable jar file requires JavaFX, you will need 
+to add the same options to the <code>java</code> command that were discussed in 
+<localref href="basics.6.7"/>.  For example,</np>
+
+<pre>java -p /opt/jfx17/lib --add-modules=ALL-MODULE-PATH JarFileName.jar</pre>
+
+   
+<p>The question, then, is how to create a jar file.  The answer depends on what
+programming environment you are using.  The two basic types of programming environment&mdash;command line
+and IDE&mdash;were discussed in <localref href="basics.6"/>.  Any IDE (Integrated Development Environment)
+for Java should have a command for creating jar files.  In the Eclipse IDE, for example,
+it can be done as follows:  In the Package Explorer pane, select the programming project (or just
+all the individual source and resource files that you want to include).  Right-click on the selection, and
+choose "Export" from the menu that pops up.  In the window that appears, select "JAR file"
+and click "Next".  In the window that appears next, enter a full path name for the jar file in
+the box labeled "JAR file".  (Click the "Browse" button next to this box to select the
+file name using a file dialog box.)  The name of the file should end with ".jar".
+If you are creating a regular jar file, not an executable
+one, you can hit "Finish" at this point, and the jar file will be created.  To create an
+executable file, hit the "Next" button <i>twice</i> to get to the "Jar Manifest
+Specification" screen.  At the bottom of this screen is an input box labeled "Main class".
+You have to enter the name of the class that contains the <code>main()</code> routine
+that will be run when the jar file is executed.  If you hit the "Browse" button next to
+the "Main class" box, you can select the class from a list of classes that contain
+<code>main()</code> routines.  Once you've selected the main class, you can
+click the "Finish" button to create the executable jar file.</p>
+
+<p>It is also possible to create jar files on the command line.  The Java Development Kit
+includes a command-line program named <code>jar</code> that can be used to create jar files.
+If all your classes are in the default package (like most of the examples in this book), then
+the <code>jar</code> command is easy to use.  To create a non-executable jar file on the command line,
+change to the directory that contains the class files that you want to include in the jar.
+Then give the command</p>
+   
+<pre>jar  -c  -f  JarFileName.jar  *.class</pre>
+   
+<np>where <code>JarFileName</code> can be any name that you want to use for the jar file.
+The <code>-c</code> option is used to create a jar file.  The <code>-f</code> is followed by
+the name of the jar file that is to be created.
+The "<code>*</code>" in "<code>*.class</code>" is a wildcard that makes <code>*.class</code> match every class
+file in the current directory.  This means that all the class files in the directory will be
+included in the jar file.  If you want to include only certain class files, you
+can name them individually, separated by spaces. You can also list the class file names separately.
+If the program uses resource files, such as images, they should
+also be listed in the command.  (Things get more complicated if your classes and resources are not in the
+default package.  In that case, the files must be in subdirectories of the
+directory in which you issue the <code>jar</code> command, and you have to include the path to
+the file in the name.  For example: <code>textio/TextIO.class</code> on MacOS and Linux,
+or <code>textio\TextIO.class</code> on Windows.)</np>
+   
+<p>Making an executable jar file on the command line is  only a little more complicated.
+There has to be some way of specifying which class contains the <code>main()</code>
+routine.  This can be done by adding the <code>-e</code> option to the command,
+with a value giving the full name of the class that is to be executed when the
+jar file is run.  For example, if the name of the class is <classname>MyMainClass</classname>,
+then the jar file could be created with:</p>
+   
+<pre>jar  -c  -f  JarFileName.jar  -e  MyMainClass  *.class</pre>
+   
+<np>For a program defined in two packages, <code>grapher.ui</code> and <code>grapher.util</code>,
+with a main class defined in the file <code>Main.java</code> in package <code>grapher.ui</code>,
+the command would become</np>
+
+<pre>jar -c -f Grapher.jar -e grapher.ui.Main grapher/ui/*.class grapher/util/*.class</pre>
+
+<np>except that on Windows, the slashes would be replaced by backslashes.</np>
+   
+<p>(The options <code>-c</code>, <code>-f</code>, and <code>-e</code> are abbreviations
+for the longer forms <code>--create</code>, <code>--file</code>, and <code>--main-class</code>,
+and you can use the longer forms, if you prefer clarity to brevity.)</p>
+   
+</subsection>
+
+<subsection title="jpackage" id="GUI1.6.5">
+
+<p>You can collect the class files and resource files for a program into a jar file,
+and you can give that jar file to someone who would like to use your
+program.  However, that person will still need to have Java installed on their
+computer&mdash;something that is really not very likely these days, unless that person
+is a Java developer.  A possible solution is to bundle a Java virtual machine
+along with your program.  The Java Development Kit includes the <code>jpackage</code>
+command to make that possible.</p>
+
+<p>The <code>jpackage</code> command can create an installer that will install your
+program along with as much Java support as is needed to run it.  It has some
+significant limitations.  It can only make an installer for the type of computer
+and operating system that you are using; for example, it is not possible to use <code>jpackage</code>
+on Linux to make an installer for Windows.  And the files that it makes are very
+large, since they have to include large parts of a Java execution environment.
+So <code>jpackage</code> is really meant for packaging large, serious applications.
+But if you want to try it, here is a basic example, using only a few of the
+options that are available for <code>jpackage</code>.  For the example, 
+I&nbsp;made an installer for the network poker game from <localref href="threads.5.4"/>.
+This might also help you understand how to work with packages in general.</p>
+
+<p>To apply <code>jpackage</code> to a program that uses JavaFX, you have to make
+Java packages available to the <code>jpackage</code> command.  For this purpose,
+you can't use the JavaFX SDK.  Instead, you need the JavaFX "jmods".  See
+<localref href="basics.6.7"/> for a discussion of the JavaFX SDK. For <code>jpackage</code>,
+you will need to download the jmods for your operating system from
+<a href="https://gluonhq.com/products/javafx/">https://gluonhq.com/products/javafx/</a>.
+For my computer, I extracted the downloaded file into <code>/opt/javafx-jmods-17.0.2</code>.
+(The jmods are required because they include specific operating system support that is not in
+the SDK jar files.)</p>
+
+<p>To use <code>jpackage</code>, you need a jar file that contains the classes and resource files for your
+program.  The poker game uses classes from the packages <code>netgame.common</code> and
+<code>netgame.fivecarddraw</code>, plus a resource image file <code>cards.png</code>
+in <code>netgame.fivecarddraw</code>.  To make the jar file, I first compiled
+the Java files for the program.  Since the poker game uses JavaFX, I included the
+necessary options in the <code>javac</code> command.  
+I used the following command in the directory that contained
+the <sourceref chapter="12" href="netgame"/> directory, <i>typed all on one line</i>:</p>
+
+<pre>javac  --module-path  /opt/jfx17/lib  --add-modules=ALL-MODULE-PATH
+                    netgame/common/*.java  netgame/fivecarddraw/*.java</pre>
+
+<np>I then created a jar file, <code>Poker.jar</code>, with this command,
+<i>typed all on one line</i>:</np>
+
+<pre>jar -c -f Poker.jar  netgame/common/*.class  netgame/fivecarddraw/*.class
+                netgame/fivecarddraw/cards.png</pre>
+                
+<np>It is important to include the image resource file along with the class files.
+(Note that on Windows, the slashes, "/", would be replaced by backslashes, "\".)</np>
+
+<p>I moved <code>Poker.jar</code> to a new directory.  Working in that new directory,
+I used the following very long <code>jpackage</code> command, again <i>typed all on one line</i>:</p>
+
+<pre>jpackage  --input  <b>.</b>  --main-jar  Poker.jar
+            --main-class  netgame.fivecarddraw.Main  --name  NetPoker 
+            --module-path /opt/javafx-jmods-17.0.2
+            --add-modules  javafx.base,javafx.controls,javafx.graphics</pre>
+             
+<np>The value for the <code>--input</code> option is a period, which represents the current working
+directory; it could be replaced by a path to the directory that contains <code>Poker.jar</code>.
+The value for the <code>--main-class</code> option is the full name of the class that
+contains the main program; this option is not needed if the jar file is executable.
+The value of the <code>--name</code> option is used to name the installer and
+to name the executable file that it will install.  The <code>--module-path</code>
+refers to the directory that contains the JavaFX jmods.  And the added modules
+are just those JavaFX modules that are needed for this program.</np>
+
+<p>When used on my computer, running Linux Mint, this produced a file named
+<code>netpoker_1.0-1_amd64.deb</code> that I could
+then install in the usual way. It installed the poker executable
+as <code>/opt/netpoker/bin/NetPoker</code>.</p>
+
+<p>On MacOS 10.15, using the JDK from adoptium.net (see <localref href="basics.6.1"/>),
+I found that <code>jpackage</code> was installed as part of the
+JDK, but it was not made available on the command-line.  I was able to define it
+myself as an alias: </p>
+
+<pre>alias jpackage=
+     "/Library/Java/JavaVirtualMachines/temurin-17.jdk/Contents/Home/bin/jpackage"</pre>
+
+<np>Again, type this all on one line.  With that done, I used the same commands
+as given above, with appropriate directory names for the JavaFX SDK and jmods.
+The result was a .dmg file containing a program, <code>netpoker.app</code>,
+that could be run by double-clicking. (The jpackage command might be properly set up
+in newer versions of MacOS.)</np>
+
+<p>The <code>jpackage</code> command should also work on Windows, but it requires
+something called the "WiX toolset" in addition to the JDK.  I have not tried it.</p>
+
+
+</subsection>
+
+<endchapter/>
+
+</section>

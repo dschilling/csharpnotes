@@ -21,7 +21,7 @@
                  (<a href="mailto:eck@hws.edu">eck@hws.edu</a>)</h4>        
         <hr/>
         <table border="0">
-        <tr valign="top"><td><p style="margin-right:20pt"><img height="235" width="180" src="javanotes9-cover-180x235.png"/></p></td>
+        <tr valign="top"><td><p style="margin-right:20pt"><img height="235" width="180" src="csharpnotes1-cover-180x235.png"/></p></td>
         <td style="margin-left:1cm">
          <p><big>W</big>ELCOME TO Version 9.0 of <i>Introduction to Programming Using Java</i>,
          a free, on-line textbook for introductory
@@ -32,7 +32,7 @@
         <p>Version 9 covers Java 17.  It updates the previous version mostly by moving definitively to Java&#160;17
         and by adding a new Swing edition.
          This edition of Version&#160;9 uses Swing for GUI programming;
-         <a href="https://math.hws.edu/javanotes9/">an&#160;alternative&#160;edition</a> that uses
+         <a href="https://codewren.ch/csharpnotes1/">an&#160;alternative&#160;edition</a> that uses
          JavaFX instead of Swing is also available.  Earlier versions of the book are also available;
          see the <a href="preface.html">preface</a> for links to
          older versions.</p>
@@ -86,7 +86,7 @@
         <li>
           <b>Full Web Site Download:</b>
           <ul>
-          <li><b><a href="https://math.hws.edu/eck/cs124/downloads/javanotes9-swing.zip">https://math.hws.edu/eck/cs124/downloads/javanotes9-swing.zip</a></b> &#8212;
+          <li><b><a href="https://math.hws.edu/eck/cs124/downloads/csharpnotes1-swing.zip">https://math.hws.edu/eck/cs124/downloads/csharpnotes1-swing.zip</a></b> &#8212;
           This "zip" archive contains a complete copy of the web site.  It should be usable on almost
           any computer. 
           Size:&#160;4.4&#160;Megabytes.
@@ -96,12 +96,12 @@
         <li>
           <b>Source Code Downloads:</b>
           <ul>
-          <li><b><a href="https://math.hws.edu/eck/cs124/downloads/javanotes9-swing-example-programs.zip">https://math.hws.edu/eck/cs124/downloads/javanotes9-swing-example-programs.zip</a></b>  &#8212;
+          <li><b><a href="https://math.hws.edu/eck/cs124/downloads/csharpnotes1-swing-example-programs.zip">https://math.hws.edu/eck/cs124/downloads/csharpnotes1-swing-example-programs.zip</a></b>  &#8212;
           A zip archive of the "source" directory from the web site, which includes source code for sample programs from the text.
           Note that if you download the complete web site, then you <b>already have</b> a copy of the same source directory.
           See the <a href="README-running-the-examples.txt">README&#160;file</a>. Size: 750&#160;Kilobytes.
           </li>
-          <li><b><a href="https://math.hws.edu/eck/cs124/downloads/javanotes9-swing-exercise-solutions.zip">https://math.hws.edu/eck/cs124/downloads/javanotes9-swing-exercise-solutions.zip</a></b>  &#8212;
+          <li><b><a href="https://math.hws.edu/eck/cs124/downloads/csharpnotes1-swing-exercise-solutions.zip">https://math.hws.edu/eck/cs124/downloads/csharpnotes1-swing-exercise-solutions.zip</a></b>  &#8212;
           A zip archive containing source code for all the end-of-chapter exercises.  These have been extracted from the
           web pages that contain the solutions as a convenience.  They are <b>not</b> included in the web site download.
           See the <a href="README-exercise-solutions.txt">README&#160;file</a>. Size: 300&#160;Kilobytes.
@@ -112,14 +112,14 @@
           <b>PDF Downloads:</b>
           <ul>
           <li>
-          <b><a href="https://math.hws.edu/eck/cs124/downloads/javanotes9-swing-linked.pdf">https://math.hws.edu/eck/cs124/downloads/javanotes9-swing-linked.pdf</a></b> &#8212;
+          <b><a href="https://math.hws.edu/eck/cs124/downloads/csharpnotes1-swing-linked.pdf">https://math.hws.edu/eck/cs124/downloads/csharpnotes1-swing-linked.pdf</a></b> &#8212;
           a PDF version with internal links for navigation and external links to source code
           files, exercise solutions, and other resources that are not included in the PDF.
           Recommended for on-screen reading.
           Size:&#160;6.5&#160;Megabytes; 790 pages.
           </li>
           <li>
-          <b><a href="https://math.hws.edu/eck/cs124/downloads/javanotes9-swing.pdf">https://math.hws.edu/eck/cs124/downloads/javanotes9-swing.pdf</a></b> &#8212;
+          <b><a href="https://math.hws.edu/eck/cs124/downloads/csharpnotes1-swing.pdf">https://math.hws.edu/eck/cs124/downloads/csharpnotes1-swing.pdf</a></b> &#8212;
           a PDF version without links, more suitable for printing.
           Size:&#160;6.0&#160;Megabytes; 797 pages.
           </li>
@@ -129,10 +129,10 @@
            <b>E-book Downloads.</b> 
            <ul>
            <li>
-           <b><a href="https://math.hws.edu/eck/cs124/downloads/javanotes9-swing.mobi">https://math.hws.edu/eck/cs124/downloads/javanotes9-swing.mobi</a></b>, for Kindle.
+           <b><a href="https://math.hws.edu/eck/cs124/downloads/csharpnotes1-swing.mobi">https://math.hws.edu/eck/cs124/downloads/csharpnotes1-swing.mobi</a></b>, for Kindle.
            </li>
            <li>
-           <b><a href="https://math.hws.edu/eck/cs124/downloads/javanotes9-swing.epub">https://math.hws.edu/eck/cs124/downloads/javanotes9-swing.epub</a></b>, for most other ebook readers.<br/>
+           <b><a href="https://math.hws.edu/eck/cs124/downloads/csharpnotes1-swing.epub">https://math.hws.edu/eck/cs124/downloads/csharpnotes1-swing.epub</a></b>, for most other ebook readers.<br/>
            &#160;&#160;&#160;&#160;&#160;&#160;These should be considered permanently experimental. The ebooks include answers to quizzes
            and exercises but do not include source code for sample programs; the sample programs can be downloaded separately, above.
            </li>
