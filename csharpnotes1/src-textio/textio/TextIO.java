@@ -161,7 +161,7 @@ public class TextIO {
 	 * <p>NOTE: Calling this method starts a GUI user interface thread, which can continue
 	 * to run even if the thread that runs the main program ends.  If you use this method
 	 * in a non-GUI program, it might be necessary to call System.exit(0) at the end of the main() 
-	 * routine to shut down the Java virtual machine completely.
+	 * routine to shut down the Common Language Runtime completely.
 	 */
 	public static boolean readUserSelectedFile() {
 		if (fileDialog == null)
@@ -256,7 +256,7 @@ public class TextIO {
 	 * <p>NOTE: Calling this method starts a GUI user interface thread, which can continue
 	 * to run even if the thread that runs the main program ends.  If you use this method
 	 * in a non-GUI program, it might be necessary to call System.exit(0) at the end of the main() 
-	 * routine to shut down the Java virtual machine completely.
+	 * routine to shut down the Common Language Runtime completely.
 	 */
 	public static void writeFile(String fileName) {
 		if (fileName == null)  // Go back to reading standard output

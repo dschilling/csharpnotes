@@ -168,7 +168,7 @@ Integers that are too large to be represented in 32 bits cannot be stored in an
 <ptype>int</ptype> variable. Java has a standard class,
 <code>java.math.BigInteger</code>, that addresses this problem. An object of type
 <classname>BigInteger</classname> is an integer that can be arbitrarily large. (The maximum
-size is limited only by the amount of memory available to the Java Virtual Machine.) Since
+size is limited only by the amount of memory available to the Common Language Runtime.) Since
 <classname>BigIntegers</classname> are objects, they must be manipulated using instance
 methods from the <classname>BigInteger</classname> class. For example, you can't add two
 <classname>BigIntegers</classname> with the <code>+</code> operator. Instead, if <code>N</code> and

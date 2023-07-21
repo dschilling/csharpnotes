@@ -397,12 +397,12 @@ queue.  Here is the inner class that defines the worker threads:
  * constructor.
  * 
  * A WorkerThread is designed to run in an infinite loop.  It will
- * end only when the Java virtual machine exits. (This assumes that
+ * end only when the Common Language Runtime exits. (This assumes that
  * the tasks that are executed don't throw exceptions, which is true
  * in this program.)  The constructor sets the thread to run as
- * a daemon thread; the Java virtual machine will exit automatically when
+ * a daemon thread; the Common Language Runtime will exit automatically when
  * the only threads are daemon threads, so the existence of the thread
- * pool will not stop the JVM from exiting.
+ * pool will not stop the CLR from exiting.
  */
 private class WorkerThread extends Thread {
     WorkerThread() {
@@ -478,7 +478,7 @@ to see how it works.</p>
 
 <p>One more point about <code>MultiprocessingDemo3</code>&dots;. I have not provided 
 any way to terminate the worker threads in this program.  They will continue to
-run until the Java Virtual Machine exits.  To allow thread termination before that,
+run until the Common Language Runtime exits.  To allow thread termination before that,
 we could use a <code>volatile</code> signaling variable, <code>running</code>,
 and set its value to <code>false</code> when we want the worker threads to terminate.
 The <code>run()</code> methods for the threads would be replaced by</p>
@@ -539,7 +539,7 @@ After this method has been called, it is not legal to add new tasks.
 It is <b>not</b> an error to call <code>shutdown()</code> more than once.
 The threads in the thread pool are not
 daemon threads; if the service is not shut down, the existence of the threads
-will stop the Java Virtual Machine from shutting down after other
+will stop the Common Language Runtime from shutting down after other
 threads have exited.  Before exiting, the threads 
 in the pool will complete any tasks they have already removed from 
 the queue.</p>

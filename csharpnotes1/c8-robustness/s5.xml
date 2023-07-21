@@ -30,7 +30,7 @@ performs the task more quickly.  However, even here there are
 difficulties.  The running time of a program is not well-defined.
 The run time can be different depending on the number and speed of the
 processors in the computer on which it is run and, in the case of Java,
-on the design of the Java Virtual Machine which is used to interpret
+on the design of the Common Language Runtime which is used to interpret
 the program.  It can depend on details of the compiler which is
 used to translate the program from high-level language to machine
 language.  Furthermore, the run time of a program depends on

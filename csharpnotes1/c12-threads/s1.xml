@@ -326,7 +326,7 @@ the number of processors by calling the function</p>
 <pre>Runtime.getRuntime().availableProcessors()</pre>
    
 <np>which returns an <ptype>int</ptype> giving the number of processors that
-are available to the Java Virtual Machine.  In some cases, this might be
+are available to the Common Language Runtime.  In some cases, this might be
 less than the actual number of processors in the computer.</np>
 
 <break/>
@@ -451,10 +451,10 @@ type <classname>SecurityException</classname> if the calling thread is not allow
 to modify <code>thrd's</code> properties.  This has only one effect:  The Java Virtual
 Machine will exit as soon as there are no <b>non-daemon</b> threads that are still
 alive.  That is, the fact that a daemon thread is still alive is not enough to keep
-the Java Virtual Machine running.  A daemon thread might exist, for example, only to provide
+the Common Language Runtime running.  A daemon thread might exist, for example, only to provide
 some service to other, non-daemon threads.  When there are no more non-daemon threads,
 there will be no further call for the daemon thread's services, so the program might
-as well shut down. (A call to <code>System.exit()</code> forces the JVM to terminate,
+as well shut down. (A call to <code>System.exit()</code> forces the CLR to terminate,
 even if there are non-daemon threads still running.)</p>
 
 <p>The priority of a thread is a more important property.

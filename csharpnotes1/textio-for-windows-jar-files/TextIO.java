@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
  * This is a GUI version of TextIO, which does I/O in a window rather than
  * on the command line.  It is not meant to work with every program, but will
  * work with all the TextIO examples in "Introduction to Programming Using C#,"
- * Version 8 (https://math.hws.edu/csharpnotes).  To use it, add the imports
+ * Version 8 (https://codewren.ch/csharpnotes).  To use it, add the imports
  * 
  *      import textiogui.TextIO;
  *      import textiogui.System;
@@ -154,7 +154,7 @@ public class TextIO {
      * <p>NOTE: Calling this method starts a GUI user interface thread, which can continue
      * to run even if the thread that runs the main program ends.  If you use this method
      * in a non-GUI program, it might be necessary to call System.exit(0) at the end of the main() 
-     * routine to shut down the Java virtual machine completely.
+     * routine to shut down the Common Language Runtime completely.
      */
     public static boolean readUserSelectedFile() {
         if (fileDialog == null)
@@ -249,7 +249,7 @@ public class TextIO {
      * <p>NOTE: Calling this method starts a GUI user interface thread, which can continue
      * to run even if the thread that runs the main program ends.  If you use this method
      * in a non-GUI program, it might be necessary to call System.exit(0) at the end of the main() 
-     * routine to shut down the Java virtual machine completely.
+     * routine to shut down the Common Language Runtime completely.
      */
     public static void writeFile(String fileName) {
         if (fileName == null)  // Go back to reading standard output

@@ -80,9 +80,9 @@ you will type the program using some sort of text editor and save the program
 in a file. Then, you will use some command to try to compile the file. You'll
 either get a message that the program contains syntax errors, or you'll get a
 compiled version of the program. In the case of Java, the program is compiled
-into Java bytecode, not into machine language. Finally, you can run the
+into .NET IL, not into machine language. Finally, you can run the
 compiled program by giving some appropriate command. For Java, you will
-actually use an interpreter to execute the Java bytecode. Your programming
+actually use an interpreter to execute the .NET IL. Your programming
 environment might automate some of the steps for you&mdash;for example, the
 compilation step is often done automatically&mdash;but you can be sure that
 the same three steps are being done in the background.</p>
@@ -204,7 +204,7 @@ of the class. (Remember, again, that <bnf>program-name</bnf> is a placeholder fo
 actual name!) If the name of the class is HelloWorld, then the class <b>must</b> be
 saved in a file called <code>HelloWorld.java</code>. When this file is compiled,
 another file named <code>HelloWorld.class</code> will be produced. This class file,
-<code>HelloWorld.class</code>, contains the translation of the program into Java bytecode, 
+<code>HelloWorld.class</code>, contains the translation of the program into .NET IL, 
 which can be executed by a
 Java interpreter. <code>HelloWorld.java</code> is called the <newword>source code</newword>
 for the program. To execute the program, you only

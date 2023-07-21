@@ -94,10 +94,10 @@ have many other predefined subclasses. In addition, a programmer can create new
 exception classes to represent new types of exception.</p>
 
 <p>Most of the subclasses of the class <classname>Error</classname> represent serious errors
-within the Java virtual machine that should ordinarily cause program
+within the Common Language Runtime that should ordinarily cause program
 termination because there is no reasonable way to handle them. In general, you should not
 try to catch and handle such errors.  An example is a
-<classname>ClassFormatError</classname>, which occurs when the Java virtual machine finds
+<classname>ClassFormatError</classname>, which occurs when the Common Language Runtime finds
 some kind of illegal data in a file that is supposed to contain a compiled Java
 class. If that class was being loaded as part of the program, then there is
 really no way for the program to proceed.</p>

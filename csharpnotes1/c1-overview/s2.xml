@@ -129,10 +129,7 @@ example, the user might be typing a paper while a clock is continuously
 displaying the time and a file is being downloaded over the network.</p>
 
 <p>Each of the individual tasks that the CPU is working on is called a
-<newword>thread</newword>. (Or a <newword>process</newword>;
-there are technical differences between threads and
-processes, but they are not important here, since it is threads that
-are used in Java.)  Many CPUs can literally execute more than one thread
+<newword>thread</newword>.  Many CPUs can literally execute more than one thread
 simultaneously&mdash;such CPUs contain multiple "cores," each of which can
 run a thread&mdash;but there is always a limit on the number of threads
 that can be executed at the same time.  Since there are often more threads
@@ -173,20 +170,25 @@ altogether. However, threads have become increasingly important as computers
 have become more powerful and as they have begun to make more use of
 multitasking and multiprocessing.  In fact, the ability to work with threads
 is fast becoming an essential job skill for programmers.
-Fortunately, Java has good support for threads, which
-are built into the Java programming language as a
+Fortunately, C# has good support for threads, which
+are built into the programming language as a
 fundamental programming concept.  Programming with threads will be covered
 in <localref href="threads"/>.</p>
 
-<p>Just as important in Java and in modern programming in general is the basic
+<p>Just as important in C# and in modern programming in general is the basic
 concept of asynchronous events. While programmers don't actually deal with
 interrupts directly, they do often find themselves writing <newword>event handlers</newword>, 
 which, like interrupt handlers, are called
 asynchronously when specific events occur. Such "event-driven programming" has
 a very different feel from the more traditional straight-through, synchronous
-programming. We will begin with the more traditional type of programming, which
-is still used for programming individual tasks, but we will return to threads
-and events later in the text, starting in <localref href="GUI1"/></p>
+programming.
+In addition to event handlers, C# also provides an asynchronous programming model
+that enables programmers to write code that efficiently waits for asynchronous events to complete,
+but in a way that is more similar to traditional synchronous programming than dealing with event-handlers.
+We will begin with the more traditional type of programming, which
+is still used for programming individual tasks, but we will return to
+the various approaches to parallel and asynchronous programming
+later in the text, starting in <localref href="GUI1"/>.</p>
 
 <break/>
 

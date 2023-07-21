@@ -108,9 +108,9 @@ two or more different courses of action.  Java has two branch statements:  <i>if
 statements and <i>switch</i> statements.</gitem>
 <gitem term="byte">A unit of memory that consists of eight bits.  One byte of memory can
 hold an eight-bit binary number.</gitem>
-<gitem term="bytecode">&leftquote;Java bytecode" is the usual name for the machine language of
-the Java Virtual Machine.  Java programs are compiled into Java bytecode, which can
-then be executed by the JVM.</gitem>
+<gitem term="IL">&leftquote;.NET IL" is the usual name for the machine language of
+the Common Language Runtime.  Java programs are compiled into .NET IL, which can
+then be executed by the CLR.</gitem>
 <gitem term="charset">A particular encoding of character data into binary form.  Examples
 include UTF-8 and ISO-8859-1.</gitem>
 <gitem term="checked exception">An exception in Java that must be handled, either by
@@ -300,9 +300,9 @@ compiles parts of a program as it interprets them.  This allows subsequent execu
 of the same parts of the program to be executed more quickly than they were the first
 time.  This can result is greatly increased speed of execution.  Modern JVMs use 
 a just-in-time compiler.</gitem>
-<gitem term="JVM">Java Virtual Machine.  The imaginary computer whose machine language
-is Java bytecode.  Also used to refer to computer programs that act as interpreters for
-programs written in bytecode; to run Java programs on your computer, you need a JVM.</gitem>
+<gitem term="CLR">Common Language Runtime.  The imaginary computer whose machine language
+is .NET IL.  Also used to refer to computer programs that act as interpreters for
+programs written in IL; to run Java programs on your computer, you need a CLR.</gitem>
 <gitem term="lambda expression">A notation that defines an anonymous method.  More precisely,
 a lambda expression is a kind of literal that represents a value whose type is given
 by a functional interface.</gitem>
@@ -567,7 +567,7 @@ The term "stream" also refers to I/O streams, which are used for input and outpu
 <gitem term="stroke">A drawing operation that applies a color (or other type of paint) to pixels along
 the boundary of a shape.</gitem>
 <gitem term="source code">Text written in a high-level programming language, which must
-be translated into a machine language such as Java bytecode before it can be executed by
+be translated into a machine language such as .NET IL before it can be executed by
 a computer.</gitem>
 <gitem term="subclass">A class that extends another class, directly or indirectly, and
 therefore inherits its data and behaviors.  The first class is said to be a subclass

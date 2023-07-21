@@ -14,7 +14,7 @@
 		    <metadata xmlns:dc="http://purl.org/dc/elements/1.1/"
 		          xmlns:opf="http://www.idpf.org/2007/opf">
 		   		<dc:title>Introduction to Programming Using C#, Version 1</dc:title>
-		   		<dc:creator opf:role="aut">David J. Eck, with C# content by Daniel Schilling</dc:creator>
+		   		<dc:creator opf:role="aut">David J. Eck, conversion to C# by Daniel Schilling</dc:creator>
 		   		<dc:description>A free introductory programming textbook using C# as the programming language.</dc:description>
 		   		<dc:date>2022-5</dc:date>
 		   		<dc:language>en-US</dc:language>
@@ -252,7 +252,7 @@
         <p>This is an <b>experimental</b> ebook version of a free Java Programming textbook.  Please excuse any
         irregularities in formatting.  In particular, your reader might have problems with overly wide code segments.
         Note that PDF and web versions
-        are available on-line at <a href="https://math.hws.edu/csharpnotes/">https://math.hws.edu/csharpnotes/</a>.  
+        are available on-line at <a href="https://codewren.ch/csharpnotes/">https://codewren.ch/csharpnotes/</a>.  
         Source code for examples is <b>not</b> included in
         this ebook, but the ebook does contain links to online copies of the examples.
         You can email comments to the author.</p>
@@ -267,7 +267,7 @@
             details.)
             The most recent version of this book is always available, at no
             charge, for downloading and for on-line use at the Web address:
-            <a href="https://math.hws.edu/csharpnotes/">https://math.hws.edu/csharpnotes/</a></p>
+            <a href="https://codewren.ch/csharpnotes/">https://codewren.ch/csharpnotes/</a></p>
             <hr/>
         </div>
         </div>

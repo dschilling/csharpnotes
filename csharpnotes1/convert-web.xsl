@@ -77,7 +77,7 @@
             <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">license</a> for full
             details.)<br/><br/>
             This book is available for downloading and for on-line use at the Web address:
-            <a href="https://math.hws.edu/csharpnotes/">https://math.hws.edu/csharpnotes/</a></small></i>
+            <a href="https://codewren.ch/csharpnotes/">https://codewren.ch/csharpnotes/</a></small></i>
           </blockquote>
 
         <hr/>

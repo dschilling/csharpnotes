@@ -19,7 +19,7 @@ and run the examples from this textbook using the command line, Eclipse, or Blue
 compile, and run the examples.  Source code for sample programs and solutions to
 end-of-chapter exercises can be downloaded from the
 book's web page,
-<fx><a href="https://math.hws.edu/csharpnotes">https://math.hws.edu/csharpnotes</a>.</fx><swing><a href="https://math.hws.edu/csharpnotes-swing">https://math.hws.edu/csharpnotes-swing</a>.</swing>)</p>
+<fx><a href="https://codewren.ch/csharpnotes">https://codewren.ch/csharpnotes</a>.</fx><swing><a href="https://codewren.ch/csharpnotes-swing">https://codewren.ch/csharpnotes-swing</a>.</swing>)</p>
 
 <p>One thing to keep in mind is that you do not have to pay any money
 to do Java programming (aside from buying a computer, of course).  Everything
@@ -179,13 +179,13 @@ directory named <code>source</code>; you can use
 your computer's GUI to copy-and-paste this file into your working directory,
 or you could <code>cd</code> into the <code>chapter2</code> folder and work there.
 Alternatively, you can navigate to <sourceref href="HelloWorld.java"/> on the book's 
-<tex><fx><a href="https://math.hws.edu/csharpnotes/source/index.html">Web&nbsp;site</a></fx><swing><a href="https://math.hws.edu/csharpnotes-swing/source/index.html">Web&nbsp;site</a></swing></tex><web><a href="../source/index.html">Web&nbsp;site</a></web>
+<tex><fx><a href="https://codewren.ch/csharpnotes/source/index.html">Web&nbsp;site</a></fx><swing><a href="https://codewren.ch/csharpnotes-swing/source/index.html">Web&nbsp;site</a></swing></tex><web><a href="../source/index.html">Web&nbsp;site</a></web>
 and use the  "Save&nbsp;As" command in your Web browser to save a copy of the file into your working directory.)
 Type the command (while working in the directory that contains the file <code>HelloWorld.java</code>):</p>
    
 <pre>javac  HelloWorld.java</pre>
    
-<np>This will compile <code>HelloWorld.java</code> and will create a bytecode file
+<np>This will compile <code>HelloWorld.java</code> and will create a IL file
 named <code>HelloWorld.class</code> in the same directory.  Note that if the command
 succeeds, you will not get any response from the computer; it will just redisplay
 the command prompt to tell you it's ready for another command.  You will then
@@ -684,7 +684,7 @@ now developed and distributed separately.  This has made it somewhat more diffic
 I decided to make the book available in two editions, one covering Swing and one covering JavaFX.
 The only significant differences are in the chapters that cover GUI programming, <localref href="GUI1"/>
 and <localref href="GUI2"/>.  This edition covers JavaFX.  If you also want to learn Swing, you can
-read those two chapters in the <a href="https://math.hws.edu/csharpnotes-swing/">Swing&nbsp;edition</a>.</p>
+read those two chapters in the <a href="https://codewren.ch/csharpnotes-swing/">Swing&nbsp;edition</a>.</p>
 
 <p>To use JavaFX on the command line or in Eclipse, you have to download it onto your computer.  You can find
 download links on this page:</p>

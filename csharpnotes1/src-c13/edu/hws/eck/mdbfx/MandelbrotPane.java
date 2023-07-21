@@ -199,7 +199,7 @@ public class MandelbrotPane extends BorderPane {
 	
 	/**
 	 * This is called by Main.java when the window is closed.  It is important to cancel the
-	 * resizeTimer, since otherwise, it would stop the Java Virtual Machine from exiting.
+	 * resizeTimer, since otherwise, it would stop the Common Language Runtime from exiting.
 	 */
 	public void closing() {
 		resizeTimer.cancel();

@@ -581,7 +581,7 @@ and you can use the longer forms, if you prefer clarity to brevity.)</p>
 and you can give that jar file to someone who would like to use your
 program.  However, that person will still need to have Java installed on their
 computer&mdash;something that is really not very likely these days, unless that person
-is a Java developer.  A possible solution is to bundle a Java virtual machine
+is a Java developer.  A possible solution is to bundle a Common Language Runtime
 along with your program.  The Java Development Kit includes the <code>jpackage</code>
 command to make that possible.</p>
 

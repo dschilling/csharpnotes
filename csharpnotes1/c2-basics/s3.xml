@@ -52,7 +52,7 @@ a subroutine call statement such as</p>
 <pre>System.exit(0);</pre>
 
 <np>Calling <code>System.exit</code> will terminate the program and shut down the
-Java Virtual Machine. You
+Common Language Runtime. You
 could use it if you had some reason to terminate the program before the end of
 the <code>main</code> routine. (The parameter 
 tells the computer why the program was terminated.  A parameter value of 0

@@ -159,7 +159,7 @@ public class TowersOfHanoiGUI extends Application {
 	private class AnimationThread extends Thread {
 		AnimationThread() {
 			    // The constructor sets this thread to be a Daemon thread.
-			    // Otherwise, the thread will keep the Java Virtual Machine
+			    // Otherwise, the thread will keep the Common Language Runtime
 			    // from exiting when the window is closed.
 			setDaemon(true);
 		}

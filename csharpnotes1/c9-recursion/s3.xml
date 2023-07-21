@@ -668,7 +668,7 @@ private static void readAndEvaluate() {
 } // end readAndEvaluate()</pre>
 
 <p>Postfix expressions are often used internally by computers. In fact, the
-Java virtual machine is a "stack machine" which uses the stack-based approach
+Common Language Runtime is a "stack machine" which uses the stack-based approach
 to expression evaluation that we have been discussing. The algorithm can easily
 be extended to handle variables, as well as constants. When a variable is
 encountered in the expression, the value of the variable is pushed onto the

@@ -134,7 +134,7 @@
          sodipodi:role="line"
          id="tspan2987"
          x="42"
-         y="108.36218">Java</tspan><tspan
+         y="108.36218">C#</tspan><tspan
          sodipodi:role="line"
          x="42"
          y="128.36218"
@@ -149,11 +149,11 @@
          sodipodi:role="line"
          id="tspan2993"
          x="311"
-         y="98.362183">Java</tspan><tspan
+         y="98.362183">.NET</tspan><tspan
          sodipodi:role="line"
          x="311"
          y="118.36218"
-         id="tspan2995">Bytecode</tspan><tspan
+         id="tspan2995">IL</tspan><tspan
          sodipodi:role="line"
          x="311"
          y="138.36218"
@@ -189,7 +189,7 @@
            y="85.92218"
            x="494"
            id="tspan3005"
-           sodipodi:role="line">Java Interpreter</tspan><tspan
+           sodipodi:role="line">.NET CLR</tspan><tspan
            id="tspan3007"
            y="105.92218"
            x="494"
@@ -215,7 +215,7 @@
            y="175.01018"
            x="502.96786"
            id="tspan3005-6"
-           sodipodi:role="line">Java Interpreter</tspan><tspan
+           sodipodi:role="line">.NET CLR</tspan><tspan
            id="tspan3044"
            y="195.01018"
            x="502.96786"
@@ -241,7 +241,7 @@
            y="8.0101824"
            x="490.96786"
            id="tspan3005-2"
-           sodipodi:role="line">Java Interpreter</tspan><tspan
+           sodipodi:role="line">.NET CLR</tspan><tspan
            id="tspan3007-1"
            y="28.010181"
            x="490.96786"

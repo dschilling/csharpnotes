@@ -270,10 +270,10 @@ public class MultiprocessingDemo3 extends Application {
 	 * than the priority of the thread that calls the constructor.
 	 * 
 	 * A WorkerThread is designed to run in an infinite loop.  It will
-	 * end only when the Java virtual machine exits. (This assumes that
+	 * end only when the Common Language Runtime exits. (This assumes that
 	 * the tasks that are executed don't throw exceptions, which is true
 	 * in this program.)  The constructor sets the thread to run as
-	 * a daemon thread; the Java virtual machine will exit when the
+	 * a daemon thread; the Common Language Runtime will exit when the
 	 * only threads are daemon threads. 
 	 */
 	private class WorkerThread extends Thread {

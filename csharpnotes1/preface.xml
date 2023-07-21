@@ -4,7 +4,10 @@
 <preface>
 <p><start><big>I</big>ntroduction to Programming Using C#</start> is a free
 introductory computer programming textbook that uses C# as the language of
-instruction.  This version of the book covers C#&nbsp;10, as available in .NET&nbsp;6.
+instruction.
+It builds upon David Eck's wonderful work from <i>Introduction to Programming Using Java,</i> Version 9, which
+has been available on the web in a series of versions since 1996.
+This version of the book covers C#&nbsp;10, as available in .NET&nbsp;6, the latest LTS version of .NET at the time of this writing.
 It is suitable for use in an introductory programming course
 and for people who are trying to learn programming on their own. There are
 no prerequisites beyond a general familiarity with the ideas of computers and
@@ -29,7 +32,9 @@ how-to-do-it guides.
 I have tried to use a conversational writing style that
 might be closer to classroom lecture than to a typical textbook. This is
 certainly not a .NET reference book, and it is not a
-comprehensive survey of all the features of C#. It is not written as
+comprehensive survey of all the features of C#,
+nor does it give a detailed history of the development of C# and .NET.
+It is not written as
 a quick introduction to C# for people who already know another programming
 language. Instead, it is directed mainly towards people who are learning
 programming for the first time, and it is as much about general programming
@@ -131,7 +136,7 @@ book are created from a single source, which is written largely in XML.
 To produce the
 PDF version, the XML is processed into a form that can be used by the TeX
 typesetting program.  In addition to
-XML files, the source includes DTDs, XSLT transformations, Java source code files,
+XML files, the source includes DTDs, XSLT transformations, C# source code files,
 image files, a TeX macro file, and a couple of scripts that are used in processing.
 The scripts work on Linux and on MacOS, and on Windows via Docker. The source files are available 
 on Github here:</p>

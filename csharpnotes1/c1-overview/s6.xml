@@ -18,7 +18,7 @@ and a computer is called a <newword>command-line interface</newword>.</p>
 
 <p>Today, of course, most people interact with computers in a completely
 different way. They use a <newword>Graphical User Interface</newword>, 
-or GUI. The computer draws interface <newword>components</newword> on the
+or GUI (pronounced "gooey"). The computer draws interface <newword>components</newword> on the
 screen. The components include things like windows, scroll bars, menus,
 buttons, and icons. Usually, a <newword>mouse</newword> is used to
 manipulate such components or, on "touchscreens," your fingers.
@@ -28,13 +28,13 @@ interfaces!</p>
 
 <p>A lot of GUI interface components have become fairly standard. That is, they
 have similar appearance and behavior on many different computer platforms
-including MacOS, Windows, and Linux. Java programs,
-which are supposed to run on many different platforms without modification to
-the program, can use all the standard GUI components. They might vary a little in
+including MacOS, Windows, and Linux. C# programs can be written
+to run on many different platforms without modification to
+the program, using all these standard GUI components. They might vary a little in
 appearance from platform to platform, but their functionality should be
 identical on any computer on which the program runs.</p>
 
-<p>Shown below is an image of a very simple Java program that demonstrates
+<p>Shown below is an image of a very simple C# program that demonstrates
 a few standard GUI interface components.  When the program is run, a window
 similar to the picture shown here will open on the computer screen.
 There are four components in the window with which the user can interact: 
@@ -51,22 +51,17 @@ whole window can itself be considered to be a "component."</p>
     alt="Screenshot from GUIDemo demonstrates some basic GUI components"
     texscale="0.6" bordered="true"/>
     
-<np>(If you would like to run this program, the source code, <sourceref href="GUIDemo.java"/>,
+<np>(If you would like to run this program, the source code, <sourceref href="GuiDemo.cs"/>,
 is available on line.  For more information on using
 this and other examples from this textbook, see <localref href="basics.6"/>.)</np>
 
-<p>In fact, there are three complete sets of GUI components that can be used with Java. One of these,
-the AWT or <newword>Abstract Windowing Toolkit</newword>, was
-part of the original version of Java. The second, which is known as
-<newword>Swing</newword>, builds on the AWT; it was introduced in Java version 1.2,
-and was the standard GUI toolkit for many years.  The third GUI toolkit,
-JavaFX, briefly became a standard part of Java in Version&nbsp;8 but is now distributed
-separately.  JavaFX is meant as a more modern
-way to write GUI applications, but using it is complicated by the fact that
-it has to be downloaded and installed separately.
-<fx>This textbook covers JavaFX exclusively, but an alternative version of the textbook is available that covers
-Swing instead.</fx><swing>This textbook covers Swing exclusively, but an alternative version of the textbook is available that covers
-JavaFX instead.</swing> Either version of the textbook can be a reasonable choice.</p>
+<p>There are many sets of GUI components that can be used with C#.
+The latest official one is called MAUI or <newword>Multi-platform App UI</newword>.
+It works with Windows, MacOS, Android, and iOS (but not Linux, unfortunately).
+Avalonia UI is another GUI toolkit created by a third-party which supports all of those operating systems, plus Linux.
+There are even toolkits designed for building games, such as Godot.
+TODO - which one will we use to this book? The Java book differentiated them using fx and swing tags.
+</p>
 
 <p>When a user interacts with GUI components,
 "events" are generated.  For example, clicking a push button generates an event, and pressing
