@@ -131,15 +131,15 @@ We could diagram these relationships as follows:</p>
 <img height="222" width="526" src="overview-fig4.png" tex="overview-fig4.eps" 
       texscale="0.8" alt="A sample class hierarchy." bordered="true"/>
 
-<p>DrawableObject, MultipointObject, and TwoPointObject would be classes in the
-program. MultipointObject and TwoPointObject would be <newword>subclasses</newword>
-of DrawableObject. The class Line would be a
-subclass of TwoPointObject and (indirectly) of DrawableObject. A subclass of a
+<p><classname>DrawableObject</classname>, <classname>MultipointObject</classname>, and <classname>TwoPointObject</classname> would be classes in the
+program. <classname>MultipointObject</classname> and <classname>TwoPointObject</classname> would be <newword>subclasses</newword>
+of <classname>DrawableObject</classname>. The class <classname>Line</classname> would be a
+subclass of <classname>TwoPointObject</classname> and (indirectly) of <classname>DrawableObject</classname>. A subclass of a
 class is said to <newword>inherit</newword> the properties of that
 class. The subclass can add to its inheritance and it can even "override" part
 of that inheritance (by defining a different response to some message).
 Nevertheless, lines, rectangles, and so on <b>are</b> drawable
-objects, and the class DrawableObject expresses this relationship.</p>
+objects, and the class <classname>DrawableObject</classname> expresses this relationship.</p>
 
 <p>Inheritance is a powerful means for organizing a program. It is also related
 to the problem of reusing software components. A class is the ultimate reusable
