@@ -1,14 +1,14 @@
-/**
- * This class implements a simple program that
- * will compute the amount of interest that is
- * earned on $17,000 invested at an interest
- * rate of 0.027 for one year.  The interest and
- * the value of the investment after one year are
- * printed to standard output.
- */
+/// <summary>
+/// This class implements a simple program that
+/// will compute the amount of interest that is
+/// earned on $17,000 invested at an interest
+/// rate of 0.027 for one year.  The interest and
+/// the value of the investment after one year are
+/// printed to standard output.
+/// </summary>
 public class Interest {
    
-   public static void main(String[] args) {
+   public static void Main(string[] args) {
    
        /* Declare the variables. */
    
@@ -28,11 +28,11 @@ public class Interest {
              
        /* Output the results. */
              
-       System.out.print("The interest earned is $");
-       System.out.println(interest);
-       System.out.print("The value of the investment after one year is $");
-       System.out.println(principal);
+       System.Console.Write("The interest earned is $");
+       System.Console.WriteLine(interest);
+       System.Console.Write("The value of the investment after one year is $");
+       System.Console.WriteLine(principal);
                       
-   } // end of main()
+   } // end of Main()
       
 } // end of class Interest

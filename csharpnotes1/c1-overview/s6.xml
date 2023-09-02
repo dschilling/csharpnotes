@@ -52,7 +52,7 @@ whole window can itself be considered to be a "component."</p>
     texscale="0.6" bordered="true"/>
     
 <np>(If you would like to run this program, the source code, <sourceref href="GuiDemo.cs"/>,
-is available on line.  For more information on using
+is available online.  For more information on using
 this and other examples from this textbook, see <localref href="basics.6"/>.)</np>
 
 <p>There are many sets of GUI components that can be used with C#.
@@ -60,7 +60,7 @@ The latest official one is called MAUI or <newword>Multi-platform App UI</newwor
 It works with Windows, MacOS, Android, and iOS (but not Linux, unfortunately).
 Avalonia UI is another GUI toolkit created by a third-party which supports all of those operating systems, plus Linux.
 There are even toolkits designed for building games, such as Godot.
-TODO - which one will we use to this book? The Java book differentiated them using fx and swing tags.
+<!-- godot -->This book will introduce Godot in chapter 6.
 </p>
 
 <p>When a user interacts with GUI components,
@@ -75,54 +75,25 @@ to respond to each event by displaying a message in the text area.
 In a more realistic example, the event handlers would have more to do.</p>
 
 <p>The use of the term "message" here is deliberate. Messages, as you saw in
-the <localref href="overview.5">previous&nbsp;section</localref>, are sent to objects. In fact, Java
-GUI components are implemented as objects. Java includes many predefined
+the <localref href="overview.5">previous&nbsp;section</localref>, are sent to objects. In fact,
+GUI components in most programming languages are implemented as objects. GUI libraries include many predefined
 classes that represent various types of GUI components. Some of these classes
-are subclasses of others. Here is a diagram showing just a few of the <fx>JavaFX</fx><swing>Swing</swing> GUI classes
-and their relationships:</p>
+are subclasses of others. Here is a diagram showing an example of how some GUI classes
+might relate to one another:</p>
 
 <img width="601" height="268" swingwidth="557" swingheight="277" src="overview-fig5.png" tex="overview-fig5.eps" texscale="0.7"/>
 
-<fxdiv>
-<p>Don't worry about the details for now, but try to get some feel about how
-object-oriented programming and inheritance are used here. Note that all the
-GUI classes shown here are subclasses, directly or indirectly, of a class called
-<classname>Control</classname>, which represents general properties
-that are shared by many JavaFX components. In the diagram,
-two of the direct subclasses of <classname>Control</classname>
-themselves have subclasses. The classes <classname>TextField</classname> and
-<classname>TextArea</classname>, which have certain behaviors in common, are grouped
-together as subclasses of <classname>TextInputControl</classname>.
-Similarly <classname>Button</classname> and <classname>CheckBox</classname>
-are subclasses of <classname>ButtonBase</classname>, which represents
-properties common to both buttons and checkboxes.  (<classname>ComboBox</classname>,
-by the way, is the class that represents pop-up menus.)
+<p>
+Caleb, see Dad for a more accurate Godot diagram and a discussion of it.
 </p>
-</fxdiv>
-<swingdiv>
-<p>Don't worry about the details for now, but try to get some feel about how
-object-oriented programming and inheritance are used here. Note that all the
-GUI classes are subclasses, directly or indirectly, of a class called
-<classname>JComponent</classname>, which represents general properties
-that are shared by all Swing components. In the diagram,
-two of the direct subclasses of <classname>JComponent</classname>
-themselves have subclasses. The classes <classname>JTextArea</classname> and
-<classname>JTextField</classname>, which have certain behaviors in common, are grouped
-together as subclasses of <classname>JTextComponent</classname>.
-Similarly <classname>JButton</classname> and <classname>JToggleButton</classname>
-are subclasses of <classname>JAbstractButton</classname>, which represents
-properties common to both buttons and checkboxes.  (<classname>JComboBox</classname>,
-by the way, is the Swing class that represents pop-up menus.)
-</p>
-</swingdiv>
 
 <p>Just from this brief discussion, perhaps you can see how GUI programming can
 make effective use of object-oriented design. In fact, GUIs, with their
 "visible objects," are probably a major factor contributing to the popularity
 of OOP.</p>
 
-<p>Programming with GUI components and events is one of the most interesting
-aspects of Java. However, we will spend several chapters on the basics before
+<p>Programming with GUI components and events can be one of the most interesting
+aspects computer programming. However, we will spend several chapters on the basics before
 returning to this topic in <localref href="GUI1"/>.</p>
     
 </section>

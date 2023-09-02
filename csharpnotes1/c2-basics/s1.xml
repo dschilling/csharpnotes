@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE section SYSTEM "../csharpnotes1.dtd" >
 
-<section id="basics.1" title="The Basic Java Application">
+<section id="basics.1" title="The Basic C\# Application">
 
 <p><start><big>A</big> program is a sequence</start> of instructions that a
 computer can execute to perform some task. A simple enough idea, but for the
@@ -57,7 +57,7 @@ development throughout this textbook.</p>
 
 <break/>
 
-<p>We begin our exploration of Java with the problem that has become
+<p>We begin our exploration of C# with the problem that has become
 traditional for such beginnings: to write a program that displays the message
 "Hello World!". This might seem like a trivial problem, but getting a computer
 to do this is really a big first step in learning a new programming language
@@ -72,100 +72,98 @@ understand the basic process of:</p>
 
 <p>The first time through, each of these steps will probably take you a few
 tries to get right. I won't go into the details here of how you do each of
-these steps; it depends on the particular computer and Java programming
+these steps; it depends on the particular computer and C# programming
 environment that you are using.   See <localref href="basics.6"/>
-for information about creating and running Java programs in specific programming
+for information about creating and running C# programs in specific programming
 environments.  But in general,
 you will type the program using some sort of text editor and save the program
 in a file. Then, you will use some command to try to compile the file. You'll
 either get a message that the program contains syntax errors, or you'll get a
-compiled version of the program. In the case of Java, the program is compiled
-into .NET IL, not into machine language. Finally, you can run the
-compiled program by giving some appropriate command. For Java, you will
-actually use an interpreter to execute the .NET IL. Your programming
+compiled version of the program. In the case of C#, the program is compiled
+into .NET IL, not into machine language.
+This compilation to IL results in the creation of a *.dll file.
+Finally, you can run the
+compiled program by giving some appropriate command. Your programming
 environment might automate some of the steps for you&mdash;for example, the
 compilation step is often done automatically&mdash;but you can be sure that
 the same three steps are being done in the background.</p>
 
-<p>Here is a Java program to display the message "Hello World!". Don't expect
+<p>Here is a C# program to display the message "Hello World!". Don't expect
 to understand what's going on here just yet; some of it you won't really
 understand until a few chapters from now:</p>
 
-<pre>/** A program to display the message
- *  "Hello World!" on standard output.
- */
-public class HelloWorld {
- 
-   public static void main(String[] args) {
-      System.out.println("Hello World!");
+<pre>/// &lt;summary&gt;
+/// A program to display the message
+/// "Hello World!" on standard output.
+/// &lt;/summary&gt;
+public class HelloWorld
+{
+   public static void Main()
+   {
+      /* Console is a class from
+       * the System namespace. */
+      System.Console.WriteLine("Hello World!");
    }
-      
 }   // end of class HelloWorld</pre>
 
 <np>The command that actually displays the message is:</np>
 
-<pre>System.out.println("Hello World!");</pre>
+<pre>Console.WriteLine("Hello World!");</pre>
 
 <np>This command is an example of a <newword>subroutine call statement</newword>. 
 It uses a "built-in subroutine" named
-<code>System.out.println</code> to do the actual work. Recall that a subroutine
+<code>Console.WriteLine</code> to do the actual work. Recall that a subroutine
 consists of the instructions for performing some task, chunked together and
 given a name. That name can be used to "call" the subroutine whenever that task
 needs to be performed. A <newword>built-in subroutine</newword> is
 one that is already defined as part of the language and therefore automatically
 available for use in any program.</np>
 
-<p>When you run this program, the message "Hello World!" (without the quotes)
-will be displayed on standard output. Unfortunately, I can't say exactly what
-that means! Java is meant to run on many different platforms, and standard
-output will mean different things on different platforms. However, you can
-expect the message to show up in some convenient or inconvenient place. (If you use a
-command-line interface, like that in a Java Development Kit,
-you type in a command to tell the computer to run the program. The computer
+<p>When you run this program from your operating system's command line, the message "Hello World!" (without the quotes)
+will be displayed on standard output, meaning the computer
 will type the output from the program, Hello&nbsp;World!, on the next line.
-In an integrated development environment such as Eclipse, the output
-might appear somewhere in one of the environment's windows.)</p>
+In an integrated development environment such as JetBrains Rider or Microsoft Visual Studio, the output
+might appear somewhere in one of the environment's windows.</p>
 
 <p>You must be curious about all the other stuff in the above program. Part of
 it consists of <newword>comments</newword>. Comments in a program are
 entirely ignored by the computer; they are there for human readers only. This
 doesn't mean that they are unimportant. Programs are meant to be read by people
 as well as by computers, and without comments, a program can be very difficult
-to understand. Java has two types of comments. The first type
-begins with <code>//</code> and extends to the end of a line. There
-is a comment of this form on the last line of the above program.  The computer
-ignores the <code>//</code> and everything that follows it on the same line. 
-The second type of comment starts with <code>/*</code> and ends with <code>*/</code>,
-and it can extend over more than one line.  The first three lines of the
-program are an example of this second type of comment. (A&nbsp;comment that actually
-begins with <code>/**</code>, like this one does,
-has special meaning; it is a "Javadoc" comment that can be used
-to produce documentation for the program.  See <localref href="subroutines.5.4"/>.)</p>
+to understand. C# syntactically has two types of comments. The first type
+begins with <code>//</code> and extends to the end of a line. 
+These are called <newword>single-line comments</newword> There
+is a comment of this form on the last line of the above program, and several before the <classname>HelloWorld</classname> class.  The computer
+ignores the <code>//</code> and everything that follows it on the same line.
+<i>Semantically</i> there is a difference between comments that begin with two slashes <code>//</code> versus three slashes <code>///</code>.
+Comments beginning with three slashes are <newword>Documentation Comments</newword>, and provide helpful information to other programmers (and even your future self) about how a piece of code should be used.
+See <localref href="subroutines.5.4"/> for more information about Documentation Comments.
+The final type of comment starts with <code>/*</code> and ends with <code>*/</code>,
+and it can extend over more than one line.
+These are called <newword>block comments</newword>.
+There are some lines in the <code>Main</code> routine
+that are an example of this second type of comment.</p>
 
-<p>Everything else in the program is required by the rules of Java syntax. All
-programming in Java is done inside "classes." The first line in the above
+<p>The first line in the above
 program (not counting the comment) says that this is a class named 
-<classname>HelloWorld</classname>. "HelloWorld," the
-name of the class, also serves as the name of the program. Not every class is a
-program. In order to define a program, a class must include a subroutine named
-<code>main</code>, with a definition that takes the form:</p>
+<classname>HelloWorld</classname>. In order to be executable as a console application, the class must contain a routine named
+<code>Main</code> with the <code>static</code> keyword, having a definition similar to:</p>
 
-<pre>public static void main(String[] args) {
-      <bnf>statements</bnf>
+<pre>public static void Main()
+{
+    <bnf>statements</bnf>
 }</pre>
 
-<p>When you tell the Java interpreter to run the program, the interpreter calls
-this <code>main()</code> subroutine, and the statements that it contains are
+<p>When you tell .NET to run the program, it calls
+this <code>Main()</code> subroutine, and the statements that it contains are
 executed. Those statements make up the script that tells the computer exactly
-what to do when the program is executed. The <code>main()</code> routine can call other
+what to do when the program is executed. The <code>Main()</code> routine can call other
 subroutines that are defined in the same class or even in other classes, but it
-is the <code>main()</code> routine that determines how and in what order the other
+is the <code>Main()</code> routine that determines how and in what order the other
 subroutines are used.</p>
 
-<p>The word "public" in the first line of <code>main()</code> means that this
-routine can be called from outside the program. This is essential because the
-<code>main()</code> routine is called by the Java interpreter, which is something 
-external to the program itself. The remainder of the
+<p>The word "public" in the first line of <code>Main()</code> means that this
+routine can be called from other .NET assemblies, or *.dll files. The remainder of the
 first line of the routine is harder to explain at the moment; for now, just
 think of it as part of the required syntax. The definition of the subroutine&mdash;that
 is, the instructions that say what it does&mdash;consists of the sequence of
@@ -177,17 +175,28 @@ format: anything that you see in <bnf>this style of text</bnf>
 is a placeholder that describes something you need to
 type when you write an actual program.</p>
 
-<p>As noted above, a subroutine can't exist by itself. It has to be part of a
-"class". A program is defined by a public class that takes the form:</p>
+<p>It is actually possible to write an even simpler version of this program.
+All you really need is a file containing this one line:
+</p>
 
-<pre><bnf>optional-package-declaration</bnf>
-<bnf>optional-imports</bnf>
+<pre>Console.WriteLine("Hello World!");</pre>
 
-public class <bnf>program-name</bnf> {
+<p>This is called a <newword>Top-Level Statement</newword>.
+Implicitly, behind the scenes, the compiler wraps it in a class and a <code>static Main</code> method.
+However, utilizing Top-Level Statements greatly limits our ability to large programs in an organized fashion,
+so usually we explicitly put our code in a subroutine inside of a "class".
+A program is defined by a class that takes the form:</p>
+
+<pre><bnf>optional-usings</bnf>
+<bnf>optional-namespace</bnf>
+
+public class <bnf>class-name</bnf>
+{
 
     <bnf>optional-variable-declarations-and-subroutines</bnf>
     
-    public static void main(String[] args) {
+    public static int Main(string[] args)
+    {
        <bnf>statements</bnf>
     }
     
@@ -195,20 +204,20 @@ public class <bnf>program-name</bnf> {
 
 }</pre>
 
-<np>The first two lines have to do with using <newword>packages</newword>.  A package is
-a group of classes.  You will start learning about packages in <localref href="basics.4"/>, 
+<np>The first two lines have to do with using <newword>namespaces</newword>.  A namespace is
+a group of classes.  You will start learning about namespaces in <localref href="basics.4"/>, 
 but our first few example programs will not use them.</np>
 
-<p>The <bnf>program-name</bnf> in the line that begins "public class" is the name of the program, as well as the name
-of the class. (Remember, again, that <bnf>program-name</bnf> is a placeholder for the
-actual name!) If the name of the class is HelloWorld, then the class <b>must</b> be
-saved in a file called <code>HelloWorld.java</code>. When this file is compiled,
-another file named <code>HelloWorld.class</code> will be produced. This class file,
-<code>HelloWorld.class</code>, contains the translation of the program into .NET IL, 
-which can be executed by a
-Java interpreter. <code>HelloWorld.java</code> is called the <newword>source code</newword>
+<p>The <bnf>class-name</bnf> in the line that begins "public class" is the name of the... you guessed it, the <i>class</i>.
+(Remember, again, that <bnf>class-name</bnf> is a placeholder for the
+actual name!) If the name of the class is <classname>HelloWorld</classname>, traditionally it is also saved
+in a file called <code>HelloWorld.cs</code>. Naming the file the same as the class isn't strictly necessary,
+but it helps keep things orderly and easier to find. When the project containing this file is built,
+a couple of folders named "obj" and "bin" will be created. The "obj" folder contains intermediate results of the compilation process,
+and the "bin" folder contains the final *.dll files, which can be executed by the .NET CLR.
+<code>HelloWorld.cs</code> is called the <newword>source code</newword>
 for the program. To execute the program, you only
-need the compiled <code>class</code> file, not the source code.</p>
+need the compiled <code>dll</code> file, not the source code.</p>
 
 <p>The layout of the program on the page, such as the use of blank lines
 and indentation, is not part of the syntax or semantics of the language.
@@ -218,7 +227,7 @@ to human readers, and there are certain style guidelines for layout that
 are followed by most programmers.</p>
    
 <p>Also note that according to the above syntax specification, a program can
-contain other subroutines besides <code>main()</code>, as well as things called
+contain other subroutines besides <code>Main()</code>, as well as things called
 "variable declarations." You'll learn more about these later, but not until
 <localref href="subroutines"/>.</p>
 

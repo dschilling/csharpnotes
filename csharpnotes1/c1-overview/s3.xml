@@ -41,6 +41,7 @@ the speech is being given.)</p>
 Programs written in C# are first compiled into machine language,
 but it is a machine language for a computer that doesn't really exist. This
 "intermediate" machine language is known as <newword>Intermediate Language</newword>, or IL.
+It is sometimes also called Common Intermediate Language (CIL), or sometimes Microsoft Intermediate Language (MSIL).
 Then at runtime, on an as-needed basis, this IL is converted to the machine
 language of the target system by the <newword>Just in Time Compiler</newword>,
 or JIT, which is part of the <newword>Common Language Runtime</newword>, or CLR.
